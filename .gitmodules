@@ -1,3 +1,6 @@
 [submodule "ComponentFramework-Mock"]
 	path = ComponentFramework-Mock
 	url = https://github.com/Shko-Online/ComponentFramework-Mock.git
+[submodule "powercat-code-components"]
+	path = powercat-code-components
+	url = https://github.com/microsoft/powercat-code-components.git
