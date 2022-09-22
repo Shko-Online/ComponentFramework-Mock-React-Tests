@@ -1,0 +1,10 @@
+{
+  "name": "@shko-online/componentframework-mock-tests",
+  "version": "0.1.0",
+  "description": "Test for our mocking library which helps with testing PowerApps Component Framework Components",
+  "main": "index.js",
+  "repository": "https://github.com/albanian-xrm/ComponentFramework-Mock-React-Tests.git",
+  "author": "artjola zalla <78443274+tjola@users.noreply.github.com>",
+  "license": "RPL-1.5",
+  "private": true
+}
