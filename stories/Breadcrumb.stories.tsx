@@ -23,6 +23,8 @@ import { StringPropertyMock } from "@shko-online/componentframework-mock/Compone
 import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
+import { action } from '@storybook/addon-actions';
+
 
 export default {
   title: "PCF Components/Breadcrumb",
@@ -31,37 +33,48 @@ export default {
     layout: "fullscreen",
   },
   // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
-  argTypes: {},
+  argTypes: {
+    onClick: { action: 'clicked' },
+  },
 } as Meta;
 const Template = (args) => {
   const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
-   new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
-    items: DataSetMock,
-    AccessibilityLabel: StringPropertyMock,
-    MaxDisplayedItems: WholeNumberPropertyMock,
-    OverflowIndex: WholeNumberPropertyMock,
-    InputEvent: StringPropertyMock,
-    Theme: StringPropertyMock,
-  });
- 
+    new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
+      items: DataSetMock,
+      AccessibilityLabel: StringPropertyMock,
+      MaxDisplayedItems: WholeNumberPropertyMock,
+      OverflowIndex: WholeNumberPropertyMock,
+      InputEvent: StringPropertyMock,
+      Theme: StringPropertyMock,
+    });
+
   const items = mockGenerator.context.parameters.items as DataSetMock;
-  items.initRecords((args.items||[]).map(item=>{
-const row = new EntityRecord("test", item.id, item.ItemDisplayName);
-row.columns['id'] = item.id;
-row.columns["ItemDisplayName"] = item.ItemDisplayName;
-row.columns["ItemKey"] = item.ItemKey;
-return row;
-  } ));
+  items.initRecords(
+    (args.items || []).map((item) => {
+      const row = new EntityRecord("test", item.id, item.ItemDisplayName);
+      row.columns["id"] = item.id;
+      row.columns["ItemDisplayName"] = item.ItemDisplayName;
+      row.columns["ItemKey"] = item.ItemKey;
+      row.columns["Clickable"] = item.Clickable;
+      return row;
+    })
+  );
 
-  items.openDatasetItem.callsFake((item)=>{
+  items.openDatasetItem.callsFake((item) => {
     console.log(item.id);
-  })
-  const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
+    action('OpenDatasetItem')(item);
+  });
 
-  const displayedItems = mockGenerator.context.parameters.MaxDisplayedItems as WholeNumberPropertyMock;
-  const overflowindex = mockGenerator.context.parameters.OverflowIndex as WholeNumberPropertyMock;
-  const inputElement = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
+  const accessibility = mockGenerator.context.parameters
+    .AccessibilityLabel as StringPropertyMock;
+  const displayedItems = mockGenerator.context.parameters
+    .MaxDisplayedItems as WholeNumberPropertyMock;
+  const overflowindex = mockGenerator.context.parameters
+    .OverflowIndex as WholeNumberPropertyMock;
+  const inputElement = mockGenerator.context.parameters
+    .InputEvent as StringPropertyMock;
   const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+
   mockGenerator.ExecuteInit();
   const Component = mockGenerator.ExecuteUpdateView();
   return Component;
@@ -69,8 +82,9 @@ return row;
 
 export const Primary = Template.bind({});
 Primary.args = {
-    items: [
-        {id: '1', ItemKey: 1, ItemDisplayName: 'text1'},
-        {id: '2', ItemKey: 2, ItemDisplayName: 'text2'}
-    ]
+  items: [
+    { id: "1", ItemKey: 1, ItemDisplayName: "text1" , Clickable: true},
+    { id: "2", ItemKey: 2, ItemDisplayName: "text2" , Clickable: false},
+  ],
+  
 };
