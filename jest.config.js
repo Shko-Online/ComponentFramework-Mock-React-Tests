@@ -18,16 +18,18 @@ module.export ={
 	moduleNameMapper:{
 		'@shko-online/componentframework-mock/(.*)': '<rootDir>/ComponentFramework-Mock/src/$1',
 		'@powercat/breadcrumb/(.*)': '<rootDir>/powercat-code-components/Breadcrumb/$1',
-		'@powercat/auto-width-label/(.*)': '<rootDir>/powercat-code-components/AutoWidthLabel/$1'
+		'@powercat/auto-width-label/(.*)': '<rootDir>/powercat-code-components/AutoWidthLabel/$1',
+		'@powercat/calendar/(.*)': '<rootDir>/powercat-code-components/Calendar/$1',
 	},
 	preset: 'ts-jest',
     testEnvironment: 'jsdom',
     transform: {
       // transform files with ts-jest
-      "^.+\\.(jsx?|tsx?)$": "ts-jest",
+    //   "^.+\\.(jsx?|tsx?)$": "ts-jest",
+	  "\\.[jt]sx?$": "babel-jest",
       "\\.resx" : "<rootDir>/raw-Loader.js"
     },
-    testMatch: '<rootDir>/__tests__/*.tsx',
+    testMatch:[ "**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)" ],
     coveragePathIgnorePatterns : [
       "/node_modules/",
       "/ComponentFramework-Mock/"

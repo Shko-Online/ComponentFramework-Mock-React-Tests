@@ -21,6 +21,7 @@
             "es6",
             "dom"
         ],
+        "jsx": "react",
         "module": "ES6",
         "resolveJsonModule": true,
         "moduleResolution": "node",
@@ -38,6 +39,9 @@
             ],
             "@powercat/auto-width-label*": [
                 "./powercat-code-components/AutoWidthLabel*"
+            ],
+            "@powercat/calendar*": [
+                "./powercat-code-components/Calendar*"
             ],
         },
         "typeRoots": [
