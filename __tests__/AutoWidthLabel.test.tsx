@@ -14,5 +14,63 @@
 */
 import * as sinon from 'sinon';
 
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import { ComponentFrameworkMockGenerator } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator';
 import {AutoWidthLabel} from '@powercat/auto-width-label/AutoWidthLabel';
+import {
+	IInputs,
+	IOutputs,
+  } from "@powercat/auto-width-label/AutoWidthLabel/generated/ManifestTypes";
+import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
+import { EnumPropertyMock} from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock';
+import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock';
+import { DecimalNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DecimalNumberProperty.mock';
+
+
+describe ("AutoWidthLabel", () => {
+	let mockGenerator : ComponentFrameworkMockGenerator< IInputs, IOutputs>;
+	beforeEach(()=>{
+		 mockGenerator = new ComponentFrameworkMockGenerator(
+			AutoWidthLabel,
+			{
+				Text: StringPropertyMock,
+				FontName: StringPropertyMock,
+				FontSize: DecimalNumberPropertyMock,
+				FontSizeUnits: EnumPropertyMock<string>,
+				FontColor: StringPropertyMock,
+				FontWeight: StringPropertyMock,
+				DisabledFontColor: StringPropertyMock,
+				DisabledFontWeight: StringPropertyMock,
+				FocusFontColor: StringPropertyMock,
+				FocusFontWeight: StringPropertyMock,
+				HoverFontColor: StringPropertyMock,
+				HoverFontWeight: StringPropertyMock,
+				FillColor: StringPropertyMock,
+				DisabledFillColor: StringPropertyMock,
+				FocusFillColor: StringPropertyMock,
+				HoverFillColor: StringPropertyMock,
+				BorderColor: StringPropertyMock,
+				BorderThickness: WholeNumberPropertyMock,
+				BorderRadius: WholeNumberPropertyMock,
+				DisabledBorderColor: StringPropertyMock,
+				FocusBorderColor: StringPropertyMock,
+				FocusBorderThickness: WholeNumberPropertyMock,
+				HoverBorderColor: StringPropertyMock,
+				HoverBorderThickness: WholeNumberPropertyMock,
+				PaddingLeft: WholeNumberPropertyMock,
+				PaddingRight: WholeNumberPropertyMock,
+				PaddingTop: WholeNumberPropertyMock,
+				PaddingBottom: WholeNumberPropertyMock,
+			}
+		);
+	});
+	afterEach(()=>{
+        document.body.innerHTML = null;
+    })
+
+    it("Init should work", () => {            
+        mockGenerator.ExecuteInit();
+        sinon.assert.calledOnce(mockGenerator.control.init);
+        expect(document.body).toMatchSnapshot();
+    })
+
+});
