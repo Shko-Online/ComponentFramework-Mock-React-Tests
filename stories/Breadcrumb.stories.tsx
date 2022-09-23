@@ -22,9 +22,10 @@ import { Breadcrumb } from "@powercat/breadcrumb/Breadcrumb";
 import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
 import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
+import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 
 export default {
-  title: "PCF Components/MapControl",
+  title: "PCF Components/Breadcrumb",
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
     layout: "fullscreen",
@@ -33,8 +34,6 @@ export default {
   argTypes: {},
 } as Meta;
 const Template = (args) => {
-  const container = document.createElement("div");
-  container.className = "SampleNamespace.MapControl";
   const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
    new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
     items: DataSetMock,
@@ -45,13 +44,33 @@ const Template = (args) => {
     Theme: StringPropertyMock,
   });
  
+  const items = mockGenerator.context.parameters.items as DataSetMock;
+  items.initRecords((args.items||[]).map(item=>{
+const row = new EntityRecord("test", item.id, item.ItemDisplayName);
+row.columns['id'] = item.id;
+row.columns["ItemDisplayName"] = item.ItemDisplayName;
+row.columns["ItemKey"] = item.ItemKey;
+return row;
+  } ));
+
+  items.openDatasetItem.callsFake((item)=>{
+    console.log(item.id);
+  })
+  const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
+
+  const displayedItems = mockGenerator.context.parameters.MaxDisplayedItems as WholeNumberPropertyMock;
+  const overflowindex = mockGenerator.context.parameters.OverflowIndex as WholeNumberPropertyMock;
+  const inputElement = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
+  const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
   mockGenerator.ExecuteInit();
- const Component = mockGenerator.ExecuteUpdateView();
+  const Component = mockGenerator.ExecuteUpdateView();
   return Component;
 };
 
 export const Primary = Template.bind({});
 Primary.args = {
-    addressString: "",
-    apiKey: "AIzaSyCdIXX4wdEPDGozhpbS1__l-LniN8IRotM"
+    items: [
+        {id: '1', ItemKey: 1, ItemDisplayName: 'text1'},
+        {id: '2', ItemKey: 2, ItemDisplayName: 'text2'}
+    ]
 };
