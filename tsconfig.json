@@ -22,7 +22,7 @@
         ],
         "allowJs": true,
         "jsx": "react",
-        "module": "es2015",
+        "module": "es2020",
         "moduleResolution": "Node",
         "target": "ES6",
         "resolveJsonModule": true,
