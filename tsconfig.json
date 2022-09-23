@@ -20,6 +20,7 @@
             "es6",
             "dom"
         ],
+        "allowJs": true,
         "jsx": "react",
         "module": "es2015",
         "moduleResolution": "Node",

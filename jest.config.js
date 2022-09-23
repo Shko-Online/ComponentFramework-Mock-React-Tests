@@ -25,16 +25,21 @@ module.export ={
     testEnvironment: 'jsdom',
     transform: {
       // transform files with ts-jest
-      "^.+\\.(jsx?|tsx?)$": ["ts-jest",
+      "^.+\\.(jsx?|tsx?)$": ["ts-jest"/*,
       {
         babelConfig: true,
-      }],	
+      }*/],	
       "\\.resx" : "<rootDir>/raw-Loader.js"
     },
     testMatch:[ "<rootDir>/__tests__/**/*.[jt]s?(x)" ],
     coveragePathIgnorePatterns : [
       "/node_modules/",
       "/ComponentFramework-Mock/"
+    ],
+	    transformIgnorePatterns: [
+        // allow fluent ui transformation when running tests
+        // this is because we are using path based imports
+        'node_modules/(?!(@fluentui/react/lib|@fluentui/style-utilities/lib|@fluentui/react-hooks/lib))',
     ],
 	// "moduleFileExtensions": [
 	// 	"ts",
