@@ -42,7 +42,9 @@
     "@storybook/addon-interactions": "^6.5.12",
     "@storybook/addon-links": "^6.5.12",
     "@storybook/builder-webpack4": "^6.5.12",
+    "@storybook/builder-webpack5": "^6.5.12",
     "@storybook/manager-webpack4": "^6.5.12",
+    "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/react": "^6.5.12",
     "@storybook/testing-library": "^0.0.13",
     "@types/jest": "^29.0.3",
@@ -57,6 +59,7 @@
     "jest": "^29.0.3",
     "lokijs": "^1.5.12",
     "sinon": "^14.0.0",
-    "ts-jest": "^29.0.1"
+    "ts-jest": "^29.0.1",
+    "tsconfig-paths-webpack-plugin": "^4.0.0"
   }
 }
