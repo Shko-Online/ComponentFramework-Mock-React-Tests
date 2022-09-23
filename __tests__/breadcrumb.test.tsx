@@ -13,23 +13,6 @@
 	language governing rights and limitations under the RPL. 
 */
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-module.export ={
-	moduleNameMapper:{
-		'@shko-online/componentframework-mock/(.*)': '<rootDir>/ComponentFramework-Mock/src/$1',
-		'@powercat/breadcrumb/(.*)': '<rootDir>/powercat-code-components/Breadcrumb/$1'
-	},
-	preset: 'ts-jest',
-    testEnvironment: 'jsdom',
-    transform: {
-      // transform files with ts-jest
-      "^.+\\.(jsx?|tsx?)$": "ts-jest",
-      "\\.resx" : "<rootDir>/raw-Loader.js"
-    },
-    
-    coveragePathIgnorePatterns : [
-      "/node_modules/",
-      "/ComponentFramework-Mock/"
-    ],
-    coverageReporters: ['cobertura', "text","html"]
-}
+import * as sinon from 'sinon';
+
+import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock-generator/ComponentFramework-Mock-Generator-React';

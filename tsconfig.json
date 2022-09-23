@@ -32,6 +32,9 @@
         "paths": {
             "@shko-online/componentframework-mock*": [
                 "./ComponentFramework-Mock/src*"
+            ],
+            "@powercat/breadcrumb*": [
+                "./powercat-code-components/Breadcrumb*"
             ]
         },
         "typeRoots": [
