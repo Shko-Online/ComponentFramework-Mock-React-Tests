@@ -4,15 +4,19 @@
   "description": "Test for our mocking library which helps with testing PowerApps Component Framework Components",
   "main": "index.js",
   "repository": "https://github.com/albanian-xrm/ComponentFramework-Mock-React-Tests.git",
-  "author": "artjola zalla <78443274+tjola@users.noreply.github.com>",
+  "author": "AlbanianXrm",
   "license": "RPL-1.5",
   "private": true,
   "scripts": {
-    "postinstall": "yarn install:albx & yarn install:breadcrumb ",
+    "postinstall": "yarn install:albx & yarn install:breadcrumb & install:auto-width-label ",
     "install:albx": "cd ComponentFramework-Mock && yarn",
     "install:breadcrumb": "cd powercat-code-components\\Breadcrumb && yarn",
-    "build": "yarn build:breadcrumb",
-    "build:breadcrumb": "cd powercat-code-components\\Breadcrumb && yarn build"
+    "install:auto-width-label": "cd powercat-code-components\\AutoWidthLabel && yarn",
+    "build": "yarn build:breadcrumb & yarn build:auto-width-label",
+    "build:breadcrumb": "cd powercat-code-components\\Breadcrumb && yarn build",
+    "build:auto-width-label": "cd powercat-code-components\\AutoWidthLabel && yarn build",
+    "test": "jest --coverage --maxWorkers=4",
+    "test-no-cover": "jest --maxWorkers=4"
   },
   "dependencies": {
     "@fluentui/react": "8.29.0",

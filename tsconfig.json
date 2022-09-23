@@ -35,7 +35,10 @@
             ],
             "@powercat/breadcrumb*": [
                 "./powercat-code-components/Breadcrumb*"
-            ]
+            ],
+            "@powercat/auto-width-label*": [
+                "./powercat-code-components/AutoWidthLabel*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"

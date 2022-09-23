@@ -12,25 +12,7 @@
 	PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 	language governing rights and limitations under the RPL. 
 */
+import * as sinon from 'sinon';
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-module.export ={
-	moduleNameMapper:{
-		'@shko-online/componentframework-mock/(.*)': '<rootDir>/ComponentFramework-Mock/src/$1',
-		'@powercat/breadcrumb/(.*)': '<rootDir>/powercat-code-components/Breadcrumb/$1',
-		'@powercat/auto-width-label/(.*)': '<rootDir>/powercat-code-components/AutoWidthLabel/$1'
-	},
-	preset: 'ts-jest',
-    testEnvironment: 'jsdom',
-    transform: {
-      // transform files with ts-jest
-      "^.+\\.(jsx?|tsx?)$": "ts-jest",
-      "\\.resx" : "<rootDir>/raw-Loader.js"
-    },
-    testMatch: '<rootDir>/__tests__/*.tsx',
-    coveragePathIgnorePatterns : [
-      "/node_modules/",
-      "/ComponentFramework-Mock/"
-    ],
-    coverageReporters: ['cobertura', "text","html"]
-}
+import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import {AutoWidthLabel} from '@powercat/auto-width-label/AutoWidthLabel';

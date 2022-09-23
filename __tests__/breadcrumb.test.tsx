@@ -15,4 +15,4 @@
 
 import * as sinon from 'sinon';
 
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock-generator/ComponentFramework-Mock-Generator-React';
+import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
