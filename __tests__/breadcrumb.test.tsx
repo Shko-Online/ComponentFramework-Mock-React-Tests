@@ -13,6 +13,41 @@
 	language governing rights and limitations under the RPL. 
 */
 
-import * as sinon from 'sinon';
+import * as sinon from "sinon";
+import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
+import {
+  IInputs,
+  IOutputs,
+} from "@powercat/breadcrumb/Breadcrumb/generated/ManifestTypes";
+import { Breadcrumb } from "@powercat/breadcrumb/Breadcrumb";
+import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
+import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
+import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+describe("BreadCrumb", () => {
+  let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
+  beforeEach(() => {
+    mockGenerator = new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
+      items: DataSetMock,
+      AccessibilityLabel: StringPropertyMock,
+      MaxDisplayedItems: WholeNumberPropertyMock,
+      OverflowIndex: WholeNumberPropertyMock,
+      InputEvent: StringPropertyMock,
+      Theme: StringPropertyMock,
+    });
+  });
+
+  afterEach(() => {
+    for (let i = 0; i < document.body.children.length; i++) {
+      if (document.body.children[i].tagName === "DIV") {
+        document.body.removeChild(document.body.children[i]);
+        i--;
+      }
+    }
+  });
+  it("renders", () => {
+    mockGenerator.ExecuteInit();
+    const element = mockGenerator.ExecuteUpdateView();
+    expect(element).toMatchSnapshot();
+  });
+});
