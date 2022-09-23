@@ -15,16 +15,16 @@
 {
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
-        "target": "es5",
         "lib": [
             "es5",
             "es6",
             "dom"
         ],
         "jsx": "react",
-        "module": "ES6",
+        "module": "es2015",
+        "moduleResolution": "Node",
+        "target": "ES6",
         "resolveJsonModule": true,
-        "moduleResolution": "node",
         "noEmit": false,
         "outDir": "dist",
         "declaration": true,

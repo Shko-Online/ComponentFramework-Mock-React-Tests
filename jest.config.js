@@ -13,7 +13,7 @@
 	language governing rights and limitations under the RPL. 
 */
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/**  @type {import('ts-jest').JestConfigWithTsJest}  */
 module.export ={
 	moduleNameMapper:{
 		'@shko-online/componentframework-mock/(.*)': '<rootDir>/ComponentFramework-Mock/src/$1',
@@ -25,14 +25,24 @@ module.export ={
     testEnvironment: 'jsdom',
     transform: {
       // transform files with ts-jest
-    //   "^.+\\.(jsx?|tsx?)$": "ts-jest",
-	  "\\.[jt]sx?$": "babel-jest",
+      "^.+\\.(jsx?|tsx?)$": ["ts-jest",
+      {
+        babelConfig: true,
+      }],	
       "\\.resx" : "<rootDir>/raw-Loader.js"
     },
-    testMatch:[ "**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)" ],
+    testMatch:[ "<rootDir>/__tests__/**/*.[jt]s?(x)" ],
     coveragePathIgnorePatterns : [
       "/node_modules/",
       "/ComponentFramework-Mock/"
     ],
+	// "moduleFileExtensions": [
+	// 	"ts",
+	// 	"tsx",
+	// 	"js",
+	// 	"jsx",
+	// 	"json",
+	// 	"node"
+	//   ],
     coverageReporters: ['cobertura', "text","html"]
 }
