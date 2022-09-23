@@ -44,6 +44,9 @@
             "@powercat/calendar*": [
                 "./powercat-code-components/Calendar*"
             ],
+            "@powercat/command-bar*": [
+                "./powercat-code-components/CommandBar*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"
