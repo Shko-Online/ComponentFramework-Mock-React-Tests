@@ -20,6 +20,7 @@ module.export ={
 		'@powercat/breadcrumb/(.*)': '<rootDir>/powercat-code-components/Breadcrumb/$1',
 		'@powercat/auto-width-label/(.*)': '<rootDir>/powercat-code-components/AutoWidthLabel/$1',
 		'@powercat/calendar/(.*)': '<rootDir>/powercat-code-components/Calendar/$1',
+		'@powercat/commandbar/(.*)': '<rootDir>/powercat-code-components/CommandBar/$1',
 	},
 	preset: 'ts-jest',
     testEnvironment: 'jsdom',
