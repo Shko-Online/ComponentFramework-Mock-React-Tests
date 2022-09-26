@@ -25,6 +25,7 @@ import { EnumPropertyMock } from "@shko-online/componentframework-mock/Component
 import { DateTimePropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DateTimeProperty.mock";
 import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
+import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 
 
 export default {
@@ -36,7 +37,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
   argTypes: {},
 } as Meta;
-onst Template = (args) => {
+const Template = (args) => {
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
       new ComponentFrameworkMockGeneratorReact(ContextMenu, {
       Chevron: TwoOptionsPropertyMock,
@@ -57,4 +58,24 @@ onst Template = (args) => {
       InputEvent:  StringPropertyMock,
       items:DataSetMock,
     });
-}
+
+    const items = mockGenerator.context.parameters.items as DataSetMock;
+  items.initRecords(
+    [1].map((item) => {
+      const row = new EntityRecord("test", '1', 'Item 1');
+      row.columns['Key']= 'item1';
+      row.columns['DisplayName']= 'Item 1';
+      row.columns["IconName"]= 'Open';
+      row.columns["IconColor"]= 'blue';
+      row.columns["Enabled"]= true;
+      row.columns["IconOnly"]= false;
+      return row;
+    })
+  );
+
+
+mockGenerator.ExecuteInit();
+const component = mockGenerator.ExecuteUpdateView();
+return component;
+};
+export const Primary = Template.bind({});
