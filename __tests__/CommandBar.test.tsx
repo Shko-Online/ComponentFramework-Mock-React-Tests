@@ -22,9 +22,6 @@ import {
   } from "@powercat/command-bar/CommandBar/generated/ManifestTypes";
 import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
-import { mount } from 'enzyme';
-import ReactDOM from 'react-dom';
-import * as ReactTestUtils from 'react-dom/test-utils';
   describe("CommandBar", () => {
     let mockGenerator : ComponentFrameworkMockGeneratorReact< IInputs, IOutputs>; 
 	beforeEach(() =>{

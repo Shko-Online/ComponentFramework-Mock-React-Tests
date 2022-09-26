@@ -15,6 +15,7 @@ module.exports = {
           "@powercat/auto-width-label": "./powercat-code-components/AutoWidthLabel",
           "@powercat/calendar": "./powercat-code-components/Calendar",
           "@powercat/command-bar": "./powercat-code-components/CommandBar",
+          "@powercat/context-menu": "./powercat-code-components/ContextMenu",
         }
       }
     ],

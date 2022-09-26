@@ -47,6 +47,9 @@
             "@powercat/command-bar*": [
                 "./powercat-code-components/CommandBar*"
             ],
+            "@powercat/context-menu*": [
+                "./powercat-code-components/ContextMenu*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"
