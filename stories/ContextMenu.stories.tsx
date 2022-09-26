@@ -17,16 +17,18 @@ import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentfram
 import {
   IInputs,
   IOutputs,
-} from "@powercat/calendar/Calendar/generated/ManifestTypes";
-import {Calendar} from "@powercat/calendar/Calendar"
+} from "@powercat/context-menu/ContextMenu/generated/ManifestTypes";
+import {ContextMenu} from "@powercat/context-menu/ContextMenu"
 import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
 import { TwoOptionsPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock";
 import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
 import { DateTimePropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DateTimeProperty.mock";
+import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
+import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 
 
 export default {
-  title: "PCF Components/Calendar",
+  title: "PCF Components/ContextMenu",
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
     layout: "fullscreen",
@@ -34,5 +36,25 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
   argTypes: {},
 } as Meta;
-
-
+onst Template = (args) => {
+    const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
+      new ComponentFrameworkMockGeneratorReact(ContextMenu, {
+      Chevron: TwoOptionsPropertyMock,
+      IconColor: StringPropertyMock,
+      HoverIconColor: StringPropertyMock,
+      IconSize: WholeNumberPropertyMock,
+      FontSize:  WholeNumberPropertyMock,
+      FontColor:  StringPropertyMock,
+      HoverFontColor:  StringPropertyMock,
+      FillColor:  StringPropertyMock,
+      HoverFillColor:  StringPropertyMock,
+      BorderColor:  StringPropertyMock,
+      HoverBorderColor:  StringPropertyMock,
+      BorderRadius:  WholeNumberPropertyMock,
+      TextAlignment: EnumPropertyMock<"0" | "1" | "2">,
+      AccessibilityLabel:  StringPropertyMock,
+      Theme:  StringPropertyMock,
+      InputEvent:  StringPropertyMock,
+      items:DataSetMock,
+    });
+}
