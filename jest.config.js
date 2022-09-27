@@ -22,6 +22,7 @@ module.export ={
 		'@powercat/calendar/(.*)': '<rootDir>/powercat-code-components/Calendar/$1',
 		'@powercat/commandbar/(.*)': '<rootDir>/powercat-code-components/CommandBar/$1',
 		'@powercat/context-menu/(.*)': '<rootDir>/powercat-code-components/ContextMenu/$1',
+		'@powercat/details-list/(.*)': '<rootDir>/powercat-code-components/DetailsList/$1',
 	},
 	preset: 'ts-jest',
     testEnvironment: 'jsdom',

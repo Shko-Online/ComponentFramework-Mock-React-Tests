@@ -50,6 +50,9 @@
             "@powercat/context-menu*": [
                 "./powercat-code-components/ContextMenu*"
             ],
+            "@powercat/details-list*": [
+                "./powercat-code-components/DetailsList*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"

@@ -16,6 +16,7 @@ module.exports = {
           "@powercat/calendar": "./powercat-code-components/Calendar",
           "@powercat/command-bar": "./powercat-code-components/CommandBar",
           "@powercat/context-menu": "./powercat-code-components/ContextMenu",
+          "@powercat/details-list": "./powercat-code-components/DetailsList",
         }
       }
     ],
