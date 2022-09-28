@@ -12,6 +12,11 @@
 	PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 	language governing rights and limitations under the RPL. 
 */
+
+import { initializeIcons } from '@fluentui/react/lib/Icons';
+
+initializeIcons(/* optional base url */);
+
 import { Meta } from "@storybook/react";
 import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
 import {
