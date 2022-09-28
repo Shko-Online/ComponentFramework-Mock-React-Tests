@@ -29,6 +29,8 @@ import { TwoOptionsPropertyMock } from "@shko-online/componentframework-mock/Com
 import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
+import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
+import { ColumnsColumns } from "@powercat/details-list/DetailsList/ManifestConstants";
 
 export default {
   title: "PCF Components/DetailsList",
@@ -59,13 +61,105 @@ const Template = (args) => {
       columns: DataSetMock,
     }
 
-  );
-  mockGenerator.ExecuteInit();
-  const Component = mockGenerator.ExecuteUpdateView();
-  return Component;
+   );
+const Records = mockGenerator.context.parameters.records as  DataSetMock;
+const Columns = mockGenerator.context.parameters.columns as DataSetMock;
 
-}
 
-export const Primary = Template.bind({});
-Primary.args = {
+Columns.initRecords( (args.itemscolumns || []).map((item) => {
+  const row = new EntityRecord(undefined, item.id, item.ColDisplayName);
+  row.columns["id"] = item.id;
+  row.columns[ColumnsColumns.ColDisplayName] = item[ColumnsColumns.ColDisplayName]
+  row.columns[ColumnsColumns.ColName] = item[ColumnsColumns.ColName];
+  row.columns[ColumnsColumns.ColWidth] = item[ColumnsColumns.ColWidth];
+
+  return row;
+}))
+Records.initRecords( (args.itemsrecords || []).map((item) => {
+  const row = new EntityRecord(undefined, item.id, item.name );
+  row.columns["id"] = item.id;
+  row.columns["RecordKey"] = item.RecordKey;
+  row.columns["name"] = item.name;
+
+
+  return row;
+}))
+ 
+
+
+
+mockGenerator.context.mode.allocatedHeight = 200;
+mockGenerator.context.mode.allocatedWidth = 200;
+    mockGenerator.ExecuteInit();
+    const Component = mockGenerator.ExecuteUpdateView();
+    return Component;
+
+ }
+ export const Primary = Template.bind({});
+Primary.args={    
+ colums: [
+    {
+      alias: "alias1",
+      dataType: "string",
+      displayName: "id",
+      name: "alias",
+      order: 1,
+      visualSizeFactor: 200,
+    
+  },
+  {
+    alias: "alias2",
+    dataType: "string",
+    displayName: "ColDisplayName",
+    name: "alias",
+    order: 2,
+    visualSizeFactor: 200,
+  
+},
+{
+  alias: "alias3",
+  dataType: "string",
+  displayName: "ColName",
+  name: "alias",
+  order: 3,
+  visualSizeFactor: 200,
+
+},
+{
+  alias: "alias4",
+  dataType: "string",
+  displayName: "ColWidth",
+  name: "alias",
+  order: 4,
+  visualSizeFactor: 200,
+
+},
+],
+  itemcolumns:[
+    {
+      id: "1",
+      [ColumnsColumns.ColDisplayName]: 'Name',
+      [ColumnsColumns.ColName]: 'name',    
+      [ColumnsColumns.ColWidth]: '100',
+    },
+    {
+      id: "2",
+      [ColumnsColumns.ColDisplayName]: 'Name2',
+      [ColumnsColumns.ColName]: 'name2',    
+      [ColumnsColumns.ColWidth]: '100',
+    },
+  ],
+  itemrecords:[
+    {
+      id: "1",
+      RecordKey:"Name",
+      name: "Row1",
+    },
+    {
+      id: "2",
+      RecordKey:"Name2",
+      name: "Row2",
+    },
+  ],
+
 };

@@ -13,7 +13,7 @@
 	language governing rights and limitations under the RPL. 
 */
 
-import { initializeIcons } from '@fluentui/react/lib/Icons';
+import { initializeIcons } from "@fluentui/react/lib/Icons";
 
 initializeIcons(/* optional base url */);
 import { Meta } from "@storybook/react";
@@ -29,6 +29,7 @@ import resourse from "@powercat/command-bar/CommandBar/strings/CommandBar.1033.r
 
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { action } from "@storybook/addon-actions";
+import { ItemColumns } from "@powercat/command-bar/CommandBar/ManifestConstants";
 export default {
   title: "PCF Components/CommandBar",
   argTypes: {
@@ -52,17 +53,12 @@ const Template = (args) => {
 
   items.initRecords(
     (args.items || []).map((item) => {
-      const row = new EntityRecord("test", item.id, item.itemDisplayName);
+      const row = new EntityRecord(undefined, item.id, item[ItemColumns.DisplayName]);
       row.columns["id"] = item.id;
-      row.columns["ItemDisplayName"] = item.itemDisplayName;
-      row.columns["ItemKey"] = item.itemKey;
-      row.columns["ItemIconName"] = item.itemIconName;
-      row.columns["ItemIconColor"] = item.itemIconColor;
-      row.columns["ItemEnabled"] = item.itemEnabled;
-      row.columns["ItemIconOnly"] = item.itemIconOnly;
-      row.columns["ItemOverflow"] = item.overflow;
-      row.columns["ItemFarItem"] = item.farItem;
-      row.columns["ItemVisible"]= item.visible;
+      row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
+      row.columns[ItemColumns.Key] = item[ItemColumns.Key];
+      row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
+      row.columns[ItemColumns.IconColor]=item[ItemColumns.IconColor];
       return row;
     })
   );
@@ -74,7 +70,7 @@ const Template = (args) => {
 
   const accessibility = mockGenerator.context.parameters
     .AccessibilityLabel as StringPropertyMock;
-   const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+  const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
   Theme.setValue(args.theme);
   const InputEvent = mockGenerator.context.parameters
     .InputEvent as StringPropertyMock;
@@ -85,7 +81,6 @@ const Template = (args) => {
   mockGenerator.context.mode.isVisible = true;
   mockGenerator.context.mode.isControlDisabled = false;
 
- 
   mockGenerator.SetControlResource(resourse);
   mockGenerator.ExecuteInit();
   const Component = mockGenerator.ExecuteUpdateView();
@@ -95,104 +90,187 @@ export const Primary = Template.bind({});
 Primary.args = {
   colums: [
     {
-      alias: "alias1",
-      dataType: "number",
-      displayName: "ItemKey",
-      name: "alias",
-      order: 1,
-      visualSizeFactor: 200,
-    },
-    {
-      alias: "alias2",
-      dataType: "string",
+      alias: "ItemDisplayName",
+      dataType: "SingleLine.Text",
       displayName: "ItemDisplayName",
-      name: "alias2",
-      order: 2,
-      visualSizeFactor: 200,
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
     },
     {
-      alias: "alias3",
-      dataType: "string",
-      displayName: "ItemIconName",
-      name: "alias3",
-      order: 3,
-      visualSizeFactor: 200,
+      alias: "ItemKey",
+      dataType: "SingleLine.Text",
+      displayName: "ItemKey",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
     },
     {
-      alias: "alias4",
-      dataType: "string",
-      displayName: "ItemIconColor",
-      name: "alias4",
-      order: 4,
-      visualSizeFactor: 200,
-    },
-    {
-      alias: "alias5",
-      dataType: "boolean",
+      alias: "ItemEnabled",
+      dataType: "SingleLine.Text",
       displayName: "ItemEnabled",
-      name: "alias5",
-      order: 5,
-      visualSizeFactor: 200,
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
     },
     {
-      alias: "alias6",
-      dataType: "boolean",
+      alias: "ItemVisible",
+      dataType: "SingleLine.Text",
+      displayName: "ItemVisible",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemChecked",
+      dataType: "SingleLine.Text",
+      displayName: "ItemChecked",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemSplit",
+      dataType: "SingleLine.Text",
+      displayName: "ItemSplit",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemIconName",
+      dataType: "SingleLine.Text",
+      displayName: "ItemIconName",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemIconColor",
+      dataType: "SingleLine.Text",
+      displayName: "ItemIconColor",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemIconOnly",
+      dataType: "SingleLine.Text",
       displayName: "ItemIconOnly",
-      name: "alias6",
-      order: 6,
-      visualSizeFactor: 200,
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
     },
     {
-      alias: "alias7",
-      dataType: "boolean",
-      displayName: "overflow",
-      name: "alias7",
-      order: 7,
-      visualSizeFactor: 200,
+      alias: "ItemOverflow",
+      dataType: "SingleLine.Text",
+      displayName: "ItemOverflow",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
     },
     {
-      alias: "alias8",
-      dataType: "boolean",
-      displayName: "farItem",
-      name: "alias8",
-      order: 8,
-      visualSizeFactor: 200,
+      alias: "ItemFarItem",
+      dataType: "SingleLine.Text",
+      displayName: "ItemFarItem",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
     },
     {
-        alias: "alias9",
-        dataType: "boolean",
-        displayName: "visble",
-        name: "alias9",
-        order: 9,
-        visualSizeFactor: 200,
-      },
+      alias: "ItemHeader",
+      dataType: "SingleLine.Text",
+      displayName: "ItemHeader",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemTopDivider",
+      dataType: "SingleLine.Text",
+      displayName: "ItemTopDivider",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemDivider",
+      dataType: "SingleLine.Text",
+      displayName: "ItemDivider",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
+    {
+      alias: "ItemParentKey",
+      dataType: "SingleLine.Text",
+      displayName: "ItemParentKey",
+      name: null,
+      order: -1,
+      visualSizeFactor: 1,
+    },
   ],
   items: [
     {
       id: "1",
-      itemKey: 1,
-      itemDisplayName: "text1",
-      itemIconName: "Open",
-      itemIconColor: "blue",
-      itemEnabled: true,
-      itemIconOnly: false,
-      overflow: false,
-      farItem: false,
-      visible: true,
+      [ItemColumns.DisplayName]: "OpenPane",
+      [ItemColumns.Key]: "OpenPane",
+
+      [ItemColumns.IconName]: "OpenPane",
+      [ItemColumns.IconColor]: "blue",
+      
     },
     {
       id: "2",
-      itemKey: 2,
-      itemDisplayName: "text2",
-      itemIconName: "New",
-      itemIconColor: "red",
-      itemEnabled: false,
-      itemIconOnly: false,
-      overflow: true,
-      farItem: true,
-      visible: true,
+      [ItemColumns.DisplayName]: "OpenInNewWindow",
+      [ItemColumns.Key]: "OpenInNewWindow",
+
+      [ItemColumns.IconName]: "OpenInNewWindow",
+      [ItemColumns.IconColor]: "blue",
+  
+    },
+    {
+      id: "3",
+      [ItemColumns.Key]: "commandSave",
+      [ItemColumns.DisplayName]: "Save",
+      [ItemColumns.IconName]: "Save",
+      [ItemColumns.IconColor]: "green",
+
+    },
+
+    {
+      id: "5",
+      [ItemColumns.Key]: "commandSettings",
+      [ItemColumns.DisplayName]: "Settings",
+      [ItemColumns.IconName]: "Settings",
+      [ItemColumns.IconColor]: "black",
+
+    },
+    {
+      id: "6",
+      [ItemColumns.Key]: "commandSaveAndClose",
+      [ItemColumns.DisplayName]: "SaveAndClose",
+      [ItemColumns.IconName]: "Save",
+      [ItemColumns.IconColor]: "green",
+
+    },
+    // Sub Items Second Level
+    {
+      id: "7",
+      [ItemColumns.Key]: "commandUpload",
+      [ItemColumns.DisplayName]: "Upload",
+      [ItemColumns.IconName]: "Upload",
+      [ItemColumns.IconColor]: "blue",
+
+    },
+    {
+      id: "8",
+      [ItemColumns.Key]: "commandDownload",
+      [ItemColumns.DisplayName]: "Download",
+      [ItemColumns.IconName]: "Download",
+      [ItemColumns.IconColor]: "red",      
     },
   ],
   theme: '{"palette": {"themePrimary": "#test-primary"}}',
-  inputEvent: "Set Focus",
+  inputEvent: "SetFocus",
 };
