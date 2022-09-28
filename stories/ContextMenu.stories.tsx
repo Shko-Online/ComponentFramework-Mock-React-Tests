@@ -122,7 +122,30 @@ Primary.args = {
     id: '1',
     [ItemColumns.Key]: '',
     [ItemColumns.DisplayName]: 'Open',
-}
+},
+{
+  id: '2',
+    [ItemColumns.Key]: '',
+    [ItemColumns.DisplayName]: 'Item 2',
+  
+  },
+  {
+  id: '3',
+    [ItemColumns.Key]: '',
+    [ItemColumns.DisplayName]: 'Item 3',
+    
+  },{
+    id: '5',
+      [ItemColumns.Key]: '',
+      [ItemColumns.DisplayName]: 'Sub 1',
+      
+  },
+   {
+    id: '6',
+      [ItemColumns.Key]: '',
+      [ItemColumns.DisplayName]: 'Sub 2',
+     
+  },
 ]  
   
 };
@@ -139,7 +162,7 @@ Secondary.args = {
 {
 id: '2',
   [ItemColumns.Key]: '',
-  [ItemColumns.DisplayName]: 'Item 2',
+  [ItemColumns.DisplayName]: 'Open',
 
 },
 {
