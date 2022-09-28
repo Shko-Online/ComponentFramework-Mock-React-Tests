@@ -52,7 +52,7 @@ const Template = (args) => {
       InputEvent: StringPropertyMock,
       Theme: StringPropertyMock,
     });
-
+    
   const items = mockGenerator.context.parameters.items as DataSetMock;
   items.initRecords(
     (args.items || []).map((item) => {
@@ -89,7 +89,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   items: [
     { id: "1", ItemKey: 1, ItemDisplayName: "text1" , Clickable: true},
-    { id: "2", ItemKey: 2, ItemDisplayName: "text2" , Clickable: false},
+    { id: "2", ItemKey: 2, ItemDisplayName: "text2" , Clickable: true},
   ],
   
 };

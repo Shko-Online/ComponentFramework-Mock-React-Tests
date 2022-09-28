@@ -76,10 +76,8 @@ const Template = (args) => {
       HighlightCurrentMonth.setValue(true);
       const HighlightSelectedMonth =  mockGenerator.context.parameters.HighlightSelectedMonth as TwoOptionsPropertyMock;
       HighlightSelectedMonth.setValue(true);
-      // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
-      // InputEvent.setValue();
       const Language = mockGenerator.context.parameters.Language as StringPropertyMock;
-      Language.raw ='en'
+      Language.setValue(args.language); 
       const MaxDate = mockGenerator.context.parameters.MaxDate as DateTimePropertyMock;
       MaxDate.setValue(new Date(2099,0,1));
       const MinDate = mockGenerator.context.parameters.MinDate as DateTimePropertyMock;
@@ -104,4 +102,5 @@ Primary.args = {
     theme: '{"palette": {"themePrimary": "#test-primary"}}',
     backgroundcolor: '#bcd3eb',
     text: "This is a calendar",
+    language:'en-us',
 }
