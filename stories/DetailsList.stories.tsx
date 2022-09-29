@@ -61,71 +61,71 @@ const Template = (args) => {
       columns: DataSetMock,
     }
 
-   );
-const Records = mockGenerator.context.parameters.records as  DataSetMock;
-const Columns = mockGenerator.context.parameters.columns as DataSetMock;
+  );
+  const Records = mockGenerator.context.parameters.records as DataSetMock;
+  const Columns = mockGenerator.context.parameters.columns as DataSetMock;
 
-Columns.columns=args.columns || [] ;
-Columns.initRecords( (args.itemscolumns || []).map((item) => {
-  const row = new EntityRecord(undefined, item.id, item.ColDisplayName);
-  row.columns["id"] = item.id;
-  row.columns[ColumnsColumns.ColDisplayName] = item[ColumnsColumns.ColDisplayName]
-  row.columns[ColumnsColumns.ColWidth] = item[ColumnsColumns.ColWidth];
+  Columns.columns = args.columns || [];
+  Columns.initRecords((args.itemscolumns || []).map((item) => {
+    const row = new EntityRecord(undefined, item.id, item.ColDisplayName);
+    row.columns["id"] = item.id;
+    row.columns[ColumnsColumns.ColDisplayName] = item[ColumnsColumns.ColDisplayName]
+    row.columns[ColumnsColumns.ColWidth] = item[ColumnsColumns.ColWidth];
 
-  return row;
-}))
-Records.columns=args.records || [] ;
-Records.initRecords( (args.itemsrecords || []).map((item) => {
-  const row = new EntityRecord(undefined, item.id, item.name );
-  row.columns["id"] = item.id;
-  row.columns[RecordsColumns.RecordKey] = item[RecordsColumns.RecordKey];
-  row.columns["name"] = item.name;
-  return row;
-}))
- 
-
+    return row;
+  }))
+  Records.columns = args.records || [];
+  Records.initRecords((args.itemsrecords || []).map((item) => {
+    const row = new EntityRecord(undefined, item.id, item.name);
+    row.columns["id"] = item.id;
+    row.columns[RecordsColumns.RecordKey] = item[RecordsColumns.RecordKey];
+    row.columns["name"] = item.name;
+    return row;
+  }))
 
 
 
-mockGenerator.context.mode.allocatedHeight = 200;
-mockGenerator.context.mode.allocatedWidth = 200;
-    mockGenerator.ExecuteInit();
-    const Component = mockGenerator.ExecuteUpdateView();
-    return Component;
 
- }
- export const Primary = Template.bind({});
-Primary.args={    
+
+  mockGenerator.context.mode.allocatedHeight = 200;
+  mockGenerator.context.mode.allocatedWidth = 200;
+  mockGenerator.ExecuteInit();
+  const Component = mockGenerator.ExecuteUpdateView();
+  return Component;
+
+}
+export const Primary = Template.bind({});
+Primary.args = {
   columns: [
-    {displayName: 'ColDisplayName',name: null, dataType: 'SingleLine.Text', alias: 'ColDisplayName',order: -1,visualSizeFactor:1, },
-    {displayName: 'ColWidth', name: null, dataType: 'SingleLine.Text', alias: 'ColWidth', order: -1, visualSizeFactor: 1,},   
-      ],
-  itemcolumns:[
+    { displayName: 'ColDisplayName', name: null, dataType: 'SingleLine.Text', alias: 'ColDisplayName', order: -1, visualSizeFactor: 1, },
+    { displayName: 'ColWidth', name: null, dataType: 'SingleLine.Text', alias: 'ColWidth', order: -1, visualSizeFactor: 1, },
+  ],
+  itemcolumns: [
     {
       id: "1",
-      [ColumnsColumns.ColDisplayName]: 'Name',   
+      [ColumnsColumns.ColDisplayName]: 'Name',
       [ColumnsColumns.ColWidth]: '100',
     },
     {
       id: "2",
-      [ColumnsColumns.ColDisplayName]: 'Name2',   
+      [ColumnsColumns.ColDisplayName]: 'Name2',
       [ColumnsColumns.ColWidth]: '100',
     },
   ],
-  records:[
-    {displayName: 'RecordKey', name: null, dataType: 'SingleLine.Text', alias: 'RecordKey', order: -1, visualSizeFactor:1,},
-    {displayName: 'RecordCanSelect', name: null, dataType: 'SingleLine.Text', alias: 'RecordCanSelect', order: -1,visualSizeFactor:1, },
-    {displayName: 'RecordSelected', name: null, dataType: 'SingleLine.Text', alias: 'RecordSelected', order: -1,visualSizeFactor:1,}
+  records: [
+    { displayName: 'RecordKey', name: null, dataType: 'SingleLine.Text', alias: 'RecordKey', order: -1, visualSizeFactor: 1, },
+    { displayName: 'RecordCanSelect', name: null, dataType: 'SingleLine.Text', alias: 'RecordCanSelect', order: -1, visualSizeFactor: 1, },
+    { displayName: 'RecordSelected', name: null, dataType: 'SingleLine.Text', alias: 'RecordSelected', order: -1, visualSizeFactor: 1, }
   ],
-  itemrecords:[
+  itemrecords: [
     {
       id: "1",
-      [RecordsColumns.RecordKey]:"Option",
+      [RecordsColumns.RecordKey]: "Option",
       name: "Row1",
     },
     {
       id: "2",
-      [RecordsColumns.RecordKey]:"Props",
+      [RecordsColumns.RecordKey]: "Props",
       name: "Row2",
     },
   ],

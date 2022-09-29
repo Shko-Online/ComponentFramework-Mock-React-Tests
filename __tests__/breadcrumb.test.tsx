@@ -1,16 +1,16 @@
 /*
-	Unless explicitly acquired and licensed from Licensor under another
-	license, the contents of this file are subject to the Reciprocal Public
-	License ("RPL") Version 1.5, or subsequent versions as allowed by the RPL,
-	and You may not copy or use this file in either source code or executable
-	form, except in compliance with the terms and conditions of the RPL.
+  Unless explicitly acquired and licensed from Licensor under another
+  license, the contents of this file are subject to the Reciprocal Public
+  License ("RPL") Version 1.5, or subsequent versions as allowed by the RPL,
+  and You may not copy or use this file in either source code or executable
+  form, except in compliance with the terms and conditions of the RPL.
 
-	All software distributed under the RPL is provided strictly on an "AS
-	IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, AND
-	LICENSOR HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
-	LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-	PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
-	language governing rights and limitations under the RPL. 
+  All software distributed under the RPL is provided strictly on an "AS
+  IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, AND
+  LICENSOR HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
+  LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
+  language governing rights and limitations under the RPL. 
 */
 
 import * as sinon from "sinon";
@@ -27,7 +27,7 @@ import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 
 describe('BreadCrumb', () => {
-  let mockGenerator : ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
+  let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
   beforeEach(() => {
     mockGenerator = new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
       items: DataSetMock,
@@ -38,7 +38,7 @@ describe('BreadCrumb', () => {
       Theme: StringPropertyMock,
     });
   });
-  
+
   afterEach(() => {
     for (let i = 0; i < document.body.children.length; i++) {
       if (document.body.children[i].tagName === "DIV") {
@@ -56,14 +56,14 @@ describe('BreadCrumb', () => {
     mockGenerator.ExecuteInit();
     // Simulate there being no items bound - which causes an error on the parameters
     mockGenerator.context.parameters.items.error = true;
-	sinon.assert.calledOnce(mockGenerator.control.init);
+    sinon.assert.calledOnce(mockGenerator.control.init);
     const element = mockGenerator.ExecuteUpdateView();
     expect(element).toMatchSnapshot();
   });
   it("raises the onSelect event", () => {
     mockGenerator.ExecuteInit();
     const breadcrumbElement = mockGenerator.ExecuteUpdateView();
-	
+
     const firstCommandReference = {
       id: { guid: "1" },
       name: "1",

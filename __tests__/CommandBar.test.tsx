@@ -15,35 +15,35 @@
 import * as sinon from 'sinon';
 
 import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
-import {CommandBar} from '@powercat/command-bar/CommandBar';
+import { CommandBar } from '@powercat/command-bar/CommandBar';
 import {
 	IInputs,
 	IOutputs,
-  } from "@powercat/command-bar/CommandBar/generated/ManifestTypes";
+} from "@powercat/command-bar/CommandBar/generated/ManifestTypes";
 import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
-  describe("CommandBar", () => {
-    let mockGenerator : ComponentFrameworkMockGeneratorReact< IInputs, IOutputs>; 
-	beforeEach(() =>{
+describe("CommandBar", () => {
+	let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
+	beforeEach(() => {
 		mockGenerator = new ComponentFrameworkMockGeneratorReact(
 			CommandBar,
 			{
 				Theme: StringPropertyMock,
-    			AccessibilityLabel: StringPropertyMock,
-    			InputEvent: StringPropertyMock,
-    			items: DataSetMock,
+				AccessibilityLabel: StringPropertyMock,
+				InputEvent: StringPropertyMock,
+				items: DataSetMock,
 			}
 		);
 	});
-	afterEach(() =>{
+	afterEach(() => {
 		for (let i = 0; i < document.body.children.length; i++) {
-            if (document.body.children[i].tagName === 'DIV') {
-                document.body.removeChild(document.body.children[i]);
-                i--;
-            }
-        }
+			if (document.body.children[i].tagName === 'DIV') {
+				document.body.removeChild(document.body.children[i]);
+				i--;
+			}
+		}
 	});
-	it("renders", ()=>{
+	it("renders", () => {
 		mockGenerator.ExecuteInit();
 		const element = mockGenerator.ExecuteUpdateView();
 		expect(element).toMatchSnapshot();
@@ -55,6 +55,6 @@ import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFrame
 		sinon.assert.calledOnce(mockGenerator.control.init);
 		const element = mockGenerator.ExecuteUpdateView();
 		expect(element).toMatchSnapshot();
-	  });
+	});
 
-  });
+});
