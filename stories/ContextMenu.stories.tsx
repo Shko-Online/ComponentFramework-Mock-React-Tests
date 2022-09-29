@@ -81,15 +81,16 @@ const Template = (args) => {
   items.initRecords(
     (args.items || []).map((item)=> {
       const row = new EntityRecord(undefined, item.id, item[ItemColumns.DisplayName]);
-      row.columns  [ItemColumns.Key]=item  [ItemColumns.Key];
-      row.columns    [ItemColumns.DisplayName]=item    [ItemColumns.DisplayName];
+      row.columns[ItemColumns.Key]=item[ItemColumns.Key];
+      row.columns[ItemColumns.DisplayName]=item[ItemColumns.DisplayName];
       row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
-      row.columns [ItemColumns.Enabled]=item [ItemColumns.Enabled];
-    row.columns [ItemColumns.IconOnly] = item [ItemColumns.IconOnly]; 
+      row.columns[ItemColumns.Enabled]=item[ItemColumns.Enabled];
+      row.columns[ItemColumns.IconOnly] = item [ItemColumns.IconOnly]; 
       return row;
     })
   );
 
+  mockGenerator.notifyOutputChanged
 
 mockGenerator.ExecuteInit();
 const component = mockGenerator.ExecuteUpdateView();
