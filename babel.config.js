@@ -18,6 +18,7 @@ module.exports = {
           "@powercat/context-menu": "./powercat-code-components/ContextMenu",
           "@powercat/details-list": "./powercat-code-components/DetailsList",
           "@powercat/pivot": "./powercat-code-components/Pivot",
+          "@powercat/nav": "./powercat-code-components/Nav",
         }
       }
     ],

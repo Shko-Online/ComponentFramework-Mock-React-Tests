@@ -56,6 +56,9 @@
             "@powercat/pivot*": [
                 "./powercat-code-components/Pivot*"
             ],
+            "@powercat/nav*": [
+                "./powercat-code-components/Nav*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"
