@@ -26,6 +26,8 @@ module.export ={
 		'@powercat/pivot/(.*)': '<rootDir>/powercat-code-components/Pivot/$1',
 		'@powercat/nav/(.*)': '<rootDir>/powercat-code-components/Nav/$1',
 		'@powercat/shimmer/(.*)': '<rootDir>/powercat-code-components/Shimmer/$1',
+		'@powercat/picker/(.*)': '<rootDir>/powercat-code-components/Picker/$1',
+
 	},
 	preset: 'ts-jest',
     testEnvironment: 'jsdom',

@@ -59,6 +59,9 @@
             "@powercat/nav*": [
                 "./powercat-code-components/Nav*"
             ],
+            "@powercat/picker*": [
+                "./powercat-code-components/Picker*"
+            ],
             "@powercat/shimmer*": [
                 "./powercat-code-components/Shimmer*"
             ],
