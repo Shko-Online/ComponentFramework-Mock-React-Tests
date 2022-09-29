@@ -35,9 +35,71 @@ export default {
     },
     // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
     argTypes: {},
+    args:{ items: [
+      {
+          id: '1',
+          [ItemColumns.Key]: 'item1',
+          [ItemColumns.DisplayName]: 'Pages',
+          [ItemColumns.IconName]: 'FolderOpen',
+          [ItemColumns.IconColor]: 'blue',
+          [ItemColumns.Enabled]: true,
+          [ItemColumns.Expanded]: true,
+      },
+
+      {
+          id: '3',
+          [ItemColumns.Key]: 'item3',
+          [ItemColumns.DisplayName]: 'Save',
+          [ItemColumns.IconName]: 'Save',
+          [ItemColumns.Enabled]: true,
+          [ItemColumns.Expanded]: true,
+          [ItemColumns.ParentKey]: 'commandNewFrom',
+      },
+      {
+          id: '2',
+          [ItemColumns.Key]: 'item2',
+          [ItemColumns.DisplayName]: 'News',
+          [ItemColumns.IconName]: 'News',
+          [ItemColumns.IconColor]: 'red',
+          [ItemColumns.Enabled]: true,
+          [ItemColumns.Expanded]: true,
+          [ItemColumns.ParentKey]: 'commandNewFrom',
+    
+      },
+      {
+          id: '6',
+          [ItemColumns.Key]: 'commandNewFrom',
+          [ItemColumns.DisplayName]: 'Activity',
+          [ItemColumns.IconName]: 'OfficeFormsLogo',
+          [ItemColumns.IconColor]: 'red',
+          [ItemColumns.Enabled]: true,
+          [ItemColumns.ParentKey]: 'item1',
+          [ItemColumns.Expanded]: true,
+          [ItemColumns.TextColor]: "red"
+      },
+      {
+          id: '7',
+          [ItemColumns.Key]: 'commandNewFrom',
+          [ItemColumns.DisplayName]: 'More Pages',
+          [ItemColumns.IconName]: 'OfficeFormsLogo',
+          [ItemColumns.IconColor]: 'blue',
+          [ItemColumns.Enabled]: true,
+          [ItemColumns.ParentKey]: 'item1',
+          [ItemColumns.Expanded]: true,
+      },
+      {
+          id: '8',
+          [ItemColumns.Key]: 'item6',
+          [ItemColumns.DisplayName]: 'Save And Close',
+          [ItemColumns.IconName]: 'Save',
+          [ItemColumns.IconColor]: 'green',
+          [ItemColumns.Enabled]: false,
+          [ItemColumns.Expanded]: true,
+      },
+  ],}
 } as Meta;
 
-const Template = (args) => {
+const Template = (args:{items: {id: string, ItemEnabled: boolean, }[], EnableNotes: boolean, theme: string, AccessibilityLabel: string, Expanded: boolean}) => {
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
         new ComponentFrameworkMockGeneratorReact(Nav, {
             SelectedKey: StringPropertyMock,
@@ -50,12 +112,19 @@ const Template = (args) => {
 
     const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
     AccessibilityLabel.setValue(args.AccessibilityLabel);
-
+    const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+    Theme.setValue(args.theme);
     const CollapseByDefault = mockGenerator.context.parameters.CollapseByDefault as TwoOptionsPropertyMock;
     CollapseByDefault.setValue(args.Expanded);
     const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
     InputEvent.setValue('SetFocus' + Math.random().toString());
     const items = mockGenerator.context.parameters.items as DataSetMock;
+
+if(args.EnableNotes!==undefined){
+  args.items.filter((item)=> item.id ==='8').forEach((item)=>{
+    item.ItemEnabled = args.EnableNotes;
+  })
+}
 
     items.initRecords(
         (args.items || []).map((item) => {
@@ -65,11 +134,10 @@ const Template = (args) => {
             row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
             row.columns[ItemColumns.Enabled] = item[ItemColumns.Enabled];
             row.columns[ItemColumns.Expanded] = item[ItemColumns.Expanded];
-            row.columns[ItemColumns.ParentKey]=item[ItemColumns.ParentKey];
+            row.columns[ItemColumns.ParentKey] = item[ItemColumns.ParentKey];
             return row;
         }),
     );
-
 
     mockGenerator.ExecuteInit();
     const component = mockGenerator.ExecuteUpdateView();
@@ -78,66 +146,26 @@ const Template = (args) => {
 export const Primary = Template.bind({});
 Primary.args = {
     AccessibilityLabel: 'This is a Nav Component',
-
-    items: [
-        {
-            id: '1',
-            [ItemColumns.Key]: 'item1',
-            [ItemColumns.DisplayName]: 'Pages',
-            [ItemColumns.IconName]: 'FolderOpen',
-            [ItemColumns.IconColor]: 'blue',
-            [ItemColumns.Enabled]: true,
-            [ItemColumns.Expanded]: true,
+    theme: JSON.stringify({
+        palette: {
+            themePrimary: '#test-primary',
         },
-        
-        {
-          id: '3',
-          [ItemColumns.Key]: 'item3',
-          [ItemColumns.DisplayName]: 'Save',
-          [ItemColumns.IconName]: 'Save',
-          [ItemColumns.Enabled]: true,
-          [ItemColumns.Expanded]: true,
-          [ItemColumns.ParentKey]: 'commandNewFrom',
-      },
-        {
-            id: '2',
-            [ItemColumns.Key]: 'item2',
-            [ItemColumns.DisplayName]: 'News',
-            [ItemColumns.IconName]: 'News',
-            [ItemColumns.IconColor]: 'blue',
-            [ItemColumns.Enabled]: true,
-            [ItemColumns.Expanded]: true,
-            [ItemColumns.ParentKey]: 'commandNewFrom',
-        },
-        {
-          id: '6',
-          [ItemColumns.Key]: 'commandNewFrom',
-          [ItemColumns.DisplayName]: 'Activity',
-          [ItemColumns.IconName]: 'OfficeFormsLogo',
-          [ItemColumns.IconColor]: 'blue',
-          [ItemColumns.Enabled]: true,
-          [ItemColumns.ParentKey]: 'item1',
-          [ItemColumns.Expanded]: true,
-      },
-        {
-            id: '7',
-            [ItemColumns.Key]: 'commandNewFrom',
-            [ItemColumns.DisplayName]: 'More Pages',
-            [ItemColumns.IconName]: 'OfficeFormsLogo',
-            [ItemColumns.IconColor]: 'blue',
-            [ItemColumns.Enabled]: true,
-            [ItemColumns.ParentKey]: 'item1',
-            [ItemColumns.Expanded]: true,
-        },
-        {
-            id: '8',
-            [ItemColumns.Key]: 'item6',
-            [ItemColumns.DisplayName]: 'Save And Close',
-            [ItemColumns.IconName]: 'Save',
-            [ItemColumns.IconColor]: 'green',
-            [ItemColumns.Enabled]: true,
-            [ItemColumns.Expanded]: true,
-        },
-        
-    ],
+    }),
 };
+
+export const EnableNotes = Template.bind({});
+EnableNotes.args = {
+    AccessibilityLabel: 'This is a Nav Component',
+    theme: JSON.stringify({
+        palette: {
+            themePrimary: '#test-primary',
+        },
+    }),
+    EnableNotes: true,
+};
+
+EnableNotes.parameters= {
+  controls:{
+    include: ["EnableNotes"]
+  }
+}
