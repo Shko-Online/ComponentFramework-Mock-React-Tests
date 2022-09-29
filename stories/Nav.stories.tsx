@@ -71,7 +71,7 @@ export default {
           [ItemColumns.Key]: 'commandNewFrom',
           [ItemColumns.DisplayName]: 'Activity',
           [ItemColumns.IconName]: 'OfficeFormsLogo',
-          [ItemColumns.IconColor]: 'red',
+          [ItemColumns.IconColor]: 'blue',
           [ItemColumns.Enabled]: true,
           [ItemColumns.ParentKey]: 'item1',
           [ItemColumns.Expanded]: true,
@@ -86,6 +86,7 @@ export default {
           [ItemColumns.Enabled]: true,
           [ItemColumns.ParentKey]: 'item1',
           [ItemColumns.Expanded]: true,
+          [ItemColumns.TextColor]: 'blue'
       },
       {
           id: '8',
@@ -99,7 +100,7 @@ export default {
   ],}
 } as Meta;
 
-const Template = (args:{items: {id: string, ItemEnabled: boolean, }[], EnableNotes: boolean, theme: string, AccessibilityLabel: string, Expanded: boolean}) => {
+const Template = (args:{items: {id: string, ItemEnabled: boolean, ItemIconColor: string}[], EnableNotes: boolean, theme: string, CustomIconColor:boolean, AccessibilityLabel: string, Expanded: boolean}) => {
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
         new ComponentFrameworkMockGeneratorReact(Nav, {
             SelectedKey: StringPropertyMock,
@@ -125,6 +126,11 @@ if(args.EnableNotes!==undefined){
     item.ItemEnabled = args.EnableNotes;
   })
 }
+if(args.CustomIconColor!==undefined){
+    args.items.filter((item)=> item.id ==='6' && item.ItemIconColor ).forEach((item)=>{
+      args.CustomIconColor === true ? item.ItemIconColor = "red" : item.ItemIconColor = "blue"
+    })
+  }
 
     items.initRecords(
         (args.items || []).map((item) => {
@@ -132,9 +138,11 @@ if(args.EnableNotes!==undefined){
             row.columns[ItemColumns.Key] = item[ItemColumns.Key];
             row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
             row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
+            row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
             row.columns[ItemColumns.Enabled] = item[ItemColumns.Enabled];
             row.columns[ItemColumns.Expanded] = item[ItemColumns.Expanded];
             row.columns[ItemColumns.ParentKey] = item[ItemColumns.ParentKey];
+            row.columns[ItemColumns.TextColor] = item[ItemColumns.TextColor];
             return row;
         }),
     );
@@ -162,10 +170,11 @@ EnableNotes.args = {
         },
     }),
     EnableNotes: true,
+    CustomIconColor: true
 };
 
 EnableNotes.parameters= {
   controls:{
-    include: ["EnableNotes"]
+    include: ["EnableNotes", "CustomIconColor"]
   }
 }

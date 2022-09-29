@@ -88,6 +88,7 @@ const Template = (args) => {
       row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
       row.columns[ItemColumns.Enabled]=item[ItemColumns.Enabled];
       row.columns[ItemColumns.IconOnly] = item [ItemColumns.IconOnly]; 
+      row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
       return row;
     })
   );
@@ -118,14 +119,14 @@ Primary.args = {
   
     [ItemColumns.DisplayName]: 'New',
     [ItemColumns.IconName]: "NewFolder",
-    [ItemColumns.IconColor]: 'blue',
+    [ItemColumns.IconColor]: 'red',
 },
 
   {
   id: '4',
     [ItemColumns.DisplayName]: "Settings",
     [ItemColumns.IconName]: "Settings",
-    [ItemColumns.IconColor]: "green",
+    [ItemColumns.IconColor]: "peach",
     [ItemColumns.Enabled]: true,
     [ItemColumns.IconOnly]: true,
   },
@@ -133,7 +134,7 @@ Primary.args = {
     id: '5',
       [ItemColumns.DisplayName]: 'Save',
       [ItemColumns.IconName]: 'Save',
-      [ItemColumns.IconColor]: 'green',
+      [ItemColumns.IconColor]: 'black',
       [ItemColumns.Enabled]: true,
     [ItemColumns.IconOnly]: true,
   },
