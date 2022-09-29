@@ -12,7 +12,7 @@
   PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
   language governing rights and limitations under the RPL. 
 */
-import React from 'react';
+
 import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 initializeIcons(/* optional base url */);
@@ -123,12 +123,12 @@ const Template = (args:{items: {id: string, ItemEnabled: boolean, ItemIconColor:
 
 if(args.EnableNotes!==undefined){
   args.items.filter((item)=> item.id ==='8').forEach((item)=>{
-    item.ItemEnabled = args.EnableNotes;
+    item.ItemEnabled = !!args.EnableNotes;
   })
 }
 if(args.CustomIconColor!==undefined){
     args.items.filter((item)=> item.id ==='6' && item.ItemIconColor ).forEach((item)=>{
-      args.CustomIconColor === true ? item.ItemIconColor = "red" : item.ItemIconColor = "blue"
+      args.CustomIconColor === true ? item.ItemIconColor = "red" : item.ItemIconColor = "blue";
     })
   }
 

@@ -59,6 +59,9 @@
             "@powercat/nav*": [
                 "./powercat-code-components/Nav*"
             ],
+            "@powercat/shimmer*": [
+                "./powercat-code-components/Shimmer*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"
