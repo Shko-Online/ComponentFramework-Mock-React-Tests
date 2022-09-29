@@ -23,6 +23,7 @@ module.export ={
 		'@powercat/commandbar/(.*)': '<rootDir>/powercat-code-components/CommandBar/$1',
 		'@powercat/context-menu/(.*)': '<rootDir>/powercat-code-components/ContextMenu/$1',
 		'@powercat/details-list/(.*)': '<rootDir>/powercat-code-components/DetailsList/$1',
+		'@powercat/pivot/(.*)': '<rootDir>/powercat-code-components/Pivot/$1',
 	},
 	preset: 'ts-jest',
     testEnvironment: 'jsdom',
