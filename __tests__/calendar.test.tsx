@@ -15,16 +15,16 @@
 import * as sinon from "sinon";
 import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
 import {
-  IInputs,
-  IOutputs,
+	IInputs,
+	IOutputs,
 } from "@powercat/calendar/Calendar/generated/ManifestTypes";
 import { Calendar } from "@fluentui/react";
 
 describe('Calendar', () => {
 	let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
-    beforeEach(() => {
-mockGenerator = new ComponentFrameworkMockGeneratorReact(Calendar,{
-	
-});
-    });
+	beforeEach(() => {
+		mockGenerator = new ComponentFrameworkMockGeneratorReact(Calendar, {
+
+		});
+	});
 });

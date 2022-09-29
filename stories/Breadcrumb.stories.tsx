@@ -1,16 +1,16 @@
 /*
-	Unless explicitly acquired and licensed from Licensor under another
-	license, the contents of this file are subject to the Reciprocal Public
-	License ("RPL") Version 1.5, or subsequent versions as allowed by the RPL,
-	and You may not copy or use this file in either source code or executable
-	form, except in compliance with the terms and conditions of the RPL.
+  Unless explicitly acquired and licensed from Licensor under another
+  license, the contents of this file are subject to the Reciprocal Public
+  License ("RPL") Version 1.5, or subsequent versions as allowed by the RPL,
+  and You may not copy or use this file in either source code or executable
+  form, except in compliance with the terms and conditions of the RPL.
 
-	All software distributed under the RPL is provided strictly on an "AS
-	IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, AND
-	LICENSOR HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
-	LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-	PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
-	language governing rights and limitations under the RPL. 
+  All software distributed under the RPL is provided strictly on an "AS
+  IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, AND
+  LICENSOR HEREBY DISCLAIMS ALL SUCH WARRANTIES, INCLUDING WITHOUT
+  LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+  PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
+  language governing rights and limitations under the RPL. 
 */
 
 import { initializeIcons } from '@fluentui/react/lib/Icons';
@@ -52,7 +52,7 @@ const Template = (args) => {
       InputEvent: StringPropertyMock,
       Theme: StringPropertyMock,
     });
-    
+
   const items = mockGenerator.context.parameters.items as DataSetMock;
   items.initRecords(
     (args.items || []).map((item) => {
@@ -88,8 +88,8 @@ const Template = (args) => {
 export const Primary = Template.bind({});
 Primary.args = {
   items: [
-    { id: "1", ItemKey: 1, ItemDisplayName: "text1" , Clickable: true},
-    { id: "2", ItemKey: 2, ItemDisplayName: "text2" , Clickable: true},
+    { id: "1", ItemKey: 1, ItemDisplayName: "text1", Clickable: true },
+    { id: "2", ItemKey: 2, ItemDisplayName: "text2", Clickable: true },
   ],
-  
+
 };
