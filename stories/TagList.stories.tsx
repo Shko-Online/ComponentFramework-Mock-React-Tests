@@ -27,7 +27,7 @@ import { EnumPropertyMock } from '@shko-online/componentframework-mock/Component
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock';
 import { ItemColumns } from '@powercat/tag-list/TagList/ManifestConstants';
-import {action} from '@storybook/addon-actions'
+
 
 export default {
     title: 'PCF Components/TagList',
@@ -58,17 +58,17 @@ AccessibilityLabel: StringPropertyMock,
 items: DataSetMock,
         });     
         const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-        Theme.setValue(args.Theme)
+        Theme.setValue(args.Theme);
         const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
-        BorderRadius.setValue(args.BorderRadius)
+        BorderRadius.setValue(args.BorderRadius);
         const TextAlignment = mockGenerator.context.parameters.TextAlignment as StringPropertyMock;
-        TextAlignment.setValue("2")
+        TextAlignment.setValue("2");
         const FontSize = mockGenerator.context.parameters.FontSize as WholeNumberPropertyMock;
-        FontSize.setValue(args.FontSize)
+        FontSize.setValue(args.FontSize);
         const ItemHeight = mockGenerator.context.parameters.ItemHeight as WholeNumberPropertyMock;
-        ItemHeight.setValue(args.ItemHeight)
+        ItemHeight.setValue(args.ItemHeight);
         const MaxHeight = mockGenerator.context.parameters.MaxHeight as WholeNumberPropertyMock;
-        MaxHeight.setValue(args.MaxHeight)
+        MaxHeight.setValue(args.MaxHeight);
         const items = mockGenerator.context.parameters.items as DataSetMock;
         items.initRecords(
             (args.items || []).map((item) => {
@@ -83,7 +83,6 @@ items: DataSetMock,
                 row.columns[ItemColumns.BorderColor] = item[ItemColumns.BorderColor];
                 row.columns[ItemColumns.IconOnly] = item[ItemColumns.IconOnly];
                 row.columns[ItemColumns.Visible] = item[ItemColumns.Visible];
-
                 return row;
                })
             );
@@ -91,7 +90,7 @@ items: DataSetMock,
         mockGenerator.ExecuteInit();
         const component = mockGenerator.ExecuteUpdateView();
         return component;
-    }
+    };
 export const Primary = Template.bind({});
 Primary.args = {
     Theme: JSON.stringify({
@@ -101,8 +100,8 @@ Primary.args = {
     }),
     BorderRadius: 2,
     FontSize: 20,
-    ItemHeight: 15,
-    MaxHeight: 25,
+    ItemHeight: 30,
+    MaxHeight: 50,
     items: [{
          id :'1',
             [ItemColumns.Key]: 'commandOpen',
@@ -135,4 +134,4 @@ Primary.args = {
             [ItemColumns.TextColor]: 'dark green'
         },
     ]
-}
+};
