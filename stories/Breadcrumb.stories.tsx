@@ -17,79 +17,82 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 initializeIcons(/* optional base url */);
 
-import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
-import {
-  IInputs,
-  IOutputs,
-} from "@powercat/breadcrumb/Breadcrumb/generated/ManifestTypes";
-import { Breadcrumb } from "@powercat/breadcrumb/Breadcrumb";
-import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
-import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
-import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
-import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
+import { Meta } from '@storybook/react';
+import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import { IInputs, IOutputs } from '@powercat/breadcrumb/Breadcrumb/generated/ManifestTypes';
+import { Breadcrumb } from '@powercat/breadcrumb/Breadcrumb';
+import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
+import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock';
+import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
+import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock';
 import { action } from '@storybook/addon-actions';
-
+import { ItemColumns } from '@powercat/breadcrumb/Breadcrumb/ManifestConstants';
 
 export default {
-  title: "PCF Components/Breadcrumb",
-  parameters: {
-    // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
-    layout: "fullscreen",
-  },
-  // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
-  argTypes: {
-    onClick: { action: 'clicked' },
-  },
+    title: 'PCF Components/Breadcrumb',
+    parameters: {
+        // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
+        layout: 'fullscreen',
+    },
+    // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
+    argTypes: {
+        onClick: { action: 'clicked' },
+    },
 } as Meta;
 const Template = (args) => {
-  const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
-    new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
-      items: DataSetMock,
-      AccessibilityLabel: StringPropertyMock,
-      MaxDisplayedItems: WholeNumberPropertyMock,
-      OverflowIndex: WholeNumberPropertyMock,
-      InputEvent: StringPropertyMock,
-      Theme: StringPropertyMock,
+    const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
+        new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
+            items: DataSetMock,
+            AccessibilityLabel: StringPropertyMock,
+            MaxDisplayedItems: WholeNumberPropertyMock,
+            OverflowIndex: WholeNumberPropertyMock,
+            InputEvent: StringPropertyMock,
+            Theme: StringPropertyMock,
+        });
+
+    const items = mockGenerator.context.parameters.items as DataSetMock;
+    items.initRecords(
+        (args.items || []).map((item) => {
+            const row = new EntityRecord('test', item.id, item.ItemDisplayName);
+            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
+            row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
+            row.columns[ItemColumns.Clickable] = item[ItemColumns.Clickable];
+            return row;
+        }),
+    );
+
+    items.openDatasetItem.callsFake((item) => {
+        console.log(item.id);
+        action('OpenDatasetItem')(item);
     });
 
-  const items = mockGenerator.context.parameters.items as DataSetMock;
-  items.initRecords(
-    (args.items || []).map((item) => {
-      const row = new EntityRecord("test", item.id, item.ItemDisplayName);
-      row.columns["id"] = item.id;
-      row.columns["ItemDisplayName"] = item.ItemDisplayName;
-      row.columns["ItemKey"] = item.ItemKey;
-      row.columns["Clickable"] = item.Clickable;
-      return row;
-    })
-  );
-
-  items.openDatasetItem.callsFake((item) => {
-    console.log(item.id);
-    action('OpenDatasetItem')(item);
-  });
-
-  const accessibility = mockGenerator.context.parameters
-    .AccessibilityLabel as StringPropertyMock;
-  const displayedItems = mockGenerator.context.parameters
-    .MaxDisplayedItems as WholeNumberPropertyMock;
-  const overflowindex = mockGenerator.context.parameters
-    .OverflowIndex as WholeNumberPropertyMock;
-  const inputElement = mockGenerator.context.parameters
-    .InputEvent as StringPropertyMock;
-  const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-
-  mockGenerator.ExecuteInit();
-  const Component = mockGenerator.ExecuteUpdateView();
-  return Component;
+    const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
+    accessibility.setValue(args.accessibility);
+    const MaxdisplayedItems = mockGenerator.context.parameters.MaxDisplayedItems as WholeNumberPropertyMock;
+    MaxdisplayedItems.setValue(args.MaxdisplayedItems);
+    const overflowindex = mockGenerator.context.parameters.OverflowIndex as WholeNumberPropertyMock;
+    overflowindex.setValue(args.overflowIndex);
+    const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+    theme.setValue(args.theme);
+    mockGenerator.ExecuteInit();
+    const Component = mockGenerator.ExecuteUpdateView();
+    return Component;
 };
 
 export const Primary = Template.bind({});
 Primary.args = {
-  items: [
-    { id: "1", ItemKey: 1, ItemDisplayName: "text1", Clickable: true },
-    { id: "2", ItemKey: 2, ItemDisplayName: "text2", Clickable: true },
-  ],
-
+    items: [
+        { id: '1', [ItemColumns.Key]: 1, [ItemColumns.DisplayName]: 'text1', [ItemColumns.Clickable]: true },
+        { id: '2', [ItemColumns.Key]: 2, [ItemColumns.DisplayName]: 'text2', [ItemColumns.Clickable]: true },
+        { id: '3', [ItemColumns.Key]: 3, [ItemColumns.DisplayName]: 'text3', [ItemColumns.Clickable]: true },
+        { id: '4', [ItemColumns.Key]: 4, [ItemColumns.DisplayName]: 'text4', [ItemColumns.Clickable]: true },
+    ],
+    overflowIndex: 5,
+    accessibility: 'Breadcrumb Component',
+    theme: JSON.stringify({
+        palette: {
+            themePrimary: '#test-primary',
+        },
+    }),
+    MaxdisplayedItems: 4,
 };
