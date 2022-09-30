@@ -68,6 +68,9 @@
             "@powercat/tag-list*": [
                 "./powercat-code-components/TagList*"
             ],
+            "@powercat/theme-generator*": [
+                "./powercat-code-components/ThemeGenerator*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"

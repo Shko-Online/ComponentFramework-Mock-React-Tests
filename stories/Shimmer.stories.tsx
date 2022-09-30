@@ -35,7 +35,12 @@ export default {
         layout: 'fullscreen',
     },
     // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
-    argTypes: {},
+    argTypes: {
+        SpaceBetweenshimmer: {
+            control: 'select',
+            options: ["0" , "10px" , "20px" , "30px" , "40px" , "50px"]
+        }
+    },
   
 } as Meta;
 

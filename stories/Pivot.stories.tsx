@@ -29,22 +29,32 @@ import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFrame
 import { action } from "@storybook/addon-actions";
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { ItemColumns } from "@powercat/command-bar/CommandBar/ManifestConstants";
-
+import {useArgs} from '@storybook/client-api'
 
 export default {
     title: "PCF Components/Pivot",
     argTypes: {
-
+      renderSize: {
+          control: 'select',
+          options: [ "1" , "2"]
+      },
+      renderType: {
+        control: 'radio',
+        options: [ "0" , "1"]
     },
+    PivotSelected: {  control: 'select', options: ['Open','New',' Save', 'InternetSharing', 'MapPin', 'Microphone', 'PageSolid'] }
+  },
     parameters: {
       layout: "fullscreen",
     },
+    
   } as Meta;
 
   type RenderType = "0" | "1";
   type RenderSize = "0" | "1" | "2";
 
   const Template = (args) => {
+    const [,updateArgs] = useArgs();
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
       new ComponentFrameworkMockGeneratorReact(Pivot, {
          SelectedKey:StringPropertyMock,
@@ -61,7 +71,7 @@ const items = mockGenerator.context.parameters.items as DataSetMock;
 items.initRecords(
   (args.items || []).map((item)=> {
     const row = new EntityRecord(undefined, item.id, item[ItemColumns.DisplayName]);
-    row.columns  [ItemColumns.Key]=item  [ItemColumns.Key];
+    row.columns [ItemColumns.Key]=item  [ItemColumns.Key];
     row.columns [ItemColumns.DisplayName]=item    [ItemColumns.DisplayName];
     row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
     row.columns [ItemColumns.Enabled]=item [ItemColumns.Enabled];
@@ -70,13 +80,16 @@ items.initRecords(
     return row;
   })
 );
-items.openDatasetItem.callsFake((ids)=>{
-  action("Selected")(ids);
-})
+items.openDatasetItem.callsFake((ids) => {
+  console.log(ids.id.guid);
+  action('OpenDatasetItem')(ids);
+  updateArgs({PivotSelected: ids.name});
+});
+
 const RenderType = mockGenerator.context.parameters.RenderType as EnumPropertyMock<RenderType>;
-RenderType.setValue("0");
+RenderType.setValue(args.renderType);
 const RenderSize = mockGenerator.context.parameters.RenderSize as EnumPropertyMock<RenderSize>;
-RenderSize.setValue("1");
+RenderSize.setValue(args.renderSize);
 
 mockGenerator.ExecuteInit();
 const component = mockGenerator.ExecuteUpdateView();
@@ -85,6 +98,8 @@ return component;
   
 export const Primary = Template.bind({});
 Primary.args = {
+  renderSize: "2",
+  renderType: "1",
   items: [{
    id:'1',
       [ItemColumns.DisplayName]: 'Open',
@@ -101,8 +116,7 @@ Primary.args = {
       [ItemColumns.IconColor]: 'blue',
       [ItemColumns.Enabled]: true,
       [ItemColumns.IconOnly]: true,
-      
-  
+
     },
     {
       id: '3', 
@@ -151,7 +165,7 @@ Primary.args = {
       [ItemColumns.IconOnly]: true,
       [ItemColumns.ParentKey]: 'item2',
   },
-  ]  
-    
+  ],
+  PivotSelected:"Open", 
   };
   

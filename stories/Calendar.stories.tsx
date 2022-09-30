@@ -28,7 +28,7 @@ import { StringPropertyMock } from "@shko-online/componentframework-mock/Compone
 import { TwoOptionsPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock";
 import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
 import { DateTimePropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DateTimeProperty.mock";
-
+import { useArgs } from '@storybook/client-api';
 
 export default {
   title: "PCF Components/Calendar",
@@ -37,12 +37,21 @@ export default {
     layout: "fullscreen",
   },
   // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
-  argTypes: {},
+  argTypes: { FirstDayOfWeek: {
+    control: 'select',
+    options: ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday"]
+},
+SelectedDateValue:{
+  control: 'date'
+}},
 } as Meta;
 
 type DaysOfWeek = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
 
 const Template = (args) => {
+  const [{SelectedDateValue:selectedDateValue},updateArgs] = useArgs();
+
+
   const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
     new ComponentFrameworkMockGeneratorReact(Calendar, {
       Theme: StringPropertyMock,
@@ -71,7 +80,7 @@ const Template = (args) => {
   const DayPickerVisible = mockGenerator.context.parameters.DayPickerVisible as TwoOptionsPropertyMock;
   DayPickerVisible.setValue(true);
   const FirstDayOfWeek = mockGenerator.context.parameters.FirstDayOfWeek as EnumPropertyMock<DaysOfWeek>;
-  FirstDayOfWeek.raw = "Monday";
+  FirstDayOfWeek.setValue(args.FirstDayOfWeek)
   const HighlightCurrentMonth = mockGenerator.context.parameters.HighlightCurrentMonth as TwoOptionsPropertyMock;
   HighlightCurrentMonth.setValue(true);
   const HighlightSelectedMonth = mockGenerator.context.parameters.HighlightSelectedMonth as TwoOptionsPropertyMock;
@@ -85,7 +94,14 @@ const Template = (args) => {
   const MonthPickerVisible = mockGenerator.context.parameters.MonthPickerVisible as TwoOptionsPropertyMock;
   MonthPickerVisible.setValue(true);
   const SelectedDateValue = mockGenerator.context.parameters.SelectedDateValue as DateTimePropertyMock;
-  SelectedDateValue.setValue(new Date());
+  SelectedDateValue.setValue(selectedDateValue);
+
+mockGenerator.notifyOutputChanged.callsFake(()=>{
+  const {SelectedDateValue} = mockGenerator.control.getOutputs();
+  console.log(SelectedDateValue);
+  updateArgs({SelectedDateValue}); 
+});
+
   const ShowGoToday = mockGenerator.context.parameters.ShowGoToToday as TwoOptionsPropertyMock;
   ShowGoToday.setValue(true);
   const ShowWeekNumbers = mockGenerator.context.parameters.ShowWeekNumbers as TwoOptionsPropertyMock;
@@ -103,4 +119,5 @@ Primary.args = {
   backgroundcolor: '#bcd3eb',
   text: "This is a calendar",
   language: 'en-us',
+  FirstDayOfWeek: "Monday"
 }

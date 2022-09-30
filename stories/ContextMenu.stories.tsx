@@ -31,7 +31,8 @@ import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/Co
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { ItemColumns } from "@powercat/context-menu/ContextMenu/ManifestConstants";
-
+import { useArgs } from '@storybook/client-api';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: "PCF Components/ContextMenu",
@@ -40,11 +41,20 @@ export default {
     layout: "fullscreen",
   },
   // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
-  argTypes: {},
+  argTypes: {
+    onClick: { action: 'clicked' },
+    ContextSelected: { control: 'select', options:['Item 2',
+    'Open',
+    'New',
+    "Settings",
+    'Save',]}
+
+  },
 } as Meta;
 
 type AlignmentTypes = "0" /*'center'*/ | "1" /*'left' */ | "2" /*'right'*/;
 const Template = (args) => {
+  const [,updateArgs] = useArgs();
   const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
     new ComponentFrameworkMockGeneratorReact(ContextMenu, {
       Chevron: TwoOptionsPropertyMock,
@@ -92,6 +102,11 @@ const Template = (args) => {
       return row;
     })
   );
+  items.openDatasetItem.callsFake((item) => {
+    console.log(item.id);
+    action('OpenDatasetItem')(item);
+    updateArgs({ContextSelected: item.name});
+  });
 
   mockGenerator.notifyOutputChanged
 
@@ -99,6 +114,8 @@ const Template = (args) => {
   const component = mockGenerator.ExecuteUpdateView();
   return <div style={{width: "200px", height: "100px"}}>{component}</div>;
 };
+
+
 
 export const Primary = Template.bind({});
 Primary.args = {

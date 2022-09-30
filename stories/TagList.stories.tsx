@@ -37,7 +37,10 @@ export default {
     },
     // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
     argTypes: {
-    onClick: {action: 'clicked'}
+        textAlignment: {
+            control: 'select',
+            options: ["0" , "1" , "2"]
+        }
 },
 
 } as Meta;
@@ -62,7 +65,7 @@ items: DataSetMock,
         const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
         BorderRadius.setValue(args.BorderRadius);
         const TextAlignment = mockGenerator.context.parameters.TextAlignment as StringPropertyMock;
-        TextAlignment.setValue("2");
+        TextAlignment.setValue(args.textAlignment);
         const FontSize = mockGenerator.context.parameters.FontSize as WholeNumberPropertyMock;
         FontSize.setValue(args.FontSize);
         const ItemHeight = mockGenerator.context.parameters.ItemHeight as WholeNumberPropertyMock;
@@ -102,6 +105,7 @@ Primary.args = {
     FontSize: 20,
     ItemHeight: 30,
     MaxHeight: 50,
+    textAlignment: "1",
     items: [{
          id :'1',
             [ItemColumns.Key]: 'commandOpen',

@@ -26,6 +26,8 @@ import { TwoOptionsPropertyMock } from '@shko-online/componentframework-mock/Com
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock';
 import { ItemColumns } from '@powercat/nav/Nav/ManifestConstants';
+import { useArgs } from '@storybook/client-api';
+import { action } from '@storybook/addon-actions';
 
 export default {
     title: 'PCF Components/Nav',
@@ -34,73 +36,89 @@ export default {
         layout: 'fullscreen',
     },
     // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
-    argTypes: {},
-    args:{ items: [
-      {
-          id: '1',
-          [ItemColumns.Key]: 'item1',
-          [ItemColumns.DisplayName]: 'Pages',
-          [ItemColumns.IconName]: 'FolderOpen',
-          [ItemColumns.IconColor]: 'blue',
-          [ItemColumns.Enabled]: true,
-          [ItemColumns.Expanded]: true,
-      },
+    argTypes: {
+        onClick: { action: 'clicked' },
+        LastSelected: {
+            control: 'select',
+            options: ['Pages', 'Save', 'News', 'Activity', 'More Pages', 'Save And Close'],
+        },
+    },
+    args: {
+        items: [
+            {
+                id: '1',
+                [ItemColumns.Key]: 'item1',
+                [ItemColumns.DisplayName]: 'Pages',
+                [ItemColumns.IconName]: 'FolderOpen',
+                [ItemColumns.IconColor]: 'blue',
+                [ItemColumns.Enabled]: true,
+                [ItemColumns.Expanded]: true,
+            },
 
-      {
-          id: '3',
-          [ItemColumns.Key]: 'item3',
-          [ItemColumns.DisplayName]: 'Save',
-          [ItemColumns.IconName]: 'Save',
-          [ItemColumns.Enabled]: true,
-          [ItemColumns.Expanded]: true,
-          [ItemColumns.ParentKey]: 'commandNewFrom',
-      },
-      {
-          id: '2',
-          [ItemColumns.Key]: 'item2',
-          [ItemColumns.DisplayName]: 'News',
-          [ItemColumns.IconName]: 'News',
-          [ItemColumns.IconColor]: 'red',
-          [ItemColumns.Enabled]: true,
-          [ItemColumns.Expanded]: true,
-          [ItemColumns.ParentKey]: 'commandNewFrom',
-    
-      },
-      {
-          id: '6',
-          [ItemColumns.Key]: 'commandNewFrom',
-          [ItemColumns.DisplayName]: 'Activity',
-          [ItemColumns.IconName]: 'OfficeFormsLogo',
-          [ItemColumns.IconColor]: 'blue',
-          [ItemColumns.Enabled]: true,
-          [ItemColumns.ParentKey]: 'item1',
-          [ItemColumns.Expanded]: true,
-          [ItemColumns.TextColor]: "red"
-      },
-      {
-          id: '7',
-          [ItemColumns.Key]: 'commandNewFrom',
-          [ItemColumns.DisplayName]: 'More Pages',
-          [ItemColumns.IconName]: 'OfficeFormsLogo',
-          [ItemColumns.IconColor]: 'blue',
-          [ItemColumns.Enabled]: true,
-          [ItemColumns.ParentKey]: 'item1',
-          [ItemColumns.Expanded]: true,
-          [ItemColumns.TextColor]: 'blue'
-      },
-      {
-          id: '8',
-          [ItemColumns.Key]: 'item6',
-          [ItemColumns.DisplayName]: 'Save And Close',
-          [ItemColumns.IconName]: 'Save',
-          [ItemColumns.IconColor]: 'green',
-          [ItemColumns.Enabled]: false,
-          [ItemColumns.Expanded]: true,
-      },
-  ],}
+            {
+                id: '3',
+                [ItemColumns.Key]: 'item3',
+                [ItemColumns.DisplayName]: 'Save',
+                [ItemColumns.IconName]: 'Save',
+                [ItemColumns.Enabled]: true,
+                [ItemColumns.Expanded]: true,
+                [ItemColumns.ParentKey]: 'item7',
+            },
+            {
+                id: '2',
+                [ItemColumns.Key]: 'item2',
+                [ItemColumns.DisplayName]: 'News',
+                [ItemColumns.IconName]: 'News',
+                [ItemColumns.IconColor]: 'red',
+                [ItemColumns.Enabled]: true,
+                [ItemColumns.Expanded]: true,
+                [ItemColumns.ParentKey]: 'item7',
+            },
+            {
+                id: '6',
+                [ItemColumns.Key]: 'commandNewFrom',
+                [ItemColumns.DisplayName]: 'Activity',
+                [ItemColumns.IconName]: 'OfficeFormsLogo',
+                [ItemColumns.IconColor]: 'blue',
+                [ItemColumns.Enabled]: true,
+                [ItemColumns.ParentKey]: 'item1',
+                [ItemColumns.Expanded]: true,
+                [ItemColumns.TextColor]: 'red',
+            },
+            {
+                id: '7',
+                [ItemColumns.Key]: 'item7',
+                [ItemColumns.DisplayName]: 'More Pages',
+                [ItemColumns.IconName]: 'OfficeFormsLogo',
+                [ItemColumns.IconColor]: 'blue',
+                [ItemColumns.Enabled]: true,
+                [ItemColumns.ParentKey]: 'item1',
+                [ItemColumns.Expanded]: true,
+                [ItemColumns.TextColor]: 'blue',
+            },
+            {
+                id: '8',
+                [ItemColumns.Key]: 'item6',
+                [ItemColumns.DisplayName]: 'Save And Close',
+                [ItemColumns.IconName]: 'Save',
+                [ItemColumns.IconColor]: 'green',
+                [ItemColumns.Enabled]: false,
+                [ItemColumns.Expanded]: true,
+            },
+        ],
+    },
 } as Meta;
 
-const Template = (args:{items: {id: string, ItemEnabled: boolean, ItemIconColor: string}[], EnableNotes: boolean, theme: string, CustomIconColor:boolean, AccessibilityLabel: string, Expanded: boolean}) => {
+const Template = (args: {
+    items: { id: string; ItemEnabled: boolean; ItemIconColor: string }[];
+    EnableNotes: boolean;
+    theme: string;
+    CustomIconColor: boolean;
+    AccessibilityLabel: string;
+    Expanded: boolean;
+}) => {
+    const [{ items }, updateArgs] = useArgs();
+    const argsItems = items as { id: string; ItemEnabled: boolean; ItemIconColor: string, ItemExpanded: boolean}[];
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
         new ComponentFrameworkMockGeneratorReact(Nav, {
             SelectedKey: StringPropertyMock,
@@ -119,21 +137,29 @@ const Template = (args:{items: {id: string, ItemEnabled: boolean, ItemIconColor:
     CollapseByDefault.setValue(args.Expanded);
     const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
     InputEvent.setValue('SetFocus' + Math.random().toString());
-    const items = mockGenerator.context.parameters.items as DataSetMock;
+    const itemsDataset = mockGenerator.context.parameters.items as DataSetMock;
+    itemsDataset.openDatasetItem.callsFake((item) => {
+        console.log(item.id);
+        action('OpenDatasetItem')(item);
+        updateArgs({ LastSelected: item.name });
+    });
+    if (args.EnableNotes !== undefined) {
+        argsItems
+            .filter((item) => item.id === '8')
+            .forEach((item) => {
+                item.ItemEnabled = !!args.EnableNotes;
+            });
+    }
+    if (args.CustomIconColor !== undefined) {
+        argsItems
+            .filter((item) => item.id === '6' && item.ItemIconColor)
+            .forEach((item) => {
+                args.CustomIconColor === true ? (item.ItemIconColor = 'red') : (item.ItemIconColor = 'blue');
+            });
+    }
 
-if(args.EnableNotes!==undefined){
-  args.items.filter((item)=> item.id ==='8').forEach((item)=>{
-    item.ItemEnabled = !!args.EnableNotes;
-  })
-}
-if(args.CustomIconColor!==undefined){
-    args.items.filter((item)=> item.id ==='6' && item.ItemIconColor ).forEach((item)=>{
-      args.CustomIconColor === true ? item.ItemIconColor = "red" : item.ItemIconColor = "blue";
-    })
-  }
-
-    items.initRecords(
-        (args.items || []).map((item) => {
+    itemsDataset.initRecords(
+        (argsItems || []).map((item) => {
             const row = new EntityRecord(item[ItemColumns.Key], item.id, item[ItemColumns.DisplayName]);
             row.columns[ItemColumns.Key] = item[ItemColumns.Key];
             row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
@@ -170,11 +196,12 @@ EnableNotes.args = {
         },
     }),
     EnableNotes: true,
-    CustomIconColor: true
+    CustomIconColor: true,
+    ShowActivityLink: true,
 };
 
-EnableNotes.parameters= {
-  controls:{
-    include: ["EnableNotes", "CustomIconColor"]
-  }
-}
+EnableNotes.parameters = {
+    controls: {
+        include: ['EnableNotes', 'CustomIconColor'],
+    },
+};
