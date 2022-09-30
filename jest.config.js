@@ -27,6 +27,7 @@ module.export ={
 		'@powercat/nav/(.*)': '<rootDir>/powercat-code-components/Nav/$1',
 		'@powercat/shimmer/(.*)': '<rootDir>/powercat-code-components/Shimmer/$1',
 		'@powercat/picker/(.*)': '<rootDir>/powercat-code-components/Picker/$1',
+		'@powercat/tag-list/(.*)': '<rootDir>/powercat-code-components/TagList/$1',
 
 	},
 	preset: 'ts-jest',

@@ -11,7 +11,7 @@
     "yarn": "NO LONGER USED - Please use npm"
   },
   "scripts": {
-    "postinstall": "npm run install:albx & npm run install:breadcrumb & npm run install:auto-width-label & npm run install:calendar & npm run install:command-bar & npm run install:context-menu & npm run install:details-list & npm run run install:pivot & npm run run install:nav & npm run install:picker & npm run install:shimmer",
+    "postinstall": "npm run install:albx & npm run install:breadcrumb & npm run install:auto-width-label & npm run install:calendar & npm run install:command-bar & npm run install:context-menu & npm run install:details-list & npm  run install:pivot & npm  run install:nav & npm run install:picker & npm run install:shimmer & npm run install:tag-list",
     "install:albx": "cd ComponentFramework-Mock && npm install",
     "install:breadcrumb": "cd powercat-code-components\\Breadcrumb && npm install",
     "install:auto-width-label": "cd powercat-code-components\\AutoWidthLabel && npm install",
@@ -23,7 +23,8 @@
     "install:nav": "cd powercat-code-components\\Nav && npm  install",
     "install:shimmer": "cd powercat-code-components\\Shimmer && npm install",
     "install:picker": "cd powercat-code-components\\Picker && npm install",
-    "build": "npm run build:breadcrumb & npm run build:auto-width-label & npm run build:calendar & npm run build:command-bar & npm run build:context-menu & npm run build:details-list & npm run build:pivot & npm run build:nav & npm run build:shimmer",
+    "install:tag-list": "cd powercat-code-components\\TagList && npm install",
+    "build": "npm run build:breadcrumb & npm run build:auto-width-label & npm run build:calendar & npm run build:command-bar & npm run build:context-menu & npm run build:details-list & npm run build:pivot & npm run build:nav & npm run build:shimmer & npm run build:tag-list",
     "build:breadcrumb": "cd powercat-code-components\\Breadcrumb && npm run build",
     "build:auto-width-label": "cd powercat-code-components\\AutoWidthLabel && npm run build",
     "build:calendar": "cd powercat-code-components\\Calendar && npm run build",
@@ -34,6 +35,7 @@
     "build:nav": "cd powercat-code-components\\Nav && npm run build",
     "build:picker": "cd powercat-code-components\\Picker && npm run build",
     "build:shimmer": "cd powercat-code-components\\Shimmer && npm run build",
+    "build:tag-list": "cd powercat-code-components\\TagList && npm run build",
     "test": "jest --coverage --maxWorkers=4",
     "test-no-cover": "jest --maxWorkers=4",
     "storybook": "start-storybook -p 6006",

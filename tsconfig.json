@@ -65,6 +65,9 @@
             "@powercat/shimmer*": [
                 "./powercat-code-components/Shimmer*"
             ],
+            "@powercat/tag-list*": [
+                "./powercat-code-components/TagList*"
+            ],
         },
         "typeRoots": [
             "./node_modules/@types"
