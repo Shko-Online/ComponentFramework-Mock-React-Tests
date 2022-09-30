@@ -97,7 +97,7 @@ const Template = (args) => {
   SelectedDateValue.setValue(selectedDateValue);
 
 mockGenerator.notifyOutputChanged.callsFake(()=>{
-  const {SelectedDateValue} = mockGenerator.control.getOutputs();
+  const {SelectedDateValue} = mockGenerator.control.getOutputs() || {};
   console.log(SelectedDateValue);
   updateArgs({SelectedDateValue}); 
 });
