@@ -30,6 +30,7 @@ import { ItemColumns } from '@powercat/command-bar/CommandBar/ManifestConstants'
 import {useArgs} from '@storybook/client-api';
 
 
+import canvasColumns from "./canvasColumns";
 export default {
     title: 'PCF Components/CommandBar',
     argTypes: {
@@ -54,7 +55,7 @@ const Template = (args) => {
             items: DataSetMock,
         });
     const items = mockGenerator.context.parameters.items as DataSetMock;
-    items.columns = args.columns || [];
+    items.columns = canvasColumns;
 
     items.initRecords(
         (args.items || []).map((item) => {
@@ -92,128 +93,6 @@ const Template = (args) => {
 };
 export const Primary = Template.bind({});
 Primary.args = {
-    colums: [
-        {
-            alias: 'ItemDisplayName',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemDisplayName',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemKey',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemKey',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemEnabled',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemEnabled',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemVisible',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemVisible',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemChecked',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemChecked',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemSplit',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemSplit',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemIconName',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemIconName',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemIconColor',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemIconColor',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemIconOnly',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemIconOnly',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemOverflow',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemOverflow',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemFarItem',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemFarItem',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemHeader',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemHeader',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemTopDivider',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemTopDivider',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemDivider',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemDivider',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-        {
-            alias: 'ItemParentKey',
-            dataType: 'SingleLine.Text',
-            displayName: 'ItemParentKey',
-            name: null,
-            order: -1,
-            visualSizeFactor: 1,
-        },
-    ],
     items: [
         {
             id: '1',

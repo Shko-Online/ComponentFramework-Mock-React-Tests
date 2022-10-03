@@ -12,7 +12,7 @@
 	PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 	language governing rights and limitations under the RPL. 
 */
-import * as sinon from 'sinon';
+import sinon from 'sinon';
 
 import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
 import { CommandBar } from '@powercat/command-bar/CommandBar';

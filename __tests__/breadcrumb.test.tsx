@@ -13,7 +13,11 @@
   language governing rights and limitations under the RPL. 
 */
 
-import * as sinon from "sinon";
+/**
+ * @jest-environment jsdom
+ */
+
+import sinon from "sinon";
 import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
 import {
   IInputs,

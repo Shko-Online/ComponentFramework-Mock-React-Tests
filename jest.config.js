@@ -13,6 +13,8 @@
 	language governing rights and limitations under the RPL. 
 */
 
+const path = require("path");
+
 /**  @type {import('ts-jest').JestConfigWithTsJest}  */
 module.export ={
 	moduleNameMapper:{
@@ -29,16 +31,25 @@ module.export ={
 		'@powercat/picker/(.*)': '<rootDir>/powercat-code-components/Picker/$1',
 		'@powercat/tag-list/(.*)': '<rootDir>/powercat-code-components/TagList/$1',
 		'@powercat/theme-generator/(.*)': '<rootDir>/powercat-code-components/ThemeGenerator/$1',
-
+ 		'@fluentui/react':'<rootDir>/node_modules/@fluentui/react',
+		'@fluentui/date-time-utilities/(.*)': "<rootDir>/node_modules/@fluentui/date-time-utilities/$1"
 	},
 	preset: 'ts-jest',
     testEnvironment: 'jsdom',
+	globals: {
+        'ts-jest': {
+            tsconfig: {
+                // allow js in typescript
+                allowJs: true,
+            },
+        },
+    },
     transform: {
       // transform files with ts-jest
-      "^.+\\.(jsx?|tsx?)$": ["ts-jest"/*,
+      "^.+\\.(jsx?|tsx?)$": ["ts-jest",
       {
         babelConfig: true,
-      }*/],	
+      }],	
       "\\.resx" : "<rootDir>/raw-Loader.js"
     },
     testMatch:[ "<rootDir>/__tests__/**/*.[jt]s?(x)" ],
@@ -46,7 +57,9 @@ module.export ={
       "/node_modules/",
       "/ComponentFramework-Mock/"
     ],
-	    transformIgnorePatterns: [
+	setupFiles: [path.resolve(path.join(__dirname, 'config', 'tests.js'))],
+	snapshotSerializers: ['@fluentui/jest-serializer-merge-styles'],
+	transformIgnorePatterns: [
         // allow fluent ui transformation when running tests
         // this is because we are using path based imports
         'node_modules/(?!(@fluentui/react/lib|@fluentui/style-utilities/lib|@fluentui/react-hooks/lib))',
