@@ -32,7 +32,14 @@ import { EnumPropertyMock } from "@shko-online/componentframework-mock/Component
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { ColumnsColumns, RecordsColumns } from "@powercat/details-list/DetailsList/ManifestConstants";
 import canvasColumns from './canvasColumns';
+import { within, userEvent, waitFor } from '@storybook/testing-library';
 
+
+
+const Delay = ()=>
+  new Promise<void>((resolve)=>{
+    setTimeout(()=>resolve(), 1000);
+  })
 export default {
   title: "PCF Components/DetailsList",
   argTypes: {
@@ -172,3 +179,9 @@ Primary.args = {
     
 
 };
+
+Primary.play = async({canvasElement, args}) => {
+  const canvas  = within(canvasElement);
+  await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText(""));
+}

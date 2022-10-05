@@ -30,6 +30,14 @@ import { action } from "@storybook/addon-actions";
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { ItemColumns } from "@powercat/command-bar/CommandBar/ManifestConstants";
 import {useArgs} from '@storybook/client-api'
+import { within, userEvent, waitFor } from '@storybook/testing-library';
+
+
+
+const Delay = ()=>
+  new Promise<void>((resolve)=>{
+    setTimeout(()=>resolve(), 1000);
+  })
 
 export default {
     title: "PCF Components/Pivot",
@@ -168,4 +176,23 @@ Primary.args = {
   ],
   PivotSelected:"Open", 
   };
+
+
   
+Primary.play = async({canvasElement, args}) => {
+  const canvas  = within(canvasElement);
+  await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("InternetSharing"));
+await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("MapPin"));
+await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("Microphone"));
+await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("New"));
+await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("Open"));
+await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("PageSolid"));
+await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("Save"));
+}

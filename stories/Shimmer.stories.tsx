@@ -26,7 +26,14 @@ import { EnumPropertyMock } from '@shko-online/componentframework-mock/Component
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { ItemColumns } from "@powercat/shimmer/Shimmer/ManifestConstants";
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
+import { within, waitFor, userEvent } from '@storybook/testing-library';
 
+
+
+const Delay = ()=>
+  new Promise<void>((resolve)=>{
+    setTimeout(()=>resolve(), 1000);
+  })
 
 export default {
     title: 'PCF Components/Shimmer',
@@ -130,3 +137,12 @@ Primary.args = {
         }
     ]
 }
+
+Primary.play = async({canvasElement, args}) => {
+    const canvas  = within(canvasElement);
+    await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("Edit number..."),);
+  await waitFor(Delay, {timeout: 2000});
+  console.log(args.checked); 
+  }
+  

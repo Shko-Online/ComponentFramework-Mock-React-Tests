@@ -12,6 +12,8 @@ module.exports = {
   ],
   features: {
     babelModeV7: true,
+    interactionsDebugger: true,
+    
   },
   "framework": "@storybook/react",
   "core": {
@@ -20,6 +22,16 @@ module.exports = {
   "webpackFinal": async (config) => {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(new TsconfigPathsPlugin());
+    config.module.rules.forEach(rule=>{
+      if("a.tsx".match(rule.test)){
+        rule.use.push({
+          loader: 'ts-loader',
+          options: {
+              projectReferences: true
+          }
+        })
+      }
+    })
     config.module.rules.push({ test: /\.resx$/, use: 'raw-loader' })
     return config;
   },

@@ -38,11 +38,11 @@ export default {
     // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
     argTypes: {
         onClick: { action: 'clicked' },
-        LastSelected: {  control: 'select', options: ['text1', 'text2','text3', 'text4'] }
+        LastSelected: { control: 'select', options: ['text1', 'text2', 'text3', 'text4'] },
     },
 } as Meta;
 const Template = (args) => {
-    const [,updateArgs] = useArgs();
+    const [, updateArgs] = useArgs();
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
         new ComponentFrameworkMockGeneratorReact(Breadcrumb, {
             items: DataSetMock,
@@ -67,7 +67,7 @@ const Template = (args) => {
     items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
-        updateArgs({LastSelected: item.name});
+        updateArgs({ LastSelected: item.name });
     });
 
     const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
