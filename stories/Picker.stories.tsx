@@ -36,6 +36,9 @@ import { ContextEx } from '@powercat/picker/Picker/ContextExtended';
 export default {
     title: "PCF Components/Picker",
     argTypes: {
+      hint : { type: "string"},
+      searchTerms: {type : "string"}
+
     },
     parameters: {
       layout: "fullscreen",
@@ -68,27 +71,31 @@ export default {
 
     Tags.columns= args.tagsColumns;
     Tags.initRecords((args.tagsItems || []).map((item) => {
-        const row = new EntityRecord(undefined, item.id, item.ColDisplayName);
-        row.columns["id"] = item.id;
-        row.columns[SuggestionsColumns.SuggestionKey] = item[SuggestionsColumns.SuggestionKey];
-        row.columns [SuggestionsColumns.SuggestionsDisplayName] =item [SuggestionsColumns.SuggestionsDisplayName];
+        const row = new EntityRecord(undefined, item.id, item[TagsColumns.TagsDisplayName]);
+        row.columns["id"] = item.id; row.columns["id"] = item.id;
+        row.columns[TagsColumns.TagsKey] = item[TagsColumns.TagsKey];
+        row.columns[TagsColumns.TagsDisplayName] = item[TagsColumns.TagsDisplayName];
+        row.columns[TagsColumns.TagsIconName]= item[TagsColumns.TagsIconName];
+        row.columns[TagsColumns.TagsBackgroundColor]= item[TagsColumns.TagsBackgroundColor];
+
+       
         return row;
       }))
 
     Suggestions.columns = args.suggestionsColumns;
     Suggestions.initRecords((args.suggestionItems || []).map((item) => {
-        const row = new EntityRecord(undefined, item.id, item.ColDisplayName);
-        row.columns["id"] = item.id;
-        row.columns[TagsColumns.TagsKey] = item[TagsColumns.TagsKey];
-        row.columns[TagsColumns.TagsDisplayName] = item[TagsColumns.TagsDisplayName];
-        row.columns[TagsColumns.TagsIconName]= item[TagsColumns.TagsIconName];
+        const row = new EntityRecord(undefined, item.id, item[SuggestionsColumns.SuggestionKey]);
+
+        row.columns[SuggestionsColumns.SuggestionKey] = item[SuggestionsColumns.SuggestionKey];
+        row.columns [SuggestionsColumns.SuggestionsDisplayName] =item [SuggestionsColumns.SuggestionsDisplayName];
+        row.columns[SuggestionsColumns.SuggestionsBackgroundColor]= item[ SuggestionsColumns.SuggestionsBackgroundColor];
         return row;
       }));
 
       (mockGenerator.context as unknown as ContextEx)["accessibility"] = {
           assignedTabIndex: 1
       }
-
+   
     mockGenerator.context.mode.allocatedHeight = 500;
     mockGenerator.context.mode.allocatedWidth = 500;
     mockGenerator.context.mode.trackContainerResize(true);
@@ -109,26 +116,48 @@ export default {
 Primary.args = {
     suggestionItems : [
          {  id: "1",
-            [SuggestionsColumns.SuggestionKey]: 'red',
-            [SuggestionsColumns.SuggestionsDisplayName]: 'red',
+            [SuggestionsColumns.SuggestionKey]: 'green',
+            [SuggestionsColumns.SuggestionsDisplayName]: 'Green',
+            [SuggestionsColumns.SuggestionsBackgroundColor]:'green'
+
+        },
+        {  id: "2",
+            [SuggestionsColumns.SuggestionKey]: 'pink',
+            [SuggestionsColumns.SuggestionsDisplayName]: 'Pink',
+            [SuggestionsColumns.SuggestionsBackgroundColor]:'pink',
         },
     ],
     suggestionsColumns:[
         {displayName: 'SuggestionsKey', name: null, dataType: 'SingleLine.Text', alias: 'SuggestionsKey', order: -1,visualSizeFactor: 1},
         {displayName: 'SuggestionsSubDisplayName', name: null, dataType: 'SingleLine.Text', alias: 'SuggestionsSubDisplayName', order: -1, visualSizeFactor: 1},
+        {displayName: 'SuggestionsBackgroundColor', name: null, dataType: 'SingleLine.Text', alias: 'SuggestionsBackgroundColor', order: -1, visualSizeFactor: 1},
     ],
     tagsItems:[
-         {  id: "1",
+         {  id: "aa",
             [TagsColumns.TagsKey]: 'red',
-            [TagsColumns.TagsDisplayName]: 'red',
+            [TagsColumns.TagsDisplayName]: 'Red',
             [TagsColumns.TagsIconName]: 'Edit',
+            [TagsColumns.TagsBackgroundColor]:'red',
+        },
+        {   id: "ab",
+            [TagsColumns.TagsKey]: 'blue',
+            [TagsColumns.TagsDisplayName]: 'Blue',
+            [TagsColumns.TagsIconName]: 'Add',
+            [TagsColumns.TagsBackgroundColor]:'Blue'
+        },
+        {   id: "ac",
+            [TagsColumns.TagsKey]: 'green',
+            [TagsColumns.TagsDisplayName]: 'Green',
+            [TagsColumns.TagsIconName]: 'Cancel',
+            [TagsColumns.TagsBackgroundColor]:'green'
         },
         
     ],
     tagsColumns:[
         {displayName: 'TagsKey', name: null, dataType: 'SingleLine.Text', alias: 'TagsKey', order: -1, visualSizeFactor: 1},
         {displayName: 'TagsDisplayName', name: null, dataType: 'SingleLine.Text', alias: 'TagsDisplayName', order: -1, visualSizeFactor: 1},
-        {displayName: 'TagsIconName', name: null, dataType: 'SingleLine.Text', alias: 'TagsIconName', order: -1, visualSizeFactor: 1}
+        {displayName: 'TagsIconName', name: null, dataType: 'SingleLine.Text', alias: 'TagsIconName', order: -1, visualSizeFactor: 1},
+        {displayName: 'TagsBackgroundColor', name: null, dataType: 'SingleLine.Text', alias: 'TagsBackgroundColor', order: -1, visualSizeFactor: 1}
 
     ],
     hint : "Search",
