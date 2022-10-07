@@ -30,7 +30,6 @@ import { StringPropertyMock } from "@shko-online/componentframework-mock/Compone
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
-import { ColumnsColumns, RecordsColumns } from "@powercat/details-list/DetailsList/ManifestConstants";
 import canvasColumns from './canvasColumns';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 

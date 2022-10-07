@@ -76,7 +76,9 @@
 		    "@fluentui/date-time-utilities*": ["./node_modules/@fluentui/date-time-utilities*"]
         },
         "typeRoots": [
-            "./node_modules/@types"
+            "./node_modules/@types",
+            // "./ComponentFramework-Mock/src"
+             "./src"
         ]
     },
     "exclude": [
