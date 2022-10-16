@@ -15,12 +15,13 @@
 {
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
+        "allowJs": true,
+        "baseUrl": ".",
         "lib": [
             "es5",
             "es6",
             "dom"
         ],
-        "allowJs": true,
         "jsx": "react",
         "module": "CommonJS",
         "moduleResolution": "Node",
@@ -31,7 +32,6 @@
         "outDir": "dist",
         "declaration": true,
         "sourceMap": true,
-        "baseUrl": ".",
         "paths": {
             "@shko-online/componentframework-mock*": [
                 "./ComponentFramework-Mock/src*"
