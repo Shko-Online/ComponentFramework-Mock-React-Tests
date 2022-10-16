@@ -33,6 +33,14 @@ import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFram
 import { ItemColumns } from "@powercat/context-menu/ContextMenu/ManifestConstants";
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
+import { within, waitFor, userEvent } from '@storybook/testing-library';
+
+
+
+const Delay = ()=>
+  new Promise<void>((resolve)=>{
+    setTimeout(()=>resolve(), 1000);
+  })
 
 export default {
   title: "PCF Components/ContextMenu",
@@ -158,4 +166,10 @@ Primary.args = {
   ]
 
 };
-
+Primary.play = async({canvasElement, args}) => {
+  const canvas  = within(canvasElement);
+  await waitFor(Delay, {timeout: 2000});
+await userEvent.click( canvas.getByText("Item 2"));
+await waitFor(Delay, {timeout: 2000});
+console.log(args.checked); 
+}

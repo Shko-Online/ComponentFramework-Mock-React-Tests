@@ -60,7 +60,7 @@ exports[`CommandBar renders 1`] = `
           "openUrl": [Function],
           "openWebResource": [Function],
         },
-        "parameters": {
+        "parameters": Object {
           "AccessibilityLabel": StringPropertyMock {
             "attributes": StringMetadataMock {},
             "raw": undefined,
@@ -79,7 +79,7 @@ exports[`CommandBar renders 1`] = `
           "items": DataSetMock {
             "addColumn": [Function],
             "clearSelectedRecordIds": [Function],
-            "columns": [],
+            "columns": Array [],
             "filtering": FilteringMock {
               "clearFilter": [Function],
               "getFilter": [Function],
@@ -106,21 +106,21 @@ exports[`CommandBar renders 1`] = `
               "setPageSize": [Function],
               "totalResultCount": -1,
             },
-            "records": {},
+            "records": Object {},
             "refresh": [Function],
             "setSelectedRecordIds": [Function],
-            "sortedRecordIds": [],
-            "sorting": [],
+            "sortedRecordIds": Array [],
+            "sorting": Array [],
           },
         },
         "resources": ResourcesMock {
           "getResource": [Function],
           "getString": [Function],
         },
-        "updatedProperties": [],
+        "updatedProperties": Array [],
         "userSettings": UserSettingsMock {
-          "dateFormattingInfo": {
-            "abbreviatedDayNames": [
+          "dateFormattingInfo": Object {
+            "abbreviatedDayNames": Array [
               "Sun",
               "Mon",
               "Tue",
@@ -129,7 +129,7 @@ exports[`CommandBar renders 1`] = `
               "Fri",
               "Sat",
             ],
-            "abbreviatedMonthGenitiveNames": [
+            "abbreviatedMonthGenitiveNames": Array [
               "Jan",
               "Feb",
               "Mar",
@@ -144,7 +144,7 @@ exports[`CommandBar renders 1`] = `
               "Dec",
               "",
             ],
-            "abbreviatedMonthNames": [
+            "abbreviatedMonthNames": Array [
               "Jan",
               "Feb",
               "Mar",
@@ -160,7 +160,7 @@ exports[`CommandBar renders 1`] = `
               "",
             ],
             "amDesignator": "AM",
-            "calendar": {
+            "calendar": Object {
               "algorithmType": 1,
               "calendarType": 1,
               "maxSupportedDateTime": undefined,
@@ -169,7 +169,7 @@ exports[`CommandBar renders 1`] = `
             },
             "calendarWeekRule": 0,
             "dateSeparator": "/",
-            "dayNames": [
+            "dayNames": Array [
               "Sunday",
               "Monday",
               "Tuesday",
@@ -183,7 +183,7 @@ exports[`CommandBar renders 1`] = `
             "longDatePattern": "dddd, MMMM d, yyyy",
             "longTimePattern": "hh:mm:ss tt",
             "monthDayPattern": "MMMM dd",
-            "monthGenitiveNames": [
+            "monthGenitiveNames": Array [
               "January",
               "February",
               "March",
@@ -198,7 +198,7 @@ exports[`CommandBar renders 1`] = `
               "December",
               "",
             ],
-            "monthNames": [
+            "monthNames": Array [
               "January",
               "February",
               "March",
@@ -216,7 +216,7 @@ exports[`CommandBar renders 1`] = `
             "pmDesignator": "PM",
             "shortDatePattern": "M/d/yyyy",
             "shortTimePattern": "h:mm tt",
-            "shortestDayNames": [
+            "shortestDayNames": Array [
               "Su",
               "Mo",
               "Tu",
@@ -231,18 +231,18 @@ exports[`CommandBar renders 1`] = `
             "yearMonthPattern": "MMMM yyyy",
           },
           "getTimeZoneOffsetMinutes": [Function],
-          "numberFormattingInfo": {
+          "numberFormattingInfo": Object {
             "currencyDecimalDigits": 5,
             "currencyDecimalSeparator": ".",
             "currencyGroupSeparator": ",",
-            "currencyGroupSizes": [
+            "currencyGroupSizes": Array [
               3,
             ],
             "currencyNegativePattern": 0,
             "currencyPositivePattern": 0,
             "currencySymbol": undefined,
             "nanSymbol": "NaN",
-            "nativeDigits": [
+            "nativeDigits": Array [
               "0",
               "1",
               "2",
@@ -259,7 +259,7 @@ exports[`CommandBar renders 1`] = `
             "numberDecimalDigits": 2,
             "numberDecimalSeparator": ".",
             "numberGroupSeparator": ",",
-            "numberGroupSizes": [
+            "numberGroupSizes": Array [
               3,
             ],
             "numberNegativePattern": 1,
@@ -267,7 +267,7 @@ exports[`CommandBar renders 1`] = `
             "percentDecimalDigits": 2,
             "percentDecimalSeparator": ".",
             "percentGroupSeparator": ",",
-            "percentGroupSizes": [
+            "percentGroupSizes": Array [
               3,
             ],
             "percentNegativePattern": 0,
@@ -349,7 +349,7 @@ exports[`CommandBar renders 1`] = `
             "openUrl": [Function],
             "openWebResource": [Function],
           },
-          "parameters": {
+          "parameters": Object {
             "AccessibilityLabel": StringPropertyMock {
               "attributes": StringMetadataMock {},
               "raw": undefined,
@@ -368,7 +368,7 @@ exports[`CommandBar renders 1`] = `
             "items": DataSetMock {
               "addColumn": [Function],
               "clearSelectedRecordIds": [Function],
-              "columns": [],
+              "columns": Array [],
               "filtering": FilteringMock {
                 "clearFilter": [Function],
                 "getFilter": [Function],
@@ -395,21 +395,21 @@ exports[`CommandBar renders 1`] = `
                 "setPageSize": [Function],
                 "totalResultCount": -1,
               },
-              "records": {},
+              "records": Object {},
               "refresh": [Function],
               "setSelectedRecordIds": [Function],
-              "sortedRecordIds": [],
-              "sorting": [],
+              "sortedRecordIds": Array [],
+              "sorting": Array [],
             },
           },
           "resources": ResourcesMock {
             "getResource": [Function],
             "getString": [Function],
           },
-          "updatedProperties": [],
+          "updatedProperties": Array [],
           "userSettings": UserSettingsMock {
-            "dateFormattingInfo": {
-              "abbreviatedDayNames": [
+            "dateFormattingInfo": Object {
+              "abbreviatedDayNames": Array [
                 "Sun",
                 "Mon",
                 "Tue",
@@ -418,7 +418,7 @@ exports[`CommandBar renders 1`] = `
                 "Fri",
                 "Sat",
               ],
-              "abbreviatedMonthGenitiveNames": [
+              "abbreviatedMonthGenitiveNames": Array [
                 "Jan",
                 "Feb",
                 "Mar",
@@ -433,7 +433,7 @@ exports[`CommandBar renders 1`] = `
                 "Dec",
                 "",
               ],
-              "abbreviatedMonthNames": [
+              "abbreviatedMonthNames": Array [
                 "Jan",
                 "Feb",
                 "Mar",
@@ -449,7 +449,7 @@ exports[`CommandBar renders 1`] = `
                 "",
               ],
               "amDesignator": "AM",
-              "calendar": {
+              "calendar": Object {
                 "algorithmType": 1,
                 "calendarType": 1,
                 "maxSupportedDateTime": undefined,
@@ -458,7 +458,7 @@ exports[`CommandBar renders 1`] = `
               },
               "calendarWeekRule": 0,
               "dateSeparator": "/",
-              "dayNames": [
+              "dayNames": Array [
                 "Sunday",
                 "Monday",
                 "Tuesday",
@@ -472,7 +472,7 @@ exports[`CommandBar renders 1`] = `
               "longDatePattern": "dddd, MMMM d, yyyy",
               "longTimePattern": "hh:mm:ss tt",
               "monthDayPattern": "MMMM dd",
-              "monthGenitiveNames": [
+              "monthGenitiveNames": Array [
                 "January",
                 "February",
                 "March",
@@ -487,7 +487,7 @@ exports[`CommandBar renders 1`] = `
                 "December",
                 "",
               ],
-              "monthNames": [
+              "monthNames": Array [
                 "January",
                 "February",
                 "March",
@@ -505,7 +505,7 @@ exports[`CommandBar renders 1`] = `
               "pmDesignator": "PM",
               "shortDatePattern": "M/d/yyyy",
               "shortTimePattern": "h:mm tt",
-              "shortestDayNames": [
+              "shortestDayNames": Array [
                 "Su",
                 "Mo",
                 "Tu",
@@ -520,18 +520,18 @@ exports[`CommandBar renders 1`] = `
               "yearMonthPattern": "MMMM yyyy",
             },
             "getTimeZoneOffsetMinutes": [Function],
-            "numberFormattingInfo": {
+            "numberFormattingInfo": Object {
               "currencyDecimalDigits": 5,
               "currencyDecimalSeparator": ".",
               "currencyGroupSeparator": ",",
-              "currencyGroupSizes": [
+              "currencyGroupSizes": Array [
                 3,
               ],
               "currencyNegativePattern": 0,
               "currencyPositivePattern": 0,
               "currencySymbol": undefined,
               "nanSymbol": "NaN",
-              "nativeDigits": [
+              "nativeDigits": Array [
                 "0",
                 "1",
                 "2",
@@ -548,7 +548,7 @@ exports[`CommandBar renders 1`] = `
               "numberDecimalDigits": 2,
               "numberDecimalSeparator": ".",
               "numberGroupSeparator": ",",
-              "numberGroupSizes": [
+              "numberGroupSizes": Array [
                 3,
               ],
               "numberNegativePattern": 1,
@@ -556,7 +556,7 @@ exports[`CommandBar renders 1`] = `
               "percentDecimalDigits": 2,
               "percentDecimalSeparator": ".",
               "percentGroupSeparator": ",",
-              "percentGroupSizes": [
+              "percentGroupSizes": Array [
                 3,
               ],
               "percentNegativePattern": 0,
@@ -584,51 +584,56 @@ exports[`CommandBar renders 1`] = `
         "focusKey": "",
         "onSelect": [Function],
       },
-      "data": {
-        "systemuser": {
+      "data": Object {
+        "systemuser": Object {
           "undefined": EntityRecord {
-            "columns": {},
+            "columns": Object {},
             "etn": "systemuser",
             "getFormattedValue": [Function],
             "getNamedReference": [Function],
             "getRecordId": [Function],
             "getValue": [Function],
-            "id": {
+            "id": Object {
               "guid": undefined,
+            },
+            "metadata": Object {
+              "LogicalName": "systemuser",
+              "PrimaryIdAttribute": "systemuserid",
+              "PrimaryNameAttribute": "name",
             },
             "name": "Betim Beja",
           },
         },
       },
       "metadata": MetadataDB {
-        "attributes": {},
-        "data": {},
+        "attributes": Object {},
+        "data": Object {},
         "db": Loki {
           "ENV": "NODEJS",
           "autosave": false,
           "autosaveHandle": null,
           "autosaveInterval": 5000,
-          "collections": [],
+          "collections": Array [],
           "databaseVersion": 1.5,
           "engineVersion": 1.5,
-          "events": {
-            "changes": [],
-            "close": [],
-            "flushChanges": [],
-            "init": [
+          "events": Object {
+            "changes": Array [],
+            "close": Array [],
+            "flushChanges": Array [],
+            "init": Array [
               [Function],
             ],
-            "loaded": [],
-            "warning": [],
+            "loaded": Array [],
+            "warning": Array [],
           },
           "filename": "metadata.db",
-          "options": {
+          "options": Object {
             "destructureDelimiter": "$<
 ",
             "serializationMethod": "normal",
           },
           "persistenceAdapter": LokiFsAdapter {
-            "fs": {
+            "fs": Object {
               "Dir": [Function],
               "Dirent": [Function],
               "F_OK": 0,
@@ -651,7 +656,7 @@ exports[`CommandBar renders 1`] = `
               "chownSync": [Function],
               "close": [Function],
               "closeSync": [Function],
-              "constants": {
+              "constants": Object {
                 "COPYFILE_EXCL": 1,
                 "COPYFILE_FICLONE": 2,
                 "COPYFILE_FICLONE_FORCE": 4,
@@ -669,8 +674,6 @@ exports[`CommandBar renders 1`] = `
                 "S_IFLNK": 40960,
                 "S_IFMT": 61440,
                 "S_IFREG": 32768,
-                "S_IRUSR": 256,
-                "S_IWUSR": 128,
                 "UV_DIRENT_BLOCK": 7,
                 "UV_DIRENT_CHAR": 6,
                 "UV_DIRENT_DIR": 2,
@@ -728,48 +731,11 @@ exports[`CommandBar renders 1`] = `
               "openSync": [Function],
               "opendir": [Function],
               "opendirSync": [Function],
-              "promises": {
+              "promises": Object {
                 "access": [Function],
                 "appendFile": [Function],
                 "chmod": [Function],
                 "chown": [Function],
-                "constants": {
-                  "COPYFILE_EXCL": 1,
-                  "COPYFILE_FICLONE": 2,
-                  "COPYFILE_FICLONE_FORCE": 4,
-                  "F_OK": 0,
-                  "O_APPEND": 8,
-                  "O_CREAT": 256,
-                  "O_EXCL": 1024,
-                  "O_RDONLY": 0,
-                  "O_RDWR": 2,
-                  "O_TRUNC": 512,
-                  "O_WRONLY": 1,
-                  "R_OK": 4,
-                  "S_IFCHR": 8192,
-                  "S_IFDIR": 16384,
-                  "S_IFLNK": 40960,
-                  "S_IFMT": 61440,
-                  "S_IFREG": 32768,
-                  "S_IRUSR": 256,
-                  "S_IWUSR": 128,
-                  "UV_DIRENT_BLOCK": 7,
-                  "UV_DIRENT_CHAR": 6,
-                  "UV_DIRENT_DIR": 2,
-                  "UV_DIRENT_FIFO": 4,
-                  "UV_DIRENT_FILE": 1,
-                  "UV_DIRENT_LINK": 3,
-                  "UV_DIRENT_SOCKET": 5,
-                  "UV_DIRENT_UNKNOWN": 0,
-                  "UV_FS_COPYFILE_EXCL": 1,
-                  "UV_FS_COPYFILE_FICLONE": 2,
-                  "UV_FS_COPYFILE_FICLONE_FORCE": 4,
-                  "UV_FS_O_FILEMAP": 536870912,
-                  "UV_FS_SYMLINK_DIR": 1,
-                  "UV_FS_SYMLINK_JUNCTION": 2,
-                  "W_OK": 2,
-                  "X_OK": 1,
-                },
                 "copyFile": [Function],
                 "cp": [Function],
                 "lchmod": [Function],
@@ -836,7 +802,7 @@ exports[`CommandBar renders 1`] = `
             },
           },
           "persistenceMethod": "fs",
-          "throttledCallbacks": [],
+          "throttledCallbacks": Array [],
           "throttledSavePending": false,
           "throttledSaves": true,
           "verbose": false,
@@ -908,7 +874,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
           "openUrl": [Function],
           "openWebResource": [Function],
         },
-        "parameters": {
+        "parameters": Object {
           "AccessibilityLabel": StringPropertyMock {
             "attributes": StringMetadataMock {},
             "raw": undefined,
@@ -927,7 +893,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
           "items": DataSetMock {
             "addColumn": [Function],
             "clearSelectedRecordIds": [Function],
-            "columns": [],
+            "columns": Array [],
             "error": true,
             "filtering": FilteringMock {
               "clearFilter": [Function],
@@ -955,21 +921,21 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "setPageSize": [Function],
               "totalResultCount": -1,
             },
-            "records": {},
+            "records": Object {},
             "refresh": [Function],
             "setSelectedRecordIds": [Function],
-            "sortedRecordIds": [],
-            "sorting": [],
+            "sortedRecordIds": Array [],
+            "sorting": Array [],
           },
         },
         "resources": ResourcesMock {
           "getResource": [Function],
           "getString": [Function],
         },
-        "updatedProperties": [],
+        "updatedProperties": Array [],
         "userSettings": UserSettingsMock {
-          "dateFormattingInfo": {
-            "abbreviatedDayNames": [
+          "dateFormattingInfo": Object {
+            "abbreviatedDayNames": Array [
               "Sun",
               "Mon",
               "Tue",
@@ -978,7 +944,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "Fri",
               "Sat",
             ],
-            "abbreviatedMonthGenitiveNames": [
+            "abbreviatedMonthGenitiveNames": Array [
               "Jan",
               "Feb",
               "Mar",
@@ -993,7 +959,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "Dec",
               "",
             ],
-            "abbreviatedMonthNames": [
+            "abbreviatedMonthNames": Array [
               "Jan",
               "Feb",
               "Mar",
@@ -1009,7 +975,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "",
             ],
             "amDesignator": "AM",
-            "calendar": {
+            "calendar": Object {
               "algorithmType": 1,
               "calendarType": 1,
               "maxSupportedDateTime": undefined,
@@ -1018,7 +984,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             },
             "calendarWeekRule": 0,
             "dateSeparator": "/",
-            "dayNames": [
+            "dayNames": Array [
               "Sunday",
               "Monday",
               "Tuesday",
@@ -1032,7 +998,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             "longDatePattern": "dddd, MMMM d, yyyy",
             "longTimePattern": "hh:mm:ss tt",
             "monthDayPattern": "MMMM dd",
-            "monthGenitiveNames": [
+            "monthGenitiveNames": Array [
               "January",
               "February",
               "March",
@@ -1047,7 +1013,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "December",
               "",
             ],
-            "monthNames": [
+            "monthNames": Array [
               "January",
               "February",
               "March",
@@ -1065,7 +1031,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             "pmDesignator": "PM",
             "shortDatePattern": "M/d/yyyy",
             "shortTimePattern": "h:mm tt",
-            "shortestDayNames": [
+            "shortestDayNames": Array [
               "Su",
               "Mo",
               "Tu",
@@ -1080,18 +1046,18 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             "yearMonthPattern": "MMMM yyyy",
           },
           "getTimeZoneOffsetMinutes": [Function],
-          "numberFormattingInfo": {
+          "numberFormattingInfo": Object {
             "currencyDecimalDigits": 5,
             "currencyDecimalSeparator": ".",
             "currencyGroupSeparator": ",",
-            "currencyGroupSizes": [
+            "currencyGroupSizes": Array [
               3,
             ],
             "currencyNegativePattern": 0,
             "currencyPositivePattern": 0,
             "currencySymbol": undefined,
             "nanSymbol": "NaN",
-            "nativeDigits": [
+            "nativeDigits": Array [
               "0",
               "1",
               "2",
@@ -1108,7 +1074,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             "numberDecimalDigits": 2,
             "numberDecimalSeparator": ".",
             "numberGroupSeparator": ",",
-            "numberGroupSizes": [
+            "numberGroupSizes": Array [
               3,
             ],
             "numberNegativePattern": 1,
@@ -1116,7 +1082,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             "percentDecimalDigits": 2,
             "percentDecimalSeparator": ".",
             "percentGroupSeparator": ",",
-            "percentGroupSizes": [
+            "percentGroupSizes": Array [
               3,
             ],
             "percentNegativePattern": 0,
@@ -1198,7 +1164,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             "openUrl": [Function],
             "openWebResource": [Function],
           },
-          "parameters": {
+          "parameters": Object {
             "AccessibilityLabel": StringPropertyMock {
               "attributes": StringMetadataMock {},
               "raw": undefined,
@@ -1217,7 +1183,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             "items": DataSetMock {
               "addColumn": [Function],
               "clearSelectedRecordIds": [Function],
-              "columns": [],
+              "columns": Array [],
               "error": true,
               "filtering": FilteringMock {
                 "clearFilter": [Function],
@@ -1245,21 +1211,21 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
                 "setPageSize": [Function],
                 "totalResultCount": -1,
               },
-              "records": {},
+              "records": Object {},
               "refresh": [Function],
               "setSelectedRecordIds": [Function],
-              "sortedRecordIds": [],
-              "sorting": [],
+              "sortedRecordIds": Array [],
+              "sorting": Array [],
             },
           },
           "resources": ResourcesMock {
             "getResource": [Function],
             "getString": [Function],
           },
-          "updatedProperties": [],
+          "updatedProperties": Array [],
           "userSettings": UserSettingsMock {
-            "dateFormattingInfo": {
-              "abbreviatedDayNames": [
+            "dateFormattingInfo": Object {
+              "abbreviatedDayNames": Array [
                 "Sun",
                 "Mon",
                 "Tue",
@@ -1268,7 +1234,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
                 "Fri",
                 "Sat",
               ],
-              "abbreviatedMonthGenitiveNames": [
+              "abbreviatedMonthGenitiveNames": Array [
                 "Jan",
                 "Feb",
                 "Mar",
@@ -1283,7 +1249,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
                 "Dec",
                 "",
               ],
-              "abbreviatedMonthNames": [
+              "abbreviatedMonthNames": Array [
                 "Jan",
                 "Feb",
                 "Mar",
@@ -1299,7 +1265,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
                 "",
               ],
               "amDesignator": "AM",
-              "calendar": {
+              "calendar": Object {
                 "algorithmType": 1,
                 "calendarType": 1,
                 "maxSupportedDateTime": undefined,
@@ -1308,7 +1274,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               },
               "calendarWeekRule": 0,
               "dateSeparator": "/",
-              "dayNames": [
+              "dayNames": Array [
                 "Sunday",
                 "Monday",
                 "Tuesday",
@@ -1322,7 +1288,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "longDatePattern": "dddd, MMMM d, yyyy",
               "longTimePattern": "hh:mm:ss tt",
               "monthDayPattern": "MMMM dd",
-              "monthGenitiveNames": [
+              "monthGenitiveNames": Array [
                 "January",
                 "February",
                 "March",
@@ -1337,7 +1303,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
                 "December",
                 "",
               ],
-              "monthNames": [
+              "monthNames": Array [
                 "January",
                 "February",
                 "March",
@@ -1355,7 +1321,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "pmDesignator": "PM",
               "shortDatePattern": "M/d/yyyy",
               "shortTimePattern": "h:mm tt",
-              "shortestDayNames": [
+              "shortestDayNames": Array [
                 "Su",
                 "Mo",
                 "Tu",
@@ -1370,18 +1336,18 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "yearMonthPattern": "MMMM yyyy",
             },
             "getTimeZoneOffsetMinutes": [Function],
-            "numberFormattingInfo": {
+            "numberFormattingInfo": Object {
               "currencyDecimalDigits": 5,
               "currencyDecimalSeparator": ".",
               "currencyGroupSeparator": ",",
-              "currencyGroupSizes": [
+              "currencyGroupSizes": Array [
                 3,
               ],
               "currencyNegativePattern": 0,
               "currencyPositivePattern": 0,
               "currencySymbol": undefined,
               "nanSymbol": "NaN",
-              "nativeDigits": [
+              "nativeDigits": Array [
                 "0",
                 "1",
                 "2",
@@ -1398,7 +1364,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "numberDecimalDigits": 2,
               "numberDecimalSeparator": ".",
               "numberGroupSeparator": ",",
-              "numberGroupSizes": [
+              "numberGroupSizes": Array [
                 3,
               ],
               "numberNegativePattern": 1,
@@ -1406,7 +1372,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "percentDecimalDigits": 2,
               "percentDecimalSeparator": ".",
               "percentGroupSeparator": ",",
-              "percentGroupSizes": [
+              "percentGroupSizes": Array [
                 3,
               ],
               "percentNegativePattern": 0,
@@ -1434,51 +1400,56 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
         "focusKey": "",
         "onSelect": [Function],
       },
-      "data": {
-        "systemuser": {
+      "data": Object {
+        "systemuser": Object {
           "undefined": EntityRecord {
-            "columns": {},
+            "columns": Object {},
             "etn": "systemuser",
             "getFormattedValue": [Function],
             "getNamedReference": [Function],
             "getRecordId": [Function],
             "getValue": [Function],
-            "id": {
+            "id": Object {
               "guid": undefined,
+            },
+            "metadata": Object {
+              "LogicalName": "systemuser",
+              "PrimaryIdAttribute": "systemuserid",
+              "PrimaryNameAttribute": "name",
             },
             "name": "Betim Beja",
           },
         },
       },
       "metadata": MetadataDB {
-        "attributes": {},
-        "data": {},
+        "attributes": Object {},
+        "data": Object {},
         "db": Loki {
           "ENV": "NODEJS",
           "autosave": false,
           "autosaveHandle": null,
           "autosaveInterval": 5000,
-          "collections": [],
+          "collections": Array [],
           "databaseVersion": 1.5,
           "engineVersion": 1.5,
-          "events": {
-            "changes": [],
-            "close": [],
-            "flushChanges": [],
-            "init": [
+          "events": Object {
+            "changes": Array [],
+            "close": Array [],
+            "flushChanges": Array [],
+            "init": Array [
               [Function],
             ],
-            "loaded": [],
-            "warning": [],
+            "loaded": Array [],
+            "warning": Array [],
           },
           "filename": "metadata.db",
-          "options": {
+          "options": Object {
             "destructureDelimiter": "$<
 ",
             "serializationMethod": "normal",
           },
           "persistenceAdapter": LokiFsAdapter {
-            "fs": {
+            "fs": Object {
               "Dir": [Function],
               "Dirent": [Function],
               "F_OK": 0,
@@ -1501,7 +1472,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "chownSync": [Function],
               "close": [Function],
               "closeSync": [Function],
-              "constants": {
+              "constants": Object {
                 "COPYFILE_EXCL": 1,
                 "COPYFILE_FICLONE": 2,
                 "COPYFILE_FICLONE_FORCE": 4,
@@ -1519,8 +1490,6 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
                 "S_IFLNK": 40960,
                 "S_IFMT": 61440,
                 "S_IFREG": 32768,
-                "S_IRUSR": 256,
-                "S_IWUSR": 128,
                 "UV_DIRENT_BLOCK": 7,
                 "UV_DIRENT_CHAR": 6,
                 "UV_DIRENT_DIR": 2,
@@ -1578,48 +1547,11 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
               "openSync": [Function],
               "opendir": [Function],
               "opendirSync": [Function],
-              "promises": {
+              "promises": Object {
                 "access": [Function],
                 "appendFile": [Function],
                 "chmod": [Function],
                 "chown": [Function],
-                "constants": {
-                  "COPYFILE_EXCL": 1,
-                  "COPYFILE_FICLONE": 2,
-                  "COPYFILE_FICLONE_FORCE": 4,
-                  "F_OK": 0,
-                  "O_APPEND": 8,
-                  "O_CREAT": 256,
-                  "O_EXCL": 1024,
-                  "O_RDONLY": 0,
-                  "O_RDWR": 2,
-                  "O_TRUNC": 512,
-                  "O_WRONLY": 1,
-                  "R_OK": 4,
-                  "S_IFCHR": 8192,
-                  "S_IFDIR": 16384,
-                  "S_IFLNK": 40960,
-                  "S_IFMT": 61440,
-                  "S_IFREG": 32768,
-                  "S_IRUSR": 256,
-                  "S_IWUSR": 128,
-                  "UV_DIRENT_BLOCK": 7,
-                  "UV_DIRENT_CHAR": 6,
-                  "UV_DIRENT_DIR": 2,
-                  "UV_DIRENT_FIFO": 4,
-                  "UV_DIRENT_FILE": 1,
-                  "UV_DIRENT_LINK": 3,
-                  "UV_DIRENT_SOCKET": 5,
-                  "UV_DIRENT_UNKNOWN": 0,
-                  "UV_FS_COPYFILE_EXCL": 1,
-                  "UV_FS_COPYFILE_FICLONE": 2,
-                  "UV_FS_COPYFILE_FICLONE_FORCE": 4,
-                  "UV_FS_O_FILEMAP": 536870912,
-                  "UV_FS_SYMLINK_DIR": 1,
-                  "UV_FS_SYMLINK_JUNCTION": 2,
-                  "W_OK": 2,
-                  "X_OK": 1,
-                },
                 "copyFile": [Function],
                 "cp": [Function],
                 "lchmod": [Function],
@@ -1686,7 +1618,7 @@ exports[`CommandBar renders dummy items when no items configured 1`] = `
             },
           },
           "persistenceMethod": "fs",
-          "throttledCallbacks": [],
+          "throttledCallbacks": Array [],
           "throttledSavePending": false,
           "throttledSaves": true,
           "verbose": false,

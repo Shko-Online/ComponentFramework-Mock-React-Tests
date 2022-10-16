@@ -12,7 +12,6 @@
 	PURPOSE, QUIET ENJOYMENT, OR NON-INFRINGEMENT. See the RPL for specific
 	language governing rights and limitations under the RPL. 
 */
-import sinon from 'sinon';
 
 import { ComponentFrameworkMockGenerator } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator';
 import { AutoWidthLabel } from '@powercat/auto-width-label/AutoWidthLabel';
@@ -26,7 +25,7 @@ import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/Co
 import { DecimalNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DecimalNumberProperty.mock';
 
 
-describe("AutoWidthLabel", () => {
+describe('BreadCrumb', () => {
 	let mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>;
 	beforeEach(() => {
 		mockGenerator = new ComponentFrameworkMockGenerator(
@@ -63,14 +62,14 @@ describe("AutoWidthLabel", () => {
 			}
 		);
 	});
+
 	afterEach(() => {
 		document.body.innerHTML = null;
-	})
+	});
 
-	it("Init should work", () => {
+	it("renders", () => {
 		mockGenerator.ExecuteInit();
-		sinon.assert.calledOnce(mockGenerator.control.init);
-		expect(document.body).toMatchSnapshot();
-	})
-
+		const element = mockGenerator.ExecuteUpdateView();
+		expect(element).toMatchSnapshot();
+	});
 });

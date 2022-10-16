@@ -15,7 +15,7 @@
 
 import { initializeIcons } from '@fluentui/react/lib/Icons';
 
-initializeIcons(/* optional base url */);
+initializeIcons(undefined /* optional base url */, { disableWarnings: true });
 
 import { Meta } from '@storybook/react';
 import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
@@ -28,6 +28,14 @@ import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFram
 import { ItemColumns } from '@powercat/nav/Nav/ManifestConstants';
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
+import { within, userEvent, waitFor } from '@storybook/testing-library';
+
+
+
+const Delay = ()=>
+  new Promise<void>((resolve)=>{
+    setTimeout(()=>resolve(), 1000);
+  })
 
 export default {
     title: 'PCF Components/Nav',
@@ -80,7 +88,7 @@ export default {
                 [ItemColumns.DisplayName]: 'Activity',
                 [ItemColumns.IconName]: 'OfficeFormsLogo',
                 [ItemColumns.IconColor]: 'blue',
-                [ItemColumns.Enabled]: true,
+                [ItemColumns.Enabled]: false,
                 [ItemColumns.ParentKey]: 'item1',
                 [ItemColumns.Expanded]: true,
                 [ItemColumns.TextColor]: 'red',
@@ -118,7 +126,7 @@ const Template = (args: {
     Expanded: boolean;
 }) => {
     const [{ items }, updateArgs] = useArgs();
-    const argsItems = items as { id: string; ItemEnabled: boolean; ItemIconColor: string, ItemExpanded: boolean}[];
+    const argsItems = items as { id: string; ItemEnabled: boolean; ItemIconColor: string; ItemExpanded: boolean }[];
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
         new ComponentFrameworkMockGeneratorReact(Nav, {
             SelectedKey: StringPropertyMock,
@@ -147,6 +155,7 @@ const Template = (args: {
         argsItems
             .filter((item) => item.id === '8')
             .forEach((item) => {
+                console.log('Enable notes!', !!args.EnableNotes);
                 item.ItemEnabled = !!args.EnableNotes;
             });
     }
@@ -175,10 +184,12 @@ const Template = (args: {
 
     mockGenerator.ExecuteInit();
     const component = mockGenerator.ExecuteUpdateView();
+    mockGenerator.notifyOutputChanged();
     return component;
 };
 export const Primary = Template.bind({});
 Primary.args = {
+    EnableNotes: true,
     AccessibilityLabel: 'This is a Nav Component',
     theme: JSON.stringify({
         palette: {
@@ -204,4 +215,28 @@ EnableNotes.parameters = {
     controls: {
         include: ['EnableNotes', 'CustomIconColor'],
     },
-};
+}
+
+Primary.play = async({canvasElement, args}) => {
+    const canvas  = within(canvasElement);
+    await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("More Pages"));
+  await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("Pages"));
+  await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("Pages"));
+  await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("More Pages"));
+  await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("News"));
+  await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("Save"));
+  await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("Save And Close"));
+}
+EnableNotes.play = async({canvasElement, args}) => {
+    const canvas  = within(canvasElement);
+    await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText("Save And Close"));
+  await waitFor(Delay, {timeout: 2000});
+}

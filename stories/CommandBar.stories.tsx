@@ -1,7 +1,7 @@
 /*
   Unless explicitly acquired and licensed from Licensor under another
   license, the contents of this file are subject to the Reciprocal Public
-  License ("RPL") Version 1.5, or subsequent versions as allowed by the RPL,
+  License ("RPL") Version 1.5, or subsequent versions as allowed by the RPL, 
   and You may not copy or use this file in either source code or executable
   form, except in compliance with the terms and conditions of the RPL.
 
@@ -27,10 +27,16 @@ import resourse from '@powercat/command-bar/CommandBar/strings/CommandBar.1033.r
 import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock';
 import { action } from '@storybook/addon-actions';
 import { ItemColumns } from '@powercat/command-bar/CommandBar/ManifestConstants';
-import {useArgs} from '@storybook/client-api';
+import { useArgs } from '@storybook/client-api';
+import { within, userEvent, waitFor } from '@storybook/testing-library';
+
+import canvasColumns from './canvasColumns';
 
 
-import canvasColumns from "./canvasColumns";
+const Delay = ()=>
+  new Promise<void>((resolve)=>{
+    setTimeout(()=>resolve(), 1000);
+  })
 export default {
     title: 'PCF Components/CommandBar',
     argTypes: {
@@ -46,7 +52,7 @@ export default {
 } as Meta;
 
 const Template = (args) => {
-  const [,updateArgs] = useArgs();
+    const [, updateArgs] = useArgs();
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
         new ComponentFrameworkMockGeneratorReact(CommandBar, {
             Theme: StringPropertyMock,
@@ -71,7 +77,7 @@ const Template = (args) => {
     items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
-        updateArgs({CommandSelected: item.name});
+        updateArgs({ CommandSelected: item.name });
     });
     const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
 
@@ -151,3 +157,11 @@ Primary.args = {
     theme: '{"palette": {"themePrimary": "#test-primary"}}',
     inputEvent: 'SetFocus',
 };
+
+Primary.play = async({canvasElement, args}) => {
+    const canvas  = within(canvasElement);
+    await waitFor(Delay, {timeout: 2000});
+  await userEvent.click( canvas.getByText(""));
+  await waitFor(Delay, {timeout: 2000});
+  console.log(args.checked);
+}
