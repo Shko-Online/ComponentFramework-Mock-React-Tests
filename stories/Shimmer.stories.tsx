@@ -16,8 +16,8 @@
 import { Meta } from "@storybook/react";
 import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
 import {
-  IInputs,
-  IOutputs,
+    IInputs,
+    IOutputs,
 } from "@powercat/shimmer/Shimmer/generated/ManifestTypes";
 import { Shimmer } from "@powercat/shimmer/Shimmer"
 import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
@@ -30,10 +30,10 @@ import { within, waitFor, userEvent } from '@storybook/testing-library';
 
 
 
-const Delay = ()=>
-  new Promise<void>((resolve)=>{
-    setTimeout(()=>resolve(), 1000);
-  })
+const Delay = () =>
+    new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), 1000);
+    })
 
 export default {
     title: 'PCF Components/Shimmer',
@@ -45,55 +45,55 @@ export default {
     argTypes: {
         SpaceBetweenshimmer: {
             control: 'select',
-            options: ["0" , "10px" , "20px" , "30px" , "40px" , "50px"]
+            options: ["0", "10px", "20px", "30px", "40px", "50px"]
         }
     },
-  
+
 } as Meta;
 
 type SpaceBetweenshimmer = "0" | "10px" | "20px" | "30px" | "40px" | "50px";
 const Template = (args) => {
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
-        new ComponentFrameworkMockGeneratorReact(Shimmer, {  
+        new ComponentFrameworkMockGeneratorReact(Shimmer, {
             Theme: StringPropertyMock,
             AccessibilityLabel: StringPropertyMock,
             RowCount: WholeNumberPropertyMock,
-            SpacebetweenShimmer:EnumPropertyMock<SpaceBetweenshimmer>,
-            items:DataSetMock,
+            SpacebetweenShimmer: EnumPropertyMock<SpaceBetweenshimmer>,
+            items: DataSetMock,
         });
 
-        // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-        // Theme.setValue(args.theme);
-        mockGenerator.metadata.initCanvasItems([
-            {
-                Theme: args.Theme,   
-            },
-           ]);
-        // const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-        // AccessibilityLabel.setValue(args.AccessibilityLabel);
-        mockGenerator.metadata.initCanvasItems([
-            {
-                AccessibilityLabel: args.AccessibilityLabel,   
-            },
-          ]);
-        const RowCount = mockGenerator.context.parameters.RowCount as WholeNumberPropertyMock;
-        RowCount.setValue(args.RowCount);
-        const SpacebetweenShimmer = mockGenerator.context.parameters.SpacebetweenShimmer as EnumPropertyMock<SpaceBetweenshimmer>;
-        SpacebetweenShimmer.setValue(args.SpaceBetweenshimmer);
-        const items = mockGenerator.context.parameters.items as DataSetMock;
+    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+    // Theme.setValue(args.theme);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            Theme: args.Theme,
+        },
+    ]);
+    // const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
+    // AccessibilityLabel.setValue(args.AccessibilityLabel);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            AccessibilityLabel: args.AccessibilityLabel,
+        },
+    ]);
+    const RowCount = mockGenerator.context.parameters.RowCount as WholeNumberPropertyMock;
+    RowCount.setValue(args.RowCount);
+    const SpacebetweenShimmer = mockGenerator.context.parameters.SpacebetweenShimmer as EnumPropertyMock<SpaceBetweenshimmer>;
+    SpacebetweenShimmer.setValue(args.SpaceBetweenshimmer);
+    const items = mockGenerator.context.parameters.items as DataSetMock;
 
-        items.initRecords(
-            (args.items || []).map((item) => {
-                const row = new EntityRecord('',item.id, item.id);
-    row.columns[ItemColumns.Height]=item[ItemColumns.Height];
-    row.columns[ItemColumns.Width]=item[ItemColumns.Width];
-    row.columns[ItemColumns.Type]=item[ItemColumns.Type];
-    row.columns[ItemColumns.Key]=item[ItemColumns.Key];
-    row.columns[ItemColumns.RowKey]=item[ItemColumns.RowKey];
-    
-        return row;
-    }),
-);
+    items.initRecords(
+        (args.items || []).map((item) => {
+            const row = new EntityRecord('', item.id, item.id);
+            row.columns[ItemColumns.Height] = item[ItemColumns.Height];
+            row.columns[ItemColumns.Width] = item[ItemColumns.Width];
+            row.columns[ItemColumns.Type] = item[ItemColumns.Type];
+            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
+            row.columns[ItemColumns.RowKey] = item[ItemColumns.RowKey];
+
+            return row;
+        }),
+    );
     mockGenerator.ExecuteInit();
     const component = mockGenerator.ExecuteUpdateView();
     return component;
@@ -111,35 +111,35 @@ Primary.args = {
     SpaceBetweenshimmer: "10px",
     items: [
         {
-            id: '1',                
+            id: '1',
             [ItemColumns.Height]: 25,
             [ItemColumns.Width]: '3.8',
             [ItemColumns.RowKey]: '1',
             [ItemColumns.Type]: 'circle',
         },
         {
-            id: '2',                
+            id: '2',
             [ItemColumns.Height]: 10,
             [ItemColumns.Width]: '5',
             [ItemColumns.RowKey]: '1',
             [ItemColumns.Type]: 'gap',
         },
         {
-            id: '3',                
+            id: '3',
             [ItemColumns.Height]: 20,
             [ItemColumns.Width]: '100',
             [ItemColumns.RowKey]: '1',
             [ItemColumns.Type]: 'line',
-        },        
+        },
         {
-            id: '4',                
+            id: '4',
             [ItemColumns.Height]: 10,
             [ItemColumns.Width]: '10',
             [ItemColumns.RowKey]: '2',
             [ItemColumns.Type]: 'gap',
         },
         {
-            id: '5',                
+            id: '5',
             [ItemColumns.Height]: 20,
             [ItemColumns.Width]: '100',
             [ItemColumns.RowKey]: '2',
@@ -148,11 +148,10 @@ Primary.args = {
     ]
 }
 
-Primary.play = async({canvasElement, args}) => {
-    const canvas  = within(canvasElement);
-    await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("Edit number..."),);
-  await waitFor(Delay, {timeout: 2000});
-  console.log(args.checked); 
-  }
-  
+Primary.play = async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("Edit number..."),);
+    await waitFor(Delay, { timeout: 2000 });
+    console.log(args.checked);
+}

@@ -39,9 +39,9 @@ export default {
     argTypes: {
         textAlignment: {
             control: 'select',
-            options: ["0" , "1" , "2"]
+            options: ["0", "1", "2"]
         }
-},
+    },
 
 } as Meta;
 
@@ -50,50 +50,80 @@ type TextAlignment = "0" | "1" | "2";
 const Template = (args) => {
     const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
         new ComponentFrameworkMockGeneratorReact(TagList, {
-SelectedKey: StringPropertyMock,
-Theme: StringPropertyMock,
-BorderRadius:WholeNumberPropertyMock,
-TextAlignment: EnumPropertyMock<TextAlignment>,
-FontSize:WholeNumberPropertyMock,
-ItemHeight: WholeNumberPropertyMock,
-MaxHeight: WholeNumberPropertyMock,
-AccessibilityLabel: StringPropertyMock,
-items: DataSetMock,
-        });     
-        const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-        Theme.setValue(args.Theme);
-        const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
-        BorderRadius.setValue(args.BorderRadius);
-        const TextAlignment = mockGenerator.context.parameters.TextAlignment as StringPropertyMock;
-        TextAlignment.setValue(args.textAlignment);
-        const FontSize = mockGenerator.context.parameters.FontSize as WholeNumberPropertyMock;
-        FontSize.setValue(args.FontSize);
-        const ItemHeight = mockGenerator.context.parameters.ItemHeight as WholeNumberPropertyMock;
-        ItemHeight.setValue(args.ItemHeight);
-        const MaxHeight = mockGenerator.context.parameters.MaxHeight as WholeNumberPropertyMock;
-        MaxHeight.setValue(args.MaxHeight);
-        const items = mockGenerator.context.parameters.items as DataSetMock;
-        items.initRecords(
-            (args.items || []).map((item) => {
-                const row = new EntityRecord('',item.id, item[ItemColumns.Key]);
-                row.columns[ItemColumns.Key] = item[ItemColumns.Key];
-                row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
-                row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
-                row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
-                row.columns[ItemColumns.Enabled] = item[ItemColumns.Enabled];
-                row.columns[ItemColumns.TextColor] = item[ItemColumns.TextColor];
-                row.columns[ItemColumns.BackgroundColor] = item[ItemColumns.BackgroundColor];
-                row.columns[ItemColumns.BorderColor] = item[ItemColumns.BorderColor];
-                row.columns[ItemColumns.IconOnly] = item[ItemColumns.IconOnly];
-                row.columns[ItemColumns.Visible] = item[ItemColumns.Visible];
-                return row;
-               })
-            );
-            
-        mockGenerator.ExecuteInit();
-        const component = mockGenerator.ExecuteUpdateView();
-        return component;
-    };
+            SelectedKey: StringPropertyMock,
+            Theme: StringPropertyMock,
+            BorderRadius: WholeNumberPropertyMock,
+            TextAlignment: EnumPropertyMock<TextAlignment>,
+            FontSize: WholeNumberPropertyMock,
+            ItemHeight: WholeNumberPropertyMock,
+            MaxHeight: WholeNumberPropertyMock,
+            AccessibilityLabel: StringPropertyMock,
+            items: DataSetMock,
+        });
+    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+    // Theme.setValue(args.Theme);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            Theme: args.Theme,
+        },
+    ]);
+    // const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
+    // BorderRadius.setValue(args.BorderRadius);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            BorderRadius: args.BorderRadius,
+        },
+    ]);
+    // const TextAlignment = mockGenerator.context.parameters.TextAlignment as StringPropertyMock;
+    // TextAlignment.setValue(args.textAlignment);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            TextAlignment: args.textAlignment,
+        },
+    ]);
+    // const FontSize = mockGenerator.context.parameters.FontSize as WholeNumberPropertyMock;
+    // FontSize.setValue(args.FontSize);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            FontSize: args.FontSize,
+        },
+    ]);
+    // const ItemHeight = mockGenerator.context.parameters.ItemHeight as WholeNumberPropertyMock;
+    // ItemHeight.setValue(args.ItemHeight);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            ItemHeight: args.ItemHeight
+        }
+    ])
+    // const MaxHeight = mockGenerator.context.parameters.MaxHeight as WholeNumberPropertyMock;
+    // MaxHeight.setValue(args.MaxHeight);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            MaxHeight: args.MaxHeight,
+        },
+    ]);
+    const items = mockGenerator.context.parameters.items as DataSetMock;
+    items.initRecords(
+        (args.items || []).map((item) => {
+            const row = new EntityRecord('', item.id, item[ItemColumns.Key]);
+            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
+            row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
+            row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
+            row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
+            row.columns[ItemColumns.Enabled] = item[ItemColumns.Enabled];
+            row.columns[ItemColumns.TextColor] = item[ItemColumns.TextColor];
+            row.columns[ItemColumns.BackgroundColor] = item[ItemColumns.BackgroundColor];
+            row.columns[ItemColumns.BorderColor] = item[ItemColumns.BorderColor];
+            row.columns[ItemColumns.IconOnly] = item[ItemColumns.IconOnly];
+            row.columns[ItemColumns.Visible] = item[ItemColumns.Visible];
+            return row;
+        })
+    );
+
+    mockGenerator.ExecuteInit();
+    const component = mockGenerator.ExecuteUpdateView();
+    return component;
+};
 export const Primary = Template.bind({});
 Primary.args = {
     Theme: JSON.stringify({
@@ -107,35 +137,37 @@ Primary.args = {
     MaxHeight: 50,
     textAlignment: "1",
     items: [{
-         id :'1',
-            [ItemColumns.Key]: 'commandOpen',
-            [ItemColumns.DisplayName]: 'Open',
-            [ItemColumns.IconName]: 'FolderOpen',
-            [ItemColumns.IconColor]: 'purple',
-            [ItemColumns.Enabled]: true,
-            [ItemColumns.IconOnly]: false,
-            [ItemColumns.BackgroundColor]: "pink",
-            [ItemColumns.TextColor]: 'purple'
-        },
-     { id: '2',
-            [ItemColumns.Key]: 'commandNew',
-            [ItemColumns.DisplayName]: 'New',
-            [ItemColumns.IconName]: 'OpenInNewWindow',
-            [ItemColumns.IconColor]: 'orange',
-            [ItemColumns.Enabled]: true,
-            [ItemColumns.IconOnly]: true,
-            [ItemColumns.BackgroundColor]: "yellow",
-            [ItemColumns.TextColor]: 'orange'
-        },
-     {id: '3',
-            [ItemColumns.Key]: 'commandSave',
-            [ItemColumns.DisplayName]: 'Save',
-            [ItemColumns.IconName]: 'Save',
-            [ItemColumns.IconColor]: 'dark green',
-            [ItemColumns.Enabled]: false,
-            [ItemColumns.IconOnly]: false,
-            [ItemColumns.BackgroundColor]: "lime",
-            [ItemColumns.TextColor]: 'dark green'
-        },
+        id: '1',
+        [ItemColumns.Key]: 'commandOpen',
+        [ItemColumns.DisplayName]: 'Open',
+        [ItemColumns.IconName]: 'FolderOpen',
+        [ItemColumns.IconColor]: 'purple',
+        [ItemColumns.Enabled]: true,
+        [ItemColumns.IconOnly]: false,
+        [ItemColumns.BackgroundColor]: "pink",
+        [ItemColumns.TextColor]: 'purple'
+    },
+    {
+        id: '2',
+        [ItemColumns.Key]: 'commandNew',
+        [ItemColumns.DisplayName]: 'New',
+        [ItemColumns.IconName]: 'OpenInNewWindow',
+        [ItemColumns.IconColor]: 'orange',
+        [ItemColumns.Enabled]: true,
+        [ItemColumns.IconOnly]: true,
+        [ItemColumns.BackgroundColor]: "yellow",
+        [ItemColumns.TextColor]: 'orange'
+    },
+    {
+        id: '3',
+        [ItemColumns.Key]: 'commandSave',
+        [ItemColumns.DisplayName]: 'Save',
+        [ItemColumns.IconName]: 'Save',
+        [ItemColumns.IconColor]: 'dark green',
+        [ItemColumns.Enabled]: false,
+        [ItemColumns.IconOnly]: false,
+        [ItemColumns.BackgroundColor]: "lime",
+        [ItemColumns.TextColor]: 'dark green'
+    },
     ]
 };

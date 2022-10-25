@@ -33,10 +33,10 @@ import { within, userEvent, waitFor } from '@storybook/testing-library';
 import canvasColumns from './canvasColumns';
 
 
-const Delay = ()=>
-  new Promise<void>((resolve)=>{
-    setTimeout(()=>resolve(), 1000);
-  })
+const Delay = () =>
+    new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), 1000);
+    })
 export default {
     title: 'PCF Components/CommandBar',
     argTypes: {
@@ -82,11 +82,30 @@ const Template = (args) => {
     const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
 
     const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-    const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    Theme.setValue(args.theme);
-    const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
-    InputEvent.setValue(args.inputEvent);
-
+    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+    // Theme.setValue(args.theme);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            Theme: args.theme,
+        },
+    ]);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            items: args.items,
+        },
+    ]);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            AccessibilityLabel: args.AccessibilityLabel,
+        },
+    ]);
+    // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
+    // InputEvent.setValue(args.inputEvent);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            InputEvent: args.inputEvent
+        }
+    ])
     mockGenerator.context.mode.allocatedHeight = 200;
     mockGenerator.context.mode.allocatedWidth = 200;
     mockGenerator.context.mode.isVisible = true;
@@ -156,12 +175,13 @@ Primary.args = {
     ],
     theme: '{"palette": {"themePrimary": "#test-primary"}}',
     inputEvent: 'SetFocus',
+    AccessibilityLabel: "Command Bar component"
 };
 
-Primary.play = async({canvasElement, args}) => {
-    const canvas  = within(canvasElement);
-    await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText(""));
-  await waitFor(Delay, {timeout: 2000});
-  console.log(args.checked);
+Primary.play = async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText(""));
+    await waitFor(Delay, { timeout: 2000 });
+    console.log(args.checked);
 }

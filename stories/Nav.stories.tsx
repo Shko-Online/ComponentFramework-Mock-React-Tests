@@ -32,10 +32,10 @@ import { within, userEvent, waitFor } from '@storybook/testing-library';
 
 
 
-const Delay = ()=>
-  new Promise<void>((resolve)=>{
-    setTimeout(()=>resolve(), 1000);
-  })
+const Delay = () =>
+    new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), 1000);
+    })
 
 export default {
     title: 'PCF Components/Nav',
@@ -143,28 +143,28 @@ const Template = (args: {
         {
             AccessibilityLabel: args.AccessibilityLabel,
         },
-      ]);
+    ]);
     // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
     // Theme.setValue(args.theme);
     mockGenerator.metadata.initCanvasItems([
         {
-          Theme: args.theme,
+            Theme: args.theme,
         },
-      ]);
+    ]);
     // const CollapseByDefault = mockGenerator.context.parameters.CollapseByDefault as TwoOptionsPropertyMock;
     // CollapseByDefault.setValue(args.Expanded);
     mockGenerator.metadata.initCanvasItems([
         {
             CollapseByDefault: args.Expanded,
         },
-      ]);
+    ]);
     // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
     // InputEvent.setValue('SetFocus' + Math.random().toString());
     mockGenerator.metadata.initCanvasItems([
         {
             InputEvent: 'SetFocus' + Math.random().toString(),
         },
-      ]);
+    ]);
     const itemsDataset = mockGenerator.context.parameters.items as DataSetMock;
     itemsDataset.openDatasetItem.callsFake((item) => {
         console.log(item.id);
@@ -238,26 +238,26 @@ EnableNotes.parameters = {
     },
 }
 
-Primary.play = async({canvasElement, args}) => {
-    const canvas  = within(canvasElement);
-    await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("More Pages"));
-  await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("Pages"));
-  await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("Pages"));
-  await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("More Pages"));
-  await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("News"));
-  await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("Save"));
-  await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("Save And Close"));
+Primary.play = async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("More Pages"));
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("Pages"));
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("Pages"));
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("More Pages"));
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("News"));
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("Save"));
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("Save And Close"));
 }
-EnableNotes.play = async({canvasElement, args}) => {
-    const canvas  = within(canvasElement);
-    await waitFor(Delay, {timeout: 2000});
-  await userEvent.click( canvas.getByText("Save And Close"));
-  await waitFor(Delay, {timeout: 2000});
+EnableNotes.play = async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await waitFor(Delay, { timeout: 2000 });
+    await userEvent.click(canvas.getByText("Save And Close"));
+    await waitFor(Delay, { timeout: 2000 });
 }
