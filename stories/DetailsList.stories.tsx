@@ -81,15 +81,40 @@ const Template = (args) => {
   (mockGenerator.context.parameters.SelectRowsOnFocus as TwoOptionsPropertyMock).setValue(false);
   (mockGenerator.context.parameters.PageSize as WholeNumberPropertyMock).setValue(10);
   (mockGenerator.context.parameters.LargeDatasetPaging as TwoOptionsPropertyMock).setValue(false);
-  (mockGenerator.context.parameters.CurrentSortColumn as StringPropertyMock).setValue("Name");
+  //(mockGenerator.context.parameters.CurrentSortColumn as StringPropertyMock).setValue("Name");
+  mockGenerator.metadata.initCanvasItems([
+    {
+      CurrentSortColumn: "Name",   
+    },
+  ]);
   (mockGenerator.context.parameters.CurrentSortDirection as EnumPropertyMock<"0" | "1">).setValue("1");
-  (mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock).setValue("Help");
+  //(mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock).setValue("Help");
+  mockGenerator.metadata.initCanvasItems([
+    {
+      AccessibilityLabel: "Help",   
+    },
+  ]);
   (mockGenerator.context.parameters.RaiseOnRowSelectionChangeEvent as TwoOptionsPropertyMock).setValue(false);
-  (mockGenerator.context.parameters.InputEvent as StringPropertyMock).setValue("");
-  (mockGenerator.context.parameters.Theme as StringPropertyMock).setValue("");
+  //(mockGenerator.context.parameters.InputEvent as StringPropertyMock).setValue("");
+  mockGenerator.metadata.initCanvasItems([
+    {
+      InputEvent: "",   
+    },
+  ]);
+  //(mockGenerator.context.parameters.Theme as StringPropertyMock).setValue("");
+  mockGenerator.metadata.initCanvasItems([
+    {
+      Theme: "",   
+    },
+  ]);
   (mockGenerator.context.parameters.Compact as TwoOptionsPropertyMock).setValue(false);
   (mockGenerator.context.parameters.HeaderVisible as TwoOptionsPropertyMock).setValue(true);
-  (mockGenerator.context.parameters.AlternateRowColor as StringPropertyMock).setValue("#ff0000");
+  //(mockGenerator.context.parameters.AlternateRowColor as StringPropertyMock).setValue("#ff0000");
+  mockGenerator.metadata.initCanvasItems([
+    {
+      AlternateRowColor: "#ff0000",   
+    },
+  ]);
   (mockGenerator.context.parameters.SelectionAlwaysVisible as TwoOptionsPropertyMock).setValue(true);
 
 
