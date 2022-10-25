@@ -86,16 +86,32 @@ const Template = (args) => {
 
     
 
-    const Chevron = mockGenerator.context.parameters.Chevron as TwoOptionsPropertyMock;
-    Chevron.setValue(true);
-    const IconColor = mockGenerator.context.parameters.IconColor as StringPropertyMock;
-    IconColor.setValue(args.IconColor);
-    const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
-    BorderRadius.setValue(10);
+    // const Chevron = mockGenerator.context.parameters.Chevron as TwoOptionsPropertyMock;
+    // Chevron.setValue(true);
+    mockGenerator.metadata.initCanvasItems([
+      {
+        Chevron: true,   
+      },
+    ]);
+    // const IconColor = mockGenerator.context.parameters.IconColor as StringPropertyMock;
+    // IconColor.setValue(args.IconColor);
+   
+    // const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
+    // BorderRadius.setValue(10);
+    mockGenerator.metadata.initCanvasItems([
+      {
+        BorderRadius: 10,   
+      },
+    ]);
     const TextAlignment = mockGenerator.context.parameters.TextAlignment as EnumPropertyMock<AlignmentTypes>;
     TextAlignment.setValue("0");
-    const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
-    InputEvent.setValue('SetFocus' + Math.random().toString());
+    // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
+    // InputEvent.setValue('SetFocus' + Math.random().toString());
+    mockGenerator.metadata.initCanvasItems([
+      {
+        InputEvent: 'SetFocus' + Math.random().toString(),   
+      },
+    ]);
     const items = mockGenerator.context.parameters.items as DataSetMock;
     items.columns = [{"displayName":"ItemDisplayName","name":null,"dataType":"SingleLine.Text","alias":"ItemDisplayName","order":-1,"visualSizeFactor":1},{"displayName":"ItemKey","name":null,"dataType":"SingleLine.Text","alias":"ItemKey","order":-1,"visualSizeFactor":1},{"displayName":"ItemEnabled","name":null,"dataType":"SingleLine.Text","alias":"ItemEnabled","order":-1,"visualSizeFactor":1},{"displayName":"ItemVisible","name":null,"dataType":"SingleLine.Text","alias":"ItemVisible","order":-1,"visualSizeFactor":1},{"displayName":"ItemChecked","name":null,"dataType":"SingleLine.Text","alias":"ItemChecked","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconName","name":null,"dataType":"SingleLine.Text","alias":"ItemIconName","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconColor","name":null,"dataType":"SingleLine.Text","alias":"ItemIconColor","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconOnly","name":null,"dataType":"SingleLine.Text","alias":"ItemIconOnly","order":-1,"visualSizeFactor":1},{"displayName":"ItemHeader","name":null,"dataType":"SingleLine.Text","alias":"ItemHeader","order":-1,"visualSizeFactor":1},{"displayName":"ItemTopDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemTopDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemParentKey","name":null,"dataType":"SingleLine.Text","alias":"ItemParentKey","order":-1,"visualSizeFactor":1}];
   items.initRecords(
