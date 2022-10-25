@@ -13,7 +13,7 @@ module.exports = {
   features: {
     babelModeV7: true,
     interactionsDebugger: true,
-    
+
   },
   "framework": "@storybook/react",
   "core": {
@@ -22,12 +22,13 @@ module.exports = {
   "webpackFinal": async (config) => {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(new TsconfigPathsPlugin());
-    config.module.rules.forEach(rule=>{
-      if("a.tsx".match(rule.test)){
+    config.module.rules.forEach(rule => {
+      if ("a.tsx".match(rule.test)) {
         rule.use.push({
-          loader: 'ts-loader',
+          loader: 'esbuild-loader',
           options: {
-              projectReferences: true
+            loader: 'tsx',  // Or 'ts' if you don't need tsx
+            target: 'es2015'
           }
         })
       }
