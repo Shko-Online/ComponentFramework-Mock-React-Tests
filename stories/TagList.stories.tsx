@@ -80,44 +80,15 @@ const Template = (args) => {
             LogicalName: logicalName,
             PrimaryIdAttribute: 'myId',
             PrimaryNameAttribute: ItemColumns.DisplayName,
-            Attributes: [
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.DisplayName,
-                } as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: 'myId',
-                } as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.IconName,
-                } as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.IconColor,
-                }as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.BackgroundColor,
-                }as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.Key,
-                }as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.TextColor,
-                }as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.IconOnly,
-                }as ShkoOnline.BooleanAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.Enabled,
-                }as ShkoOnline.BooleanAttributeMetadata,
-            ],
+            Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.IconName, ItemColumns.IconColor,ItemColumns.BackgroundColor,ItemColumns.Key,ItemColumns.TextColor,ItemColumns.IconOnly,ItemColumns.Enabled].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!items',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ), 
+                
+            
         },
     ]);
 

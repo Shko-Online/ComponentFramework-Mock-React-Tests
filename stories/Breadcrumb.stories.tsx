@@ -60,24 +60,13 @@ const Template = (args) => {
             LogicalName: logicalName,
             PrimaryIdAttribute: 'myId',
             PrimaryNameAttribute: ItemColumns.DisplayName,
-            Attributes: [
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.DisplayName,
-                } as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: 'myId',
-                } as ShkoOnline.StringAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.Clickable,
-                } as ShkoOnline.BooleanAttributeMetadata,
-                {
-                    EntityLogicalName: '!!items',
-                    LogicalName: ItemColumns.Key,
-                } as ShkoOnline.NumberAttributeMetadata,
-            ],
+            Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Clickable, ItemColumns.Key].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!items',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
         },
     ]);
 
