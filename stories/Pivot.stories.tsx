@@ -75,15 +75,29 @@ const Template = (args) => {
     });
 
 
-  const items = mockGenerator.context.parameters.items as DataSetMock;
- var dispalyNameMetadata  = mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) || {EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName} as ShkoOnline.StringAttributeMetadata;
-    mockGenerator.metadata.upsertAttributeMetadata('!!items', dispalyNameMetadata);
-  mockGenerator.metadata.initItems({
-"@odata.context": "#!!items",
-   value: args.items || []
-  }
-  );
-  items.openDatasetItem.callsFake((ids) => {
+    const logicalName = '!!!items';
+    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.DisplayName,
+            Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Key,ItemColumns.IconName,ItemColumns.IconColor, ItemColumns.Enabled, ItemColumns.IconOnly].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!items',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!!items',
+        value: args.items || [],
+    });
+  mockGenerator.context._parameters.items.openDatasetItem.callsFake((ids) => {
     console.log(ids.id.guid);
     action('OpenDatasetItem')(ids);
     updateArgs({ PivotSelected: ids.name });
@@ -96,10 +110,10 @@ const Template = (args) => {
     },
   ]);
   mockGenerator.context.mode.allocatedHeight = 200;
-  mockGenerator.context.mode.allocatedWidth = 800;
+  mockGenerator.context.mode.allocatedWidth = 1000;
   mockGenerator.ExecuteInit();
-  const component = mockGenerator.ExecuteUpdateView();
-  return component;
+  return mockGenerator.ExecuteUpdateView();
+  
 };
 
 export const Primary = Template.bind({});
@@ -107,7 +121,7 @@ Primary.args = {
   renderSize: "2",
   renderType: "1",
   items: [{
-    id: '1',
+    myId: '1',
     [ItemColumns.DisplayName]: 'Open',
     [ItemColumns.Key]: 'item1',
     [ItemColumns.IconName]: 'PageLink',
@@ -116,7 +130,7 @@ Primary.args = {
     [ItemColumns.IconOnly]: true,
   },
   {
-    id: '2',
+    myId: '2',
     [ItemColumns.DisplayName]: 'New',
     [ItemColumns.Key]: 'item2',
     [ItemColumns.IconName]: 'PinSolid12',
@@ -126,7 +140,7 @@ Primary.args = {
 
   },
   {
-    id: '3',
+    myId: '3',
     [ItemColumns.Key]: 'item3',
     [ItemColumns.DisplayName]: ' Save',
     [ItemColumns.IconName]: 'Save',
@@ -136,7 +150,7 @@ Primary.args = {
   },
   // Sub Items First Level
   {
-    id: '5',
+    myId: '5',
     [ItemColumns.Key]: 'item5',
     [ItemColumns.DisplayName]: 'InternetSharing',
     [ItemColumns.IconName]: 'InternetSharing',
@@ -146,7 +160,7 @@ Primary.args = {
     [ItemColumns.ParentKey]: 'commandNew',
   },
   {
-    id: '6',
+    myId: '6',
     [ItemColumns.Key]: 'item6',
     [ItemColumns.DisplayName]: 'MapPin',
     [ItemColumns.IconName]: 'MapPin',
@@ -157,7 +171,7 @@ Primary.args = {
   },
   // Sub Items Second Level
   {
-    id: '7',
+    myId: '7',
     [ItemColumns.Key]: 'item7',
     [ItemColumns.DisplayName]: 'Microphone',
     [ItemColumns.IconName]: 'Microphone',
@@ -166,8 +180,8 @@ Primary.args = {
     [ItemColumns.IconOnly]: true,
     [ItemColumns.ParentKey]: 'item1',
   },
-     {
-    id: '8',
+  {
+    myId: '8',
     [ItemColumns.Key]: 'item8',
     [ItemColumns.DisplayName]: 'PageSolid',
     [ItemColumns.IconName]: 'PageSolid',

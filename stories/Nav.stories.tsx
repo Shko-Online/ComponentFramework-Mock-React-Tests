@@ -24,7 +24,6 @@ import { Nav } from '@powercat/nav/Nav';
 import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
 import { TwoOptionsPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock';
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
-import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock';
 import { ItemColumns } from '@powercat/nav/Nav/ManifestConstants';
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
@@ -52,7 +51,7 @@ export default {
     args: {
         items: [
             {
-                id: '1',
+                myId: '1',
                 [ItemColumns.Key]: 'item1',
                 [ItemColumns.DisplayName]: 'Pages',
                 [ItemColumns.IconName]: 'FolderOpen',
@@ -62,7 +61,7 @@ export default {
             },
 
             {
-                id: '3',
+                myId: '3',
                 [ItemColumns.Key]: 'item3',
                 [ItemColumns.DisplayName]: 'Save',
                 [ItemColumns.IconName]: 'Save',
@@ -71,7 +70,7 @@ export default {
                 [ItemColumns.ParentKey]: 'item7',
             },
             {
-                id: '2',
+                myId: '2',
                 [ItemColumns.Key]: 'item2',
                 [ItemColumns.DisplayName]: 'News',
                 [ItemColumns.IconName]: 'News',
@@ -81,7 +80,7 @@ export default {
                 [ItemColumns.ParentKey]: 'item7',
             },
             {
-                id: '6',
+                myId: '6',
                 [ItemColumns.Key]: 'commandNewFrom',
                 [ItemColumns.DisplayName]: 'Activity',
                 [ItemColumns.IconName]: 'OfficeFormsLogo',
@@ -92,7 +91,7 @@ export default {
                 [ItemColumns.TextColor]: 'red',
             },
             {
-                id: '7',
+                myId: '7',
                 [ItemColumns.Key]: 'item7',
                 [ItemColumns.DisplayName]: 'More Pages',
                 [ItemColumns.IconName]: 'OfficeFormsLogo',
@@ -103,7 +102,7 @@ export default {
                 [ItemColumns.TextColor]: 'blue',
             },
             {
-                id: '8',
+                myId: '8',
                 [ItemColumns.Key]: 'item6',
                 [ItemColumns.DisplayName]: 'Save And Close',
                 [ItemColumns.IconName]: 'Save',
@@ -144,16 +143,29 @@ const Template = (args: {
         },
     ]);
 
-    const itemsDataset = mockGenerator.context.parameters.items as DataSetMock;
-    var displayNameMetadata =
-        mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
-        ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
-    mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+    const logicalName = '!!!items';
+    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.DisplayName,
+            Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Key,ItemColumns.IconName,ItemColumns.IconColor,ItemColumns.Enabled,ItemColumns.ParentKey,ItemColumns.Expanded,ItemColumns.TextColor].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!items',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
     mockGenerator.metadata.initItems({
-        '@odata.context': '#!!items',
+        '@odata.context': '#!!!items',
         value: args.items || [],
     });
-    itemsDataset.openDatasetItem.callsFake((item) => {
+    mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
         updateArgs({ LastSelected: item.name });
