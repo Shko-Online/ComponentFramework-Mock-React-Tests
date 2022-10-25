@@ -99,24 +99,51 @@ const Template = (args) => {
     // const IconColor = mockGenerator.context.parameters.IconColor as StringPropertyMock;
     // IconColor.setValue(args.IconColor);
    
-    const items = mockGenerator.context.parameters.items as DataSetMock;
-    var displayNameMetadata =
-    mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
-    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
-mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+//     const items = mockGenerator.context.parameters.items as DataSetMock;
+//     var displayNameMetadata =
+//     mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
+//     ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
+// mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+
+const logicalName = '!!!items';
+mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.DisplayName,
+            Attributes: [
+                'myId',
+                ItemColumns.DisplayName,
+                ItemColumns.IconName,
+                ItemColumns.IconColor,
+                ItemColumns.Enabled,
+                ItemColumns.IconOnly
+            ].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!!items',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
+
 mockGenerator.metadata.initItems({
-    '@odata.context': '#!!items',
+    '@odata.context': '#!!!items',
     value: args.items || [],
 });
 
   //items.columns = [{"displayName":"ItemDisplayName","name":null,"dataType":"SingleLine.Text","alias":"ItemDisplayName","order":-1,"visualSizeFactor":1},{"displayName":"ItemKey","name":null,"dataType":"SingleLine.Text","alias":"ItemKey","order":-1,"visualSizeFactor":1},{"displayName":"ItemEnabled","name":null,"dataType":"SingleLine.Text","alias":"ItemEnabled","order":-1,"visualSizeFactor":1},{"displayName":"ItemVisible","name":null,"dataType":"SingleLine.Text","alias":"ItemVisible","order":-1,"visualSizeFactor":1},{"displayName":"ItemChecked","name":null,"dataType":"SingleLine.Text","alias":"ItemChecked","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconName","name":null,"dataType":"SingleLine.Text","alias":"ItemIconName","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconColor","name":null,"dataType":"SingleLine.Text","alias":"ItemIconColor","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconOnly","name":null,"dataType":"SingleLine.Text","alias":"ItemIconOnly","order":-1,"visualSizeFactor":1},{"displayName":"ItemHeader","name":null,"dataType":"SingleLine.Text","alias":"ItemHeader","order":-1,"visualSizeFactor":1},{"displayName":"ItemTopDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemTopDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemParentKey","name":null,"dataType":"SingleLine.Text","alias":"ItemParentKey","order":-1,"visualSizeFactor":1}];
-  items.openDatasetItem.callsFake((item) => {
+  mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
     console.log(item.id);
     action('OpenDatasetItem')(item);
     updateArgs({ContextSelected: item.name});
   });
 
-  mockGenerator.notifyOutputChanged
+  mockGenerator.notifyOutputChanged()
   mockGenerator.ExecuteInit();
   const component = mockGenerator.ExecuteUpdateView();
   return <div style={{width: "200px", height: "100px"}}>{component}</div>;
@@ -128,7 +155,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   
   items: [{
-    id: '1',
+    myId: '1',
       [ItemColumns.DisplayName]: 'Item 2',
       [ItemColumns.IconName]: "World",
       [ItemColumns.IconColor]: 'green',
@@ -139,7 +166,7 @@ Primary.args = {
     [ItemColumns.IconName]: "OpenInNewWindow",
     [ItemColumns.IconColor]: "blue",
 },{
-  id: '3',
+  myId: '3',
   
     [ItemColumns.DisplayName]: 'New',
     [ItemColumns.IconName]: "NewFolder",
@@ -147,7 +174,7 @@ Primary.args = {
 },
 
   {
-  id: '4',
+  myId: '4',
     [ItemColumns.DisplayName]: "Settings",
     [ItemColumns.IconName]: "Settings",
     [ItemColumns.IconColor]: "peach",
@@ -155,7 +182,7 @@ Primary.args = {
     [ItemColumns.IconOnly]: true,
   },
    {
-    id: '5',
+    myId: '5',
       [ItemColumns.DisplayName]: 'Save',
       [ItemColumns.IconName]: 'Save',
       [ItemColumns.IconColor]: 'black',
