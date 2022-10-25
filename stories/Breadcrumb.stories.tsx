@@ -69,6 +69,14 @@ const Template = (args) => {
                     EntityLogicalName: '!!items',
                     LogicalName: 'myId',
                 } as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.Clickable,
+                } as ShkoOnline.BooleanAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.Key,
+                } as ShkoOnline.NumberAttributeMetadata,
             ],
         },
     ]);
@@ -100,10 +108,10 @@ const Template = (args) => {
 export const Primary = Template.bind({});
 Primary.args = {
     items: [
-        { myId: '1', [ItemColumns.Key]: 1, [ItemColumns.DisplayName]: 'text1', [ItemColumns.Clickable]: true },
-        { myId: '2', [ItemColumns.Key]: 2, [ItemColumns.DisplayName]: 'text2', [ItemColumns.Clickable]: true },
-        { myId: '3', [ItemColumns.Key]: 3, [ItemColumns.DisplayName]: 'text3', [ItemColumns.Clickable]: true },
-        { myId: '4', [ItemColumns.Key]: 4, [ItemColumns.DisplayName]: 'text4', [ItemColumns.Clickable]: true },
+        { myId: '1', [ItemColumns.Key]: 1, [ItemColumns.DisplayName]: 'Text1', [ItemColumns.Clickable]: true },
+        { myId: '2', [ItemColumns.Key]: 2, [ItemColumns.DisplayName]: 'Text2', [ItemColumns.Clickable]: true },
+        { myId: '3', [ItemColumns.Key]: 3, [ItemColumns.DisplayName]: 'Text3', [ItemColumns.Clickable]: true },
+        { myId: '4', [ItemColumns.Key]: 4, [ItemColumns.DisplayName]: 'Text4', [ItemColumns.Clickable]: true },
     ],
     overflowIndex: 5,
     accessibility: 'Breadcrumb Component',

@@ -71,15 +71,60 @@ const Template = (args) => {
             MaxHeight: args.MaxHeight,
         },
     ]);
-    const items = mockGenerator.context.parameters.items as DataSetMock;
-    var displayNameMetadata =
-    mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
-    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
-mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
-mockGenerator.metadata.initItems({
-    '@odata.context': '#!!items',
-    value: args.items || [],
-});
+    
+    const logicalName = '!!!items';
+    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.DisplayName,
+            Attributes: [
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.DisplayName,
+                } as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: 'myId',
+                } as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.IconName,
+                } as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.IconColor,
+                }as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.BackgroundColor,
+                }as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.Key,
+                }as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.TextColor,
+                }as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.IconOnly,
+                }as ShkoOnline.BooleanAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.Enabled,
+                }as ShkoOnline.BooleanAttributeMetadata,
+            ],
+        },
+    ]);
+
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!!items',
+        value: args.items || [],
+    });
     mockGenerator.ExecuteInit();
     const component = mockGenerator.ExecuteUpdateView();
     return component;
@@ -97,7 +142,7 @@ Primary.args = {
     MaxHeight: 50,
     textAlignment: "1",
     items: [{
-        id: '1',
+        myId: '1',
         [ItemColumns.Key]: 'commandOpen',
         [ItemColumns.DisplayName]: 'Open',
         [ItemColumns.IconName]: 'FolderOpen',
@@ -108,7 +153,7 @@ Primary.args = {
         [ItemColumns.TextColor]: 'purple'
     },
     {
-        id: '2',
+        myId: '2',
         [ItemColumns.Key]: 'commandNew',
         [ItemColumns.DisplayName]: 'New',
         [ItemColumns.IconName]: 'OpenInNewWindow',
@@ -116,10 +161,10 @@ Primary.args = {
         [ItemColumns.Enabled]: true,
         [ItemColumns.IconOnly]: true,
         [ItemColumns.BackgroundColor]: "yellow",
-        [ItemColumns.TextColor]: 'orange'
+        [ItemColumns.TextColor]: 'blue'
     },
     {
-        id: '3',
+        myId: '3',
         [ItemColumns.Key]: 'commandSave',
         [ItemColumns.DisplayName]: 'Save',
         [ItemColumns.IconName]: 'Save',
