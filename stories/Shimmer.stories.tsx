@@ -62,10 +62,20 @@ const Template = (args) => {
             items:DataSetMock,
         });
 
-        const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-        Theme.setValue(args.theme);
-        const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-        AccessibilityLabel.setValue(args.AccessibilityLabel);
+        // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+        // Theme.setValue(args.theme);
+        mockGenerator.metadata.initCanvasItems([
+            {
+                Theme: args.Theme,   
+            },
+           ]);
+        // const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
+        // AccessibilityLabel.setValue(args.AccessibilityLabel);
+        mockGenerator.metadata.initCanvasItems([
+            {
+                AccessibilityLabel: args.AccessibilityLabel,   
+            },
+          ]);
         const RowCount = mockGenerator.context.parameters.RowCount as WholeNumberPropertyMock;
         RowCount.setValue(args.RowCount);
         const SpacebetweenShimmer = mockGenerator.context.parameters.SpacebetweenShimmer as EnumPropertyMock<SpaceBetweenshimmer>;
@@ -91,7 +101,7 @@ const Template = (args) => {
 
 export const Primary = Template.bind({});
 Primary.args = {
-    theme: JSON.stringify({
+    Theme: JSON.stringify({
         palette: {
             themePrimary: '#test-primary',
         },

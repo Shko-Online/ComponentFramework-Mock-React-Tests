@@ -102,10 +102,20 @@ export default {
     mockGenerator.context.parameters.Suggestions.paging.setPageSize(500);
     mockGenerator.context.parameters.Tags.paging.setPageSize(500);
 
-    const Hint =mockGenerator.context.parameters.HintText as StringPropertyMock;
-    Hint.setValue(args.hint);
-    const SearchTermToShortMessage = mockGenerator.context.parameters.SearchTermToShortMessage as StringPropertyMock;
-    SearchTermToShortMessage.setValue(args.searchTerms);
+    // const Hint =mockGenerator.context.parameters.HintText as StringPropertyMock;
+    // Hint.setValue(args.hint);
+    mockGenerator.metadata.initCanvasItems([
+      {
+        HintText: args.HintText,   
+      },
+    ]);
+    // const SearchTermToShortMessage = mockGenerator.context.parameters.SearchTermToShortMessage as StringPropertyMock;
+    // SearchTermToShortMessage.setValue(args.SearchTermToShortMessage);
+    mockGenerator.metadata.initCanvasItems([
+      {
+        SearchTermToShortMessage: args.SearchTermToShortMessage,   
+      },
+    ]);
 
     mockGenerator.ExecuteInit();
     const Component = mockGenerator.ExecuteUpdateView();
@@ -160,6 +170,6 @@ Primary.args = {
         {displayName: 'TagsBackgroundColor', name: null, dataType: 'SingleLine.Text', alias: 'TagsBackgroundColor', order: -1, visualSizeFactor: 1}
 
     ],
-    hint : "Search",
-    searchTerms: "Continue Typing...",
+    HintText : "Search",
+    SearchTermToShortMessage: "Continue Typing...",
 };
