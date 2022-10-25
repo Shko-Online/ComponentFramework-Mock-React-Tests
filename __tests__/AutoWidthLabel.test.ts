@@ -25,7 +25,7 @@ import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/Co
 import { DecimalNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DecimalNumberProperty.mock';
 
 
-describe('BreadCrumb', () => {
+describe('AutoWidthLabel', () => {
 	let mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>;
 	beforeEach(() => {
 		mockGenerator = new ComponentFrameworkMockGenerator(

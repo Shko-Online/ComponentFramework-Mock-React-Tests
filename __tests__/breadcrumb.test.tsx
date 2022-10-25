@@ -44,13 +44,9 @@ describe('BreadCrumb', () => {
   });
 
   afterEach(() => {
-    for (let i = 0; i < document.body.children.length; i++) {
-      if (document.body.children[i].tagName === "DIV") {
-        document.body.removeChild(document.body.children[i]);
-        i--;
-      }
-    }
-  });
+		document.body.innerHTML = null;
+	});
+  
   it("renders", () => {
     mockGenerator.ExecuteInit();
     const element = mockGenerator.ExecuteUpdateView();
