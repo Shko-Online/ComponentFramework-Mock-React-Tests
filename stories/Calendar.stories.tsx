@@ -71,43 +71,32 @@ const Template = (args) => {
       ShowSixWeeksByDefault: TwoOptionsPropertyMock,
       ShowWeekNumbers: TwoOptionsPropertyMock,
     });
-  const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-  Theme.setValue(args.theme);
-  const AccesibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-  AccesibilityLabel.setValue(args.text);
-  const BackgroundColor = mockGenerator.context.parameters.BackgroundColor as StringPropertyMock;
-  BackgroundColor.setValue(args.backgroundcolor);
-  const DayPickerVisible = mockGenerator.context.parameters.DayPickerVisible as TwoOptionsPropertyMock;
-  DayPickerVisible.setValue(true);
-  const FirstDayOfWeek = mockGenerator.context.parameters.FirstDayOfWeek as EnumPropertyMock<DaysOfWeek>;
-  FirstDayOfWeek.setValue(args.FirstDayOfWeek)
-  const HighlightCurrentMonth = mockGenerator.context.parameters.HighlightCurrentMonth as TwoOptionsPropertyMock;
-  HighlightCurrentMonth.setValue(true);
-  const HighlightSelectedMonth = mockGenerator.context.parameters.HighlightSelectedMonth as TwoOptionsPropertyMock;
-  HighlightSelectedMonth.setValue(true);
-  const Language = mockGenerator.context.parameters.Language as StringPropertyMock;
-  Language.setValue(args.language);
-  const MaxDate = mockGenerator.context.parameters.MaxDate as DateTimePropertyMock;
-  MaxDate.setValue(new Date(2099, 0, 1));
-  const MinDate = mockGenerator.context.parameters.MinDate as DateTimePropertyMock;
-  MinDate.setValue(new Date(2001, 0, 1));
-  const MonthPickerVisible = mockGenerator.context.parameters.MonthPickerVisible as TwoOptionsPropertyMock;
-  MonthPickerVisible.setValue(true);
-  const SelectedDateValue = mockGenerator.context.parameters.SelectedDateValue as DateTimePropertyMock;
-  SelectedDateValue.setValue(selectedDateValue);
+
+  mockGenerator.metadata.initCanvasItems([
+    {
+      Theme: args.theme, 
+      AccessibilityLabel: args.AccessibilityLabel, 
+      BackgroundColor: args.BackgroundColor, 
+      Language: args.Language,
+      MaxDate: args.MaxDate,    
+      MinDate: args.MinDate, 
+      SelectedDateValue: selectedDateValue,
+      MonthPickerVisible: args.MonthPickerVisible,
+      FirstDayOfWeek:args.FirstDayOfWeek,
+      HighlightSelectedMonth:true,
+      HighlightCurrentMonth:true,
+      DayPickerVisible: true,
+      ShowGoToToday:true,
+      ShowWeekNumbers: true,
+      ShowSixWeeksByDefault:true,
+    },
+  ]);
 
 mockGenerator.notifyOutputChanged.callsFake(()=>{
   const {SelectedDateValue} = mockGenerator.control.getOutputs() || {};
   console.log(SelectedDateValue);
   updateArgs({SelectedDateValue}); 
 });
-
-  const ShowGoToday = mockGenerator.context.parameters.ShowGoToToday as TwoOptionsPropertyMock;
-  ShowGoToday.setValue(true);
-  const ShowWeekNumbers = mockGenerator.context.parameters.ShowWeekNumbers as TwoOptionsPropertyMock;
-  ShowWeekNumbers.setValue(true);
-  const ShowSixWeeksByDefault = mockGenerator.context.parameters.ShowSixWeeksByDefault as TwoOptionsPropertyMock;
-  ShowSixWeeksByDefault.setValue(false);
 
   mockGenerator.ExecuteInit();
   const component = mockGenerator.ExecuteUpdateView();
@@ -116,8 +105,11 @@ mockGenerator.notifyOutputChanged.callsFake(()=>{
 export const Primary = Template.bind({});
 Primary.args = {
   theme: '{"palette": {"themePrimary": "#test-primary"}}',
-  backgroundcolor: '#bcd3eb',
-  text: "This is a calendar",
-  language: 'en-us',
-  FirstDayOfWeek: "Monday"
+  BackgroundColor: '#bcd3eb',
+  AccessibilityLabel: "This is a calendar",
+  Language: 'en-us',
+  FirstDayOfWeek: "Monday",
+  MaxDate: new Date(2099, 0, 1),
+  MinDate: new Date(2001, 0, 1),
+  MonthPickerVisible: true,
 }

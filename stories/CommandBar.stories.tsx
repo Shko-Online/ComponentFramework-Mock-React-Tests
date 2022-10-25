@@ -32,11 +32,10 @@ import { within, userEvent, waitFor } from '@storybook/testing-library';
 
 import canvasColumns from './canvasColumns';
 
-
 const Delay = () =>
     new Promise<void>((resolve) => {
         setTimeout(() => resolve(), 1000);
-    })
+    });
 export default {
     title: 'PCF Components/CommandBar',
     argTypes: {
@@ -61,51 +60,29 @@ const Template = (args) => {
             items: DataSetMock,
         });
     const items = mockGenerator.context.parameters.items as DataSetMock;
-    items.columns = canvasColumns;
+    var displayNameMetadata =
+        mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
+        ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
+    mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!items',
+        value: args.items || [],
+    });
 
-    items.initRecords(
-        (args.items || []).map((item) => {
-            const row = new EntityRecord(undefined, item.id, item[ItemColumns.DisplayName]);
-            row.columns['id'] = item.id;
-            row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
-            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
-            row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
-            row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
-            return row;
-        }),
-    );
     items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
         updateArgs({ CommandSelected: item.name });
     });
-    const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
 
-    const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    // Theme.setValue(args.theme);
     mockGenerator.metadata.initCanvasItems([
         {
             Theme: args.theme,
-        },
-    ]);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            items: args.items,
-        },
-    ]);
-    mockGenerator.metadata.initCanvasItems([
-        {
             AccessibilityLabel: args.AccessibilityLabel,
+            InputEvent: args.inputEvent,
         },
     ]);
-    // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
-    // InputEvent.setValue(args.inputEvent);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            InputEvent: args.inputEvent
-        }
-    ])
+
     mockGenerator.context.mode.allocatedHeight = 200;
     mockGenerator.context.mode.allocatedWidth = 200;
     mockGenerator.context.mode.isVisible = true;
@@ -175,13 +152,13 @@ Primary.args = {
     ],
     theme: '{"palette": {"themePrimary": "#test-primary"}}',
     inputEvent: 'SetFocus',
-    AccessibilityLabel: "Command Bar component"
+    AccessibilityLabel: 'Command Bar component',
 };
 
 Primary.play = async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText(""));
+    await userEvent.click(canvas.getByText(''));
     await waitFor(Delay, { timeout: 2000 });
     console.log(args.checked);
-}
+};

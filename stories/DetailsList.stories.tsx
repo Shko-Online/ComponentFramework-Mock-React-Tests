@@ -32,6 +32,7 @@ import { EnumPropertyMock } from "@shko-online/componentframework-mock/Component
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import canvasColumns from './canvasColumns';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
+import { ColumnsColumns } from '@powercat/details-list/DetailsList/ManifestConstants';
 
 
 
@@ -42,7 +43,7 @@ const Delay = ()=>
 export default {
   title: "PCF Components/DetailsList",
   argTypes: {
-    selectionType: {
+    SelectionType: {
     options: ['0',"1","2"],
     control: { type: 'radio' },
   },},
@@ -74,63 +75,41 @@ const Template = (args) => {
 
   );
   const Records = mockGenerator.context.parameters.records as DataSetMock;
-  const Columns = mockGenerator.context.parameters.columns as DataSetMock;
+  var displayNameMetadataR =
+  mockGenerator.metadata.getAttributeMetadata('!!records', "records") ||
+  ({ EntityLogicalName: '!!records', LogicalName: "records"} as ShkoOnline.StringAttributeMetadata);
+mockGenerator.metadata.upsertAttributeMetadata('!!records', displayNameMetadataR);
+mockGenerator.metadata.initItems({
+  '@odata.context': '#!!records',
+  value: args.records || [],
+});
 
+    mockGenerator.metadata.upsertAttributeMetadata('!!columns', { EntityLogicalName: '!!columns', LogicalName: ColumnsColumns.ColName } as ShkoOnline.StringAttributeMetadata);
+   
+   
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!columns',
+        value: args.columns || [],
+    });
 
-  (mockGenerator.context.parameters.SelectionType as EnumPropertyMock<"0" | "1" | "2">).setValue("1");
-  (mockGenerator.context.parameters.SelectRowsOnFocus as TwoOptionsPropertyMock).setValue(false);
-  (mockGenerator.context.parameters.PageSize as WholeNumberPropertyMock).setValue(10);
-  (mockGenerator.context.parameters.LargeDatasetPaging as TwoOptionsPropertyMock).setValue(false);
-  //(mockGenerator.context.parameters.CurrentSortColumn as StringPropertyMock).setValue("Name");
   mockGenerator.metadata.initCanvasItems([
     {
+      SelectionType: args.SelectionType,
+      SelectRowsOnFocus:false,
+      PageSize:10,
+      LargeDatasetPaging: false,
       CurrentSortColumn: "Name",   
+      AccessibilityLabel: "Help", 
+      InputEvent: "", 
+      Theme: "", 
+      AlternateRowColor: "#ff0000", 
+      CurrentSortDirection: "1",
+      RaiseOnRowSelectionChangeEvent:false,
+      Compact:false,
+      HeaderVisible:true,
+      SelectionAlwaysVisible: true,
     },
   ]);
-  (mockGenerator.context.parameters.CurrentSortDirection as EnumPropertyMock<"0" | "1">).setValue("1");
-  //(mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock).setValue("Help");
-  mockGenerator.metadata.initCanvasItems([
-    {
-      AccessibilityLabel: "Help",   
-    },
-  ]);
-  (mockGenerator.context.parameters.RaiseOnRowSelectionChangeEvent as TwoOptionsPropertyMock).setValue(false);
-  //(mockGenerator.context.parameters.InputEvent as StringPropertyMock).setValue("");
-  mockGenerator.metadata.initCanvasItems([
-    {
-      InputEvent: "",   
-    },
-  ]);
-  //(mockGenerator.context.parameters.Theme as StringPropertyMock).setValue("");
-  mockGenerator.metadata.initCanvasItems([
-    {
-      Theme: "",   
-    },
-  ]);
-  (mockGenerator.context.parameters.Compact as TwoOptionsPropertyMock).setValue(false);
-  (mockGenerator.context.parameters.HeaderVisible as TwoOptionsPropertyMock).setValue(true);
-  //(mockGenerator.context.parameters.AlternateRowColor as StringPropertyMock).setValue("#ff0000");
-  mockGenerator.metadata.initCanvasItems([
-    {
-      AlternateRowColor: "#ff0000",   
-    },
-  ]);
-  (mockGenerator.context.parameters.SelectionAlwaysVisible as TwoOptionsPropertyMock).setValue(true);
-
-
-
-  Columns.columns = canvasColumns;
-  Columns.initRecords((args.columns || []).map((item) => {
-    const row = new EntityRecord(undefined, item.id, item.ColDisplayName);
-    row.columns = item;
-    return row;
-  }))
-  Records.columns = canvasColumns;
-  Records.initRecords((args.records || []).map((item) => {
-    const row = new EntityRecord(undefined, item.id, item.name);
-    row.columns = item;
-    return row;
-  }))
 
   mockGenerator.context.mode.allocatedHeight = 200;
   mockGenerator.context.mode.allocatedWidth = 200;
@@ -144,41 +123,41 @@ Primary.args = {
   columns: [
     {
       id: "1",
-      ColName:"Icon",
-      ColDisplayName:"",
-      ColWidth:32,
-      ColCellType:"image",
-      ColImageWidth:16,
-      ColVerticalAlign:"top",
-      ColPaddingTop:4
+      [ColumnsColumns.ColName]:"Icon",
+      [ColumnsColumns.ColDisplayName]:"",
+      [ColumnsColumns.ColWidth]:32,
+      [ColumnsColumns.ColCellType]:"image",
+      [ColumnsColumns.ColImageWidth]:16,
+      [ColumnsColumns.ColVerticalAlign]:"top",
+      [ColumnsColumns.ColPaddingTop]:4
   },
   {
     id: "2",
-      ColName:"Name",
-      ColDisplayName:"Name",
-      ColSortable:true,
-      ColWidth:200,
-      ColRowHeader:true,
-      ColResizable:true
+    [ColumnsColumns.ColName]:"Name",
+      [ColumnsColumns.ColDisplayName]:"Name",
+      [ColumnsColumns.ColSortable]:true,
+      [ColumnsColumns.ColWidth]:200,
+      [ColumnsColumns.ColRowHeader]:true,
+      [ColumnsColumns.ColResizable]:true
   },
   {
     id: "3",
-      ColName:"Description",
-      ColDisplayName:"Description",
-      ColSortable:true,
-      ColWidth:200,
-      ColResizable:true,
-      ColMultiLine: true
+    [ColumnsColumns.ColName]:"Description",
+      [ColumnsColumns.ColDisplayName]:"Description",
+      [ColumnsColumns.ColSortable]:true,
+      [ColumnsColumns.ColWidth]:200,
+      [ColumnsColumns.ColResizable]:true,
+      [ColumnsColumns.ColMultiLine]: true
   },
   {
     id:"4",
-      ColName:"DateModified",
-      ColDisplayName:"Date Modified",
-      ColSortable:true,
-      ColWidth:200,
-      ColResizable:true,
-      ColShowAsSubTextOf:"Name",
-      ColInlineLabel:"Modified:"
+    [ColumnsColumns.ColName]:"DateModified",
+      [ColumnsColumns.ColDisplayName]:"Date Modified",
+      [ColumnsColumns.ColSortable]:true,
+      [ColumnsColumns.ColWidth]:200,
+      [ColumnsColumns.ColResizable]:true,
+      [ColumnsColumns.ColShowAsSubTextOf]:"Name",
+      [ColumnsColumns.ColInlineLabel]:"Modified:"
   }
   ],
   records: [
@@ -199,8 +178,7 @@ Primary.args = {
       SubText3: "Shko Online"
   }
   ],
- 
-    
+
 
 };
 

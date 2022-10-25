@@ -76,17 +76,12 @@ const Template = (args) => {
 
 
   const items = mockGenerator.context.parameters.items as DataSetMock;
-  items.initRecords(
-    (args.items || []).map((item) => {
-      const row = new EntityRecord(undefined, item.id, item[ItemColumns.DisplayName]);
-      row.columns[ItemColumns.Key] = item[ItemColumns.Key];
-      row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
-      row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
-      row.columns[ItemColumns.Enabled] = item[ItemColumns.Enabled];
-      row.columns[ItemColumns.IconOnly] = item[ItemColumns.IconOnly];
-
-      return row;
-    })
+ var dispalyNameMetadata  = mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) || {EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName} as ShkoOnline.StringAttributeMetadata;
+    mockGenerator.metadata.upsertAttributeMetadata('!!items', dispalyNameMetadata);
+  mockGenerator.metadata.initItems({
+"@odata.context": "#!!items",
+   value: args.items || []
+  }
   );
   items.openDatasetItem.callsFake((ids) => {
     console.log(ids.id.guid);
@@ -94,20 +89,14 @@ const Template = (args) => {
     updateArgs({ PivotSelected: ids.name });
   });
 
-  // const RenderType = mockGenerator.context.parameters.RenderType as EnumPropertyMock<RenderType>;
-  // RenderType.setValue(args.renderType);
   mockGenerator.metadata.initCanvasItems([
     {
       RenderType: args.renderType,
-    },
-  ]);
-  // const RenderSize = mockGenerator.context.parameters.RenderSize as EnumPropertyMock<RenderSize>;
-  // RenderSize.setValue(args.renderSize);
-  mockGenerator.metadata.initCanvasItems([
-    {
       RenderSize: args.renderSize,
     },
   ]);
+  mockGenerator.context.mode.allocatedHeight = 200;
+  mockGenerator.context.mode.allocatedWidth = 800;
   mockGenerator.ExecuteInit();
   const component = mockGenerator.ExecuteUpdateView();
   return component;
@@ -177,7 +166,7 @@ Primary.args = {
     [ItemColumns.IconOnly]: true,
     [ItemColumns.ParentKey]: 'item1',
   },
-    , {
+     {
     id: '8',
     [ItemColumns.Key]: 'item8',
     [ItemColumns.DisplayName]: 'PageSolid',
@@ -186,7 +175,7 @@ Primary.args = {
     [ItemColumns.Enabled]: false,
     [ItemColumns.IconOnly]: true,
     [ItemColumns.ParentKey]: 'item2',
-  },
+  }
   ],
   PivotSelected: "Open",
 };

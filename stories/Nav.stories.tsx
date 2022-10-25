@@ -30,12 +30,10 @@ import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 
-
-
 const Delay = () =>
     new Promise<void>((resolve) => {
         setTimeout(() => resolve(), 1000);
-    })
+    });
 
 export default {
     title: 'PCF Components/Nav',
@@ -137,35 +135,24 @@ const Template = (args: {
             items: DataSetMock,
         });
 
-    // const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-    // AccessibilityLabel.setValue(args.AccessibilityLabel);
     mockGenerator.metadata.initCanvasItems([
         {
             AccessibilityLabel: args.AccessibilityLabel,
-        },
-    ]);
-    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    // Theme.setValue(args.theme);
-    mockGenerator.metadata.initCanvasItems([
-        {
             Theme: args.theme,
-        },
-    ]);
-    // const CollapseByDefault = mockGenerator.context.parameters.CollapseByDefault as TwoOptionsPropertyMock;
-    // CollapseByDefault.setValue(args.Expanded);
-    mockGenerator.metadata.initCanvasItems([
-        {
             CollapseByDefault: args.Expanded,
-        },
-    ]);
-    // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
-    // InputEvent.setValue('SetFocus' + Math.random().toString());
-    mockGenerator.metadata.initCanvasItems([
-        {
             InputEvent: 'SetFocus' + Math.random().toString(),
         },
     ]);
+
     const itemsDataset = mockGenerator.context.parameters.items as DataSetMock;
+    var displayNameMetadata =
+        mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
+        ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
+    mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!items',
+        value: args.items || [],
+    });
     itemsDataset.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
@@ -186,22 +173,6 @@ const Template = (args: {
                 args.CustomIconColor === true ? (item.ItemIconColor = 'red') : (item.ItemIconColor = 'blue');
             });
     }
-
-    itemsDataset.initRecords(
-        (argsItems || []).map((item) => {
-            const row = new EntityRecord(item[ItemColumns.Key], item.id, item[ItemColumns.DisplayName]);
-            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
-            row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
-            row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
-            row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
-            row.columns[ItemColumns.Enabled] = item[ItemColumns.Enabled];
-            row.columns[ItemColumns.Expanded] = item[ItemColumns.Expanded];
-            row.columns[ItemColumns.ParentKey] = item[ItemColumns.ParentKey];
-            row.columns[ItemColumns.TextColor] = item[ItemColumns.TextColor];
-            return row;
-        }),
-    );
-
     mockGenerator.ExecuteInit();
     const component = mockGenerator.ExecuteUpdateView();
     mockGenerator.notifyOutputChanged();
@@ -236,28 +207,28 @@ EnableNotes.parameters = {
     controls: {
         include: ['EnableNotes', 'CustomIconColor'],
     },
-}
+};
 
 Primary.play = async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("More Pages"));
+    await userEvent.click(canvas.getByText('More Pages'));
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("Pages"));
+    await userEvent.click(canvas.getByText('Pages'));
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("Pages"));
+    await userEvent.click(canvas.getByText('Pages'));
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("More Pages"));
+    await userEvent.click(canvas.getByText('More Pages'));
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("News"));
+    await userEvent.click(canvas.getByText('News'));
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("Save"));
+    await userEvent.click(canvas.getByText('Save'));
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("Save And Close"));
-}
+    await userEvent.click(canvas.getByText('Save And Close'));
+};
 EnableNotes.play = async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     await waitFor(Delay, { timeout: 2000 });
-    await userEvent.click(canvas.getByText("Save And Close"));
+    await userEvent.click(canvas.getByText('Save And Close'));
     await waitFor(Delay, { timeout: 2000 });
-}
+};

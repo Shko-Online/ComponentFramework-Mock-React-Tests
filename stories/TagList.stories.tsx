@@ -60,66 +60,26 @@ const Template = (args) => {
             AccessibilityLabel: StringPropertyMock,
             items: DataSetMock,
         });
-    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    // Theme.setValue(args.Theme);
+    
     mockGenerator.metadata.initCanvasItems([
         {
             Theme: args.Theme,
-        },
-    ]);
-    // const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
-    // BorderRadius.setValue(args.BorderRadius);
-    mockGenerator.metadata.initCanvasItems([
-        {
             BorderRadius: args.BorderRadius,
-        },
-    ]);
-    // const TextAlignment = mockGenerator.context.parameters.TextAlignment as StringPropertyMock;
-    // TextAlignment.setValue(args.textAlignment);
-    mockGenerator.metadata.initCanvasItems([
-        {
             TextAlignment: args.textAlignment,
-        },
-    ]);
-    // const FontSize = mockGenerator.context.parameters.FontSize as WholeNumberPropertyMock;
-    // FontSize.setValue(args.FontSize);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            FontSize: args.FontSize,
-        },
-    ]);
-    // const ItemHeight = mockGenerator.context.parameters.ItemHeight as WholeNumberPropertyMock;
-    // ItemHeight.setValue(args.ItemHeight);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            ItemHeight: args.ItemHeight
-        }
-    ])
-    // const MaxHeight = mockGenerator.context.parameters.MaxHeight as WholeNumberPropertyMock;
-    // MaxHeight.setValue(args.MaxHeight);
-    mockGenerator.metadata.initCanvasItems([
-        {
+            FontSize: args.FontSize, 
+            ItemHeight: args.ItemHeight,
             MaxHeight: args.MaxHeight,
         },
     ]);
     const items = mockGenerator.context.parameters.items as DataSetMock;
-    items.initRecords(
-        (args.items || []).map((item) => {
-            const row = new EntityRecord('', item.id, item[ItemColumns.Key]);
-            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
-            row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
-            row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
-            row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
-            row.columns[ItemColumns.Enabled] = item[ItemColumns.Enabled];
-            row.columns[ItemColumns.TextColor] = item[ItemColumns.TextColor];
-            row.columns[ItemColumns.BackgroundColor] = item[ItemColumns.BackgroundColor];
-            row.columns[ItemColumns.BorderColor] = item[ItemColumns.BorderColor];
-            row.columns[ItemColumns.IconOnly] = item[ItemColumns.IconOnly];
-            row.columns[ItemColumns.Visible] = item[ItemColumns.Visible];
-            return row;
-        })
-    );
-
+    var displayNameMetadata =
+    mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
+    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
+mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+mockGenerator.metadata.initItems({
+    '@odata.context': '#!!items',
+    value: args.items || [],
+});
     mockGenerator.ExecuteInit();
     const component = mockGenerator.ExecuteUpdateView();
     return component;

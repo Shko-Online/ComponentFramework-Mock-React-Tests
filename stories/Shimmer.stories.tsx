@@ -28,8 +28,6 @@ import { ItemColumns } from "@powercat/shimmer/Shimmer/ManifestConstants";
 import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { within, waitFor, userEvent } from '@storybook/testing-library';
 
-
-
 const Delay = () =>
     new Promise<void>((resolve) => {
         setTimeout(() => resolve(), 1000);
@@ -62,41 +60,28 @@ const Template = (args) => {
             items: DataSetMock,
         });
 
-    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    // Theme.setValue(args.theme);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            Theme: args.Theme,
-        },
-    ]);
-    // const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-    // AccessibilityLabel.setValue(args.AccessibilityLabel);
+    
     mockGenerator.metadata.initCanvasItems([
         {
             AccessibilityLabel: args.AccessibilityLabel,
+            Theme: args.Theme,
+            RowCount: 3,
+            SpacebetweenShimmer: args.SpacebetweenShimmer,
         },
     ]);
-    const RowCount = mockGenerator.context.parameters.RowCount as WholeNumberPropertyMock;
-    RowCount.setValue(args.RowCount);
-    const SpacebetweenShimmer = mockGenerator.context.parameters.SpacebetweenShimmer as EnumPropertyMock<SpaceBetweenshimmer>;
-    SpacebetweenShimmer.setValue(args.SpaceBetweenshimmer);
-    const items = mockGenerator.context.parameters.items as DataSetMock;
-
-    items.initRecords(
-        (args.items || []).map((item) => {
-            const row = new EntityRecord('', item.id, item.id);
-            row.columns[ItemColumns.Height] = item[ItemColumns.Height];
-            row.columns[ItemColumns.Width] = item[ItemColumns.Width];
-            row.columns[ItemColumns.Type] = item[ItemColumns.Type];
-            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
-            row.columns[ItemColumns.RowKey] = item[ItemColumns.RowKey];
-
-            return row;
-        }),
-    );
+    
+    var displayNameMetadata =
+    mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.Type) ||
+    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.Type } as ShkoOnline.StringAttributeMetadata);
+mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+mockGenerator.metadata.initItems({
+    '@odata.context': '#!!items',
+    value: args.items || [],
+});
+   
     mockGenerator.ExecuteInit();
-    const component = mockGenerator.ExecuteUpdateView();
-    return component;
+    return mockGenerator.ExecuteUpdateView();
+   
 };
 
 export const Primary = Template.bind({});
@@ -108,7 +93,7 @@ Primary.args = {
     }),
     AccessibilityLabel: "Shimmer Component",
     RowCount: 3,
-    SpaceBetweenshimmer: "10px",
+    SpacebetweenShimmer: "10px",
     items: [
         {
             id: '1',

@@ -24,7 +24,6 @@ import { Breadcrumb } from '@powercat/breadcrumb/Breadcrumb';
 import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
 import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock';
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
-import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock';
 import { action } from '@storybook/addon-actions';
 import { ItemColumns } from '@powercat/breadcrumb/Breadcrumb/ManifestConstants';
 import { useArgs } from '@storybook/client-api';
@@ -53,65 +52,58 @@ const Template = (args) => {
             Theme: StringPropertyMock,
         });
 
-    const items = mockGenerator.context.parameters.items as DataSetMock;
-    items.initRecords(
-        (args.items || []).map((item) => {
-            const row = new EntityRecord('test', item.id, item.ItemDisplayName);
-            row.columns[ItemColumns.Key] = item[ItemColumns.Key];
-            row.columns[ItemColumns.DisplayName] = item[ItemColumns.DisplayName];
-            row.columns[ItemColumns.Clickable] = item[ItemColumns.Clickable];
-            return row;
-        }),
-    );
+    const logicalName = '!!!items';
+    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.DisplayName,
+            Attributes: [
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: ItemColumns.DisplayName,
+                } as ShkoOnline.StringAttributeMetadata,
+                {
+                    EntityLogicalName: '!!items',
+                    LogicalName: 'myId',
+                } as ShkoOnline.StringAttributeMetadata,
+            ],
+        },
+    ]);
 
-    items.openDatasetItem.callsFake((item) => {
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!!items',
+        value: args.items || [],
+    });
+
+    mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
         updateArgs({ LastSelected: item.name });
     });
 
-    // const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-    // accessibility.setValue(args.accessibility);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            AccessibilityLabel: args.accessibility,
+            MaxDisplayedItems: args.MaxdisplayedItems,
+            OverflowIndex: args.overflowIndex,
+            Theme: args.theme,
+        },
+    ]);
 
-    mockGenerator.metadata.initCanvasItems([
-        {
-            AccessibilityLabel: args.accessibility,   
-        },
-      ]);
-  
-    // const MaxdisplayedItems = mockGenerator.context.parameters.MaxDisplayedItems as WholeNumberPropertyMock;
-    // MaxdisplayedItems.setValue(args.MaxdisplayedItems);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            MaxDisplayedItems: args.MaxdisplayedItems,   
-        },
-      ]);
-    // const overflowindex = mockGenerator.context.parameters.OverflowIndex as WholeNumberPropertyMock;
-    // overflowindex.setValue(args.overflowIndex);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            OverflowIndex: args.overflowIndex,   
-        },
-      ]);
-    // const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    // theme.setValue(args.theme);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            Theme: args.theme,   
-        },
-      ]);
     mockGenerator.ExecuteInit();
-    const Component = mockGenerator.ExecuteUpdateView();
-    return Component;
+    return mockGenerator.ExecuteUpdateView();
 };
 
 export const Primary = Template.bind({});
 Primary.args = {
     items: [
-        { id: '1', [ItemColumns.Key]: 1, [ItemColumns.DisplayName]: 'text1', [ItemColumns.Clickable]: true },
-        { id: '2', [ItemColumns.Key]: 2, [ItemColumns.DisplayName]: 'text2', [ItemColumns.Clickable]: true },
-        { id: '3', [ItemColumns.Key]: 3, [ItemColumns.DisplayName]: 'text3', [ItemColumns.Clickable]: true },
-        { id: '4', [ItemColumns.Key]: 4, [ItemColumns.DisplayName]: 'text4', [ItemColumns.Clickable]: true },
+        { myId: '1', [ItemColumns.Key]: 1, [ItemColumns.DisplayName]: 'text1', [ItemColumns.Clickable]: true },
+        { myId: '2', [ItemColumns.Key]: 2, [ItemColumns.DisplayName]: 'text2', [ItemColumns.Clickable]: true },
+        { myId: '3', [ItemColumns.Key]: 3, [ItemColumns.DisplayName]: 'text3', [ItemColumns.Clickable]: true },
+        { myId: '4', [ItemColumns.Key]: 4, [ItemColumns.DisplayName]: 'text4', [ItemColumns.Clickable]: true },
     ],
     overflowIndex: 5,
     accessibility: 'Breadcrumb Component',

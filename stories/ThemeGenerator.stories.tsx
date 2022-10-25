@@ -41,42 +41,22 @@ const Template = (args) => {
             TextColor: StringPropertyMock,
             BackgroundColor: StringPropertyMock,
         });
-    // const ThemeJSON = mockGenerator.context.parameters.ThemeJSON as StringPropertyMock;
-    // ThemeJSON.setValue(args.ThemeJson);
+
     mockGenerator.metadata.initCanvasItems([
         {
             ThemeJSON: args.ThemeJSON,
-        },
-    ]);
-    // const PrimaryColor = mockGenerator.context.parameters.PrimaryColor as StringPropertyMock;
-    // PrimaryColor.setValue(args.PrimaryColor);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            PrimaryColor: args.PrimaryColor,
-        },
-    ]);
-    // const TextColor = mockGenerator.context.parameters.TextColor as StringPropertyMock;
-    // TextColor.setValue(args.TextColor);
-    mockGenerator.metadata.initCanvasItems([
-        {
             TextColor: args.TextColor,
-        },
-    ]);
-    // const BackgroundColor = mockGenerator.context.parameters.BackgroundColor as StringPropertyMock;
-    // BackgroundColor.setValue(args.BackgroundColor);
-    mockGenerator.metadata.initCanvasItems([
-        {
+            PrimaryColor: args.PrimaryColor,
             BackgroundColor: args.BackgroundColor,
         },
     ]);
     mockGenerator.ExecuteInit();
-    const component = mockGenerator.ExecuteUpdateView();
-    return component;
+    return mockGenerator.ExecuteUpdateView();
 };
 export const Primary = Template.bind({});
 Primary.args = {
     ThemeJson: '{"palette": {"themePrimary": "#test-primary"}}',
-    PrimaryColor: "#0078d4",
-    TextColor: "#323130",
-    BackgroundColor: "#ffffff"
-}
+    PrimaryColor: '#0078d4',
+    TextColor: '#323130',
+    BackgroundColor: '#ffffff',
+};

@@ -66,60 +66,37 @@ export default {
             Suggestions: DataSetMock,
         }
     );
-    const Tags = mockGenerator.context.parameters.Tags as DataSetMock;
-    const Suggestions = mockGenerator.context.parameters.Suggestions as DataSetMock;
+    var displayNameMetadataTags =
+        mockGenerator.metadata.getAttributeMetadata('!!Tags', TagsColumns.TagsDisplayName) ||
+        ({ EntityLogicalName: '!!Tags', LogicalName: TagsColumns.TagsDisplayName } as ShkoOnline.StringAttributeMetadata);
+    mockGenerator.metadata.upsertAttributeMetadata('!!Tags', displayNameMetadataTags);
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!Tags',
+        value: args.tagsItems || [],
+    });
 
-    Tags.columns= args.tagsColumns;
-    Tags.initRecords((args.tagsItems || []).map((item) => {
-        const row = new EntityRecord(undefined, item.id, item[TagsColumns.TagsDisplayName]);
-        row.columns["id"] = item.id; row.columns["id"] = item.id;
-        row.columns[TagsColumns.TagsKey] = item[TagsColumns.TagsKey];
-        row.columns[TagsColumns.TagsDisplayName] = item[TagsColumns.TagsDisplayName];
-        row.columns[TagsColumns.TagsIconName]= item[TagsColumns.TagsIconName];
-        row.columns[TagsColumns.TagsBackgroundColor]= item[TagsColumns.TagsBackgroundColor];
-
-       
-        return row;
-      }))
-
-    Suggestions.columns = args.suggestionsColumns;
-    Suggestions.initRecords((args.suggestionItems || []).map((item) => {
-        const row = new EntityRecord(undefined, item.id, item[SuggestionsColumns.SuggestionKey]);
-
-        row.columns[SuggestionsColumns.SuggestionKey] = item[SuggestionsColumns.SuggestionKey];
-        row.columns [SuggestionsColumns.SuggestionsDisplayName] =item [SuggestionsColumns.SuggestionsDisplayName];
-        row.columns[SuggestionsColumns.SuggestionsBackgroundColor]= item[ SuggestionsColumns.SuggestionsBackgroundColor];
-        return row;
-      }));
-
-      (mockGenerator.context as unknown as ContextEx)["accessibility"] = {
-          assignedTabIndex: 1
-      }
-   
+    var displayNameMetadataSug =
+        mockGenerator.metadata.getAttributeMetadata('!!Suggestions', SuggestionsColumns.SuggestionsDisplayName) ||
+        ({ EntityLogicalName: '!!Suggestions', LogicalName: SuggestionsColumns.SuggestionsDisplayName } as ShkoOnline.StringAttributeMetadata);
+    mockGenerator.metadata.upsertAttributeMetadata('!!Suggestions', displayNameMetadataSug);
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!Suggestions',
+        value: args.suggestionItems|| [],
+    });
     mockGenerator.context.mode.allocatedHeight = 500;
     mockGenerator.context.mode.allocatedWidth = 500;
     mockGenerator.context.mode.trackContainerResize(true);
     mockGenerator.context.parameters.Suggestions.paging.setPageSize(500);
     mockGenerator.context.parameters.Tags.paging.setPageSize(500);
-
-    // const Hint =mockGenerator.context.parameters.HintText as StringPropertyMock;
-    // Hint.setValue(args.hint);
     mockGenerator.metadata.initCanvasItems([
       {
         HintText: args.HintText,   
+        SearchTermToShortMessage: args.SearchTermToShortMessage,
       },
     ]);
-    // const SearchTermToShortMessage = mockGenerator.context.parameters.SearchTermToShortMessage as StringPropertyMock;
-    // SearchTermToShortMessage.setValue(args.SearchTermToShortMessage);
-    mockGenerator.metadata.initCanvasItems([
-      {
-        SearchTermToShortMessage: args.SearchTermToShortMessage,   
-      },
-    ]);
-
     mockGenerator.ExecuteInit();
-    const Component = mockGenerator.ExecuteUpdateView();
-    return Component;
+    return mockGenerator.ExecuteUpdateView();
+   
   }
 
   export const Primary = Template.bind({});

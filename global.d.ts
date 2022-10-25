@@ -13,6 +13,7 @@
 	language governing rights and limitations under the RPL. 
 */
 
-/// <reference types="./ComponentFramework-Mock/src/ComponentFramework-Mock/PropertyTypes/PropertyTypes" />
+/// <reference types="powerapps-component-framework" />
+/// <reference path="./ComponentFramework-Mock/src/ShkoOnline.d.ts" />
 
 declare module '*.resx';

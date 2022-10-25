@@ -90,42 +90,26 @@ const Template = (args) => {
     // Chevron.setValue(true);
     mockGenerator.metadata.initCanvasItems([
       {
-        Chevron: true,   
+        Chevron: true,    
+        BorderRadius: 10,
+        TextAlignment: "0",
+        InputEvent: 'SetFocus' + Math.random().toString(), 
       },
     ]);
     // const IconColor = mockGenerator.context.parameters.IconColor as StringPropertyMock;
     // IconColor.setValue(args.IconColor);
    
-    // const BorderRadius = mockGenerator.context.parameters.BorderRadius as WholeNumberPropertyMock;
-    // BorderRadius.setValue(10);
-    mockGenerator.metadata.initCanvasItems([
-      {
-        BorderRadius: 10,   
-      },
-    ]);
-    const TextAlignment = mockGenerator.context.parameters.TextAlignment as EnumPropertyMock<AlignmentTypes>;
-    TextAlignment.setValue("0");
-    // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
-    // InputEvent.setValue('SetFocus' + Math.random().toString());
-    mockGenerator.metadata.initCanvasItems([
-      {
-        InputEvent: 'SetFocus' + Math.random().toString(),   
-      },
-    ]);
     const items = mockGenerator.context.parameters.items as DataSetMock;
-    items.columns = [{"displayName":"ItemDisplayName","name":null,"dataType":"SingleLine.Text","alias":"ItemDisplayName","order":-1,"visualSizeFactor":1},{"displayName":"ItemKey","name":null,"dataType":"SingleLine.Text","alias":"ItemKey","order":-1,"visualSizeFactor":1},{"displayName":"ItemEnabled","name":null,"dataType":"SingleLine.Text","alias":"ItemEnabled","order":-1,"visualSizeFactor":1},{"displayName":"ItemVisible","name":null,"dataType":"SingleLine.Text","alias":"ItemVisible","order":-1,"visualSizeFactor":1},{"displayName":"ItemChecked","name":null,"dataType":"SingleLine.Text","alias":"ItemChecked","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconName","name":null,"dataType":"SingleLine.Text","alias":"ItemIconName","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconColor","name":null,"dataType":"SingleLine.Text","alias":"ItemIconColor","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconOnly","name":null,"dataType":"SingleLine.Text","alias":"ItemIconOnly","order":-1,"visualSizeFactor":1},{"displayName":"ItemHeader","name":null,"dataType":"SingleLine.Text","alias":"ItemHeader","order":-1,"visualSizeFactor":1},{"displayName":"ItemTopDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemTopDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemParentKey","name":null,"dataType":"SingleLine.Text","alias":"ItemParentKey","order":-1,"visualSizeFactor":1}];
-  items.initRecords(
-    (args.items || []).map((item) => {
-      const row = new EntityRecord(undefined, item.id, item[ItemColumns.DisplayName]);
-      row.columns[ItemColumns.Key]=item[ItemColumns.Key];
-      row.columns[ItemColumns.DisplayName]=item[ItemColumns.DisplayName];
-      row.columns[ItemColumns.IconName] = item[ItemColumns.IconName];
-      row.columns[ItemColumns.Enabled]=item[ItemColumns.Enabled];
-      row.columns[ItemColumns.IconOnly] = item [ItemColumns.IconOnly]; 
-      row.columns[ItemColumns.IconColor] = item[ItemColumns.IconColor];
-      return row;
-    })
-  );
+    var displayNameMetadata =
+    mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
+    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
+mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+mockGenerator.metadata.initItems({
+    '@odata.context': '#!!items',
+    value: args.items || [],
+});
+
+  //items.columns = [{"displayName":"ItemDisplayName","name":null,"dataType":"SingleLine.Text","alias":"ItemDisplayName","order":-1,"visualSizeFactor":1},{"displayName":"ItemKey","name":null,"dataType":"SingleLine.Text","alias":"ItemKey","order":-1,"visualSizeFactor":1},{"displayName":"ItemEnabled","name":null,"dataType":"SingleLine.Text","alias":"ItemEnabled","order":-1,"visualSizeFactor":1},{"displayName":"ItemVisible","name":null,"dataType":"SingleLine.Text","alias":"ItemVisible","order":-1,"visualSizeFactor":1},{"displayName":"ItemChecked","name":null,"dataType":"SingleLine.Text","alias":"ItemChecked","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconName","name":null,"dataType":"SingleLine.Text","alias":"ItemIconName","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconColor","name":null,"dataType":"SingleLine.Text","alias":"ItemIconColor","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconOnly","name":null,"dataType":"SingleLine.Text","alias":"ItemIconOnly","order":-1,"visualSizeFactor":1},{"displayName":"ItemHeader","name":null,"dataType":"SingleLine.Text","alias":"ItemHeader","order":-1,"visualSizeFactor":1},{"displayName":"ItemTopDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemTopDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemParentKey","name":null,"dataType":"SingleLine.Text","alias":"ItemParentKey","order":-1,"visualSizeFactor":1}];
   items.openDatasetItem.callsFake((item) => {
     console.log(item.id);
     action('OpenDatasetItem')(item);
@@ -133,7 +117,6 @@ const Template = (args) => {
   });
 
   mockGenerator.notifyOutputChanged
-
   mockGenerator.ExecuteInit();
   const component = mockGenerator.ExecuteUpdateView();
   return <div style={{width: "200px", height: "100px"}}>{component}</div>;
