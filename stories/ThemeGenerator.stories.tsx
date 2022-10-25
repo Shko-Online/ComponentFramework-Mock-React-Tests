@@ -48,6 +48,7 @@ const Template = (args) => {
             TextColor: args.TextColor,
             PrimaryColor: args.PrimaryColor,
             BackgroundColor: args.BackgroundColor,
+            
         },
     ]);
     mockGenerator.ExecuteInit();

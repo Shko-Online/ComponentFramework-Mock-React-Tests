@@ -17,13 +17,10 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 initializeIcons(/* optional base url */);
 
-import { Meta } from "@storybook/react";
+import { Meta } from '@storybook/react';
 import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
-import {Picker} from '@powercat/picker/Picker';
-import {
-  IInputs,
-  IOutputs,
-} from "@powercat/picker/Picker/generated/ManifestTypes";
+import { Picker } from '@powercat/picker/Picker';
+import { IInputs, IOutputs } from '@powercat/picker/Picker/generated/ManifestTypes';
 import { DecimalNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DecimalNumberProperty.mock';
 import { TwoOptionsPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock';
 import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
@@ -34,21 +31,20 @@ import { SuggestionsColumns, TagsColumns } from '@powercat/picker/Picker/Manifes
 import { ContextEx } from '@powercat/picker/Picker/ContextExtended';
 
 export default {
-    title: "PCF Components/Picker",
+    title: 'PCF Components/Picker',
     argTypes: {
-      hint : { type: "string"},
-      searchTerms: {type : "string"}
-
+        hint: { type: 'string' },
+        searchTerms: { type: 'string' },
     },
     parameters: {
-      layout: "fullscreen",
+        layout: 'fullscreen',
     },
-  } as Meta;
+} as Meta;
 
-  const Template = (args) =>{
-    const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> = new ComponentFrameworkMockGeneratorReact(
-        Picker,
-        {   TagMaxWidth: DecimalNumberPropertyMock,
+const Template = (args) => {
+    const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
+        new ComponentFrameworkMockGeneratorReact(Picker, {
+            TagMaxWidth: DecimalNumberPropertyMock,
             AllowFreeText: TwoOptionsPropertyMock,
             SearchTermToShortMessage: StringPropertyMock,
             HintText: StringPropertyMock,
@@ -64,89 +60,200 @@ export default {
             InputEvent: StringPropertyMock,
             Tags: DataSetMock,
             Suggestions: DataSetMock,
+            
+        });
+        (mockGenerator.context as unknown as ContextEx).accessibility = {
+            assignedTabIndex: 0,
+            assignedTooltip: ''
         }
-    );
-    var displayNameMetadataTags =
-        mockGenerator.metadata.getAttributeMetadata('!!Tags', TagsColumns.TagsDisplayName) ||
-        ({ EntityLogicalName: '!!Tags', LogicalName: TagsColumns.TagsDisplayName } as ShkoOnline.StringAttributeMetadata);
-    mockGenerator.metadata.upsertAttributeMetadata('!!Tags', displayNameMetadataTags);
+    // var displayNameMetadataTags =
+    //     mockGenerator.metadata.getAttributeMetadata('!!Tags', TagsColumns.TagsDisplayName) ||
+    //     ({ EntityLogicalName: '!!Tags', LogicalName: TagsColumns.TagsDisplayName } as ShkoOnline.StringAttributeMetadata);
+    // mockGenerator.metadata.upsertAttributeMetadata('!!Tags', displayNameMetadataTags);
+    const logicalName = '!!!Tags';
+    mockGenerator.context._parameters.Tags._Bind(logicalName, 'Tags');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: TagsColumns.TagsDisplayName,
+            Attributes: [
+                'myId',
+                TagsColumns.TagsKey,
+                TagsColumns.TagsDisplayName,
+                TagsColumns.TagsIconName,
+                TagsColumns.TagsBackgroundColor,
+            ].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!!Tags',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
+
+
     mockGenerator.metadata.initItems({
-        '@odata.context': '#!!Tags',
+        '@odata.context': '#!!!Tags',
         value: args.tagsItems || [],
     });
 
-    var displayNameMetadataSug =
-        mockGenerator.metadata.getAttributeMetadata('!!Suggestions', SuggestionsColumns.SuggestionsDisplayName) ||
-        ({ EntityLogicalName: '!!Suggestions', LogicalName: SuggestionsColumns.SuggestionsDisplayName } as ShkoOnline.StringAttributeMetadata);
-    mockGenerator.metadata.upsertAttributeMetadata('!!Suggestions', displayNameMetadataSug);
+    // var displayNameMetadataSug =
+    //     mockGenerator.metadata.getAttributeMetadata('!!Suggestions', SuggestionsColumns.SuggestionsDisplayName) ||
+    //     ({
+    //         EntityLogicalName: '!!Suggestions',
+    //         LogicalName: SuggestionsColumns.SuggestionsDisplayName,
+    //     } as ShkoOnline.StringAttributeMetadata);
+    // mockGenerator.metadata.upsertAttributeMetadata('!!Suggestions', displayNameMetadataSug);
+
+    const entityLogicalName = '!!!Suggestions';
+    mockGenerator.context._parameters.Suggestions._Bind(entityLogicalName, 'Suggestions');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: entityLogicalName,
+            LogicalName: entityLogicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: SuggestionsColumns.SuggestionsDisplayName,
+            Attributes: [
+                'myId',
+                SuggestionsColumns.SuggestionKey,
+                SuggestionsColumns.SuggestionsDisplayName,
+                SuggestionsColumns.SuggestionsBackgroundColor,
+            ].map(
+                (entityLogicalName) =>
+                    ({
+                        EntityLogicalName: '!!!Suggestions',
+                        LogicalName: entityLogicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
     mockGenerator.metadata.initItems({
-        '@odata.context': '#!!Suggestions',
-        value: args.suggestionItems|| [],
+        '@odata.context': '#!!!Suggestions',
+        value: args.suggestionItems || [],
     });
+
+
     mockGenerator.context.mode.allocatedHeight = 500;
     mockGenerator.context.mode.allocatedWidth = 500;
     mockGenerator.context.mode.trackContainerResize(true);
     mockGenerator.context.parameters.Suggestions.paging.setPageSize(500);
     mockGenerator.context.parameters.Tags.paging.setPageSize(500);
     mockGenerator.metadata.initCanvasItems([
-      {
-        HintText: args.HintText,   
-        SearchTermToShortMessage: args.SearchTermToShortMessage,
-      },
+        {
+            HintText: args.HintText,
+            SearchTermToShortMessage: args.SearchTermToShortMessage,
+            assignedTabIndex: args.assignedTabIndex
+        },
     ]);
     mockGenerator.ExecuteInit();
     return mockGenerator.ExecuteUpdateView();
-   
-  }
+};
 
-  export const Primary = Template.bind({});
+export const Primary = Template.bind({});
 Primary.args = {
-    suggestionItems : [
-         {  id: "1",
+    suggestionItems: [
+        {
+            myId: '1',
             [SuggestionsColumns.SuggestionKey]: 'green',
             [SuggestionsColumns.SuggestionsDisplayName]: 'Green',
-            [SuggestionsColumns.SuggestionsBackgroundColor]:'green'
-
+            [SuggestionsColumns.SuggestionsBackgroundColor]: 'green',
         },
-        {  id: "2",
+        {
+            myId: '2',
             [SuggestionsColumns.SuggestionKey]: 'pink',
             [SuggestionsColumns.SuggestionsDisplayName]: 'Pink',
-            [SuggestionsColumns.SuggestionsBackgroundColor]:'pink',
+            [SuggestionsColumns.SuggestionsBackgroundColor]: 'pink',
         },
     ],
-    suggestionsColumns:[
-        {displayName: 'SuggestionsKey', name: null, dataType: 'SingleLine.Text', alias: 'SuggestionsKey', order: -1,visualSizeFactor: 1},
-        {displayName: 'SuggestionsSubDisplayName', name: null, dataType: 'SingleLine.Text', alias: 'SuggestionsSubDisplayName', order: -1, visualSizeFactor: 1},
-        {displayName: 'SuggestionsBackgroundColor', name: null, dataType: 'SingleLine.Text', alias: 'SuggestionsBackgroundColor', order: -1, visualSizeFactor: 1},
+    suggestionsColumns: [
+        {
+            displayName: 'SuggestionsKey',
+            name: null,
+            dataType: 'SingleLine.Text',
+            alias: 'SuggestionsKey',
+            order: -1,
+            visualSizeFactor: 1,
+        },
+        {
+            displayName: 'SuggestionsSubDisplayName',
+            name: null,
+            dataType: 'SingleLine.Text',
+            alias: 'SuggestionsSubDisplayName',
+            order: -1,
+            visualSizeFactor: 1,
+        },
+        {
+            displayName: 'SuggestionsBackgroundColor',
+            name: null,
+            dataType: 'SingleLine.Text',
+            alias: 'SuggestionsBackgroundColor',
+            order: -1,
+            visualSizeFactor: 1,
+        },
     ],
-    tagsItems:[
-         {  id: "aa",
+    tagsItems: [
+        {
+            myId: 'aa',
             [TagsColumns.TagsKey]: 'red',
             [TagsColumns.TagsDisplayName]: 'Red',
             [TagsColumns.TagsIconName]: 'Edit',
-            [TagsColumns.TagsBackgroundColor]:'red',
+            [TagsColumns.TagsBackgroundColor]: 'red',
         },
-        {   id: "ab",
+        {
+            myId: 'ab',
             [TagsColumns.TagsKey]: 'blue',
             [TagsColumns.TagsDisplayName]: 'Blue',
             [TagsColumns.TagsIconName]: 'Add',
-            [TagsColumns.TagsBackgroundColor]:'Blue'
+            [TagsColumns.TagsBackgroundColor]: 'Blue',
         },
-        {   id: "ac",
+        {
+            myId: 'ac',
             [TagsColumns.TagsKey]: 'green',
             [TagsColumns.TagsDisplayName]: 'Green',
             [TagsColumns.TagsIconName]: 'Cancel',
-            [TagsColumns.TagsBackgroundColor]:'green'
+            [TagsColumns.TagsBackgroundColor]: 'green',
         },
-        
     ],
-    tagsColumns:[
-        {displayName: 'TagsKey', name: null, dataType: 'SingleLine.Text', alias: 'TagsKey', order: -1, visualSizeFactor: 1},
-        {displayName: 'TagsDisplayName', name: null, dataType: 'SingleLine.Text', alias: 'TagsDisplayName', order: -1, visualSizeFactor: 1},
-        {displayName: 'TagsIconName', name: null, dataType: 'SingleLine.Text', alias: 'TagsIconName', order: -1, visualSizeFactor: 1},
-        {displayName: 'TagsBackgroundColor', name: null, dataType: 'SingleLine.Text', alias: 'TagsBackgroundColor', order: -1, visualSizeFactor: 1}
-
+    tagsColumns: [
+        {
+            displayName: 'TagsKey',
+            name: null,
+            dataType: 'SingleLine.Text',
+            alias: 'TagsKey',
+            order: -1,
+            visualSizeFactor: 1,
+        },
+        {
+            displayName: 'TagsDisplayName',
+            name: null,
+            dataType: 'SingleLine.Text',
+            alias: 'TagsDisplayName',
+            order: -1,
+            visualSizeFactor: 1,
+        },
+        {
+            displayName: 'TagsIconName',
+            name: null,
+            dataType: 'SingleLine.Text',
+            alias: 'TagsIconName',
+            order: -1,
+            visualSizeFactor: 1,
+        },
+        {
+            displayName: 'TagsBackgroundColor',
+            name: null,
+            dataType: 'SingleLine.Text',
+            alias: 'TagsBackgroundColor',
+            order: -1,
+            visualSizeFactor: 1,
+        },
     ],
-    HintText : "Search",
-    SearchTermToShortMessage: "Continue Typing...",
+    HintText: 'Search',
+    SearchTermToShortMessage: 'Continue Typing...',
+   
 };
