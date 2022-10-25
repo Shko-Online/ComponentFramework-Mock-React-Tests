@@ -87,25 +87,12 @@ const Template = (args) => {
     mockGenerator.metadata.initCanvasItems([
         {
             Theme: args.theme,
-        },
-    ]);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            items: args.items,
-        },
-    ]);
-    mockGenerator.metadata.initCanvasItems([
-        {
             AccessibilityLabel: args.AccessibilityLabel,
+            InputEvent: args.inputEvent
         },
     ]);
     // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
     // InputEvent.setValue(args.inputEvent);
-    mockGenerator.metadata.initCanvasItems([
-        {
-            InputEvent: args.inputEvent
-        }
-    ])
     mockGenerator.context.mode.allocatedHeight = 200;
     mockGenerator.context.mode.allocatedWidth = 200;
     mockGenerator.context.mode.isVisible = true;
