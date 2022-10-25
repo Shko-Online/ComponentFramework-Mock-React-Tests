@@ -59,17 +59,42 @@ const Template = (args) => {
             InputEvent: StringPropertyMock,
             items: DataSetMock,
         });
-    const items = mockGenerator.context.parameters.items as DataSetMock;
-    var displayNameMetadata =
-        mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
-        ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
-    mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+    //  const items = mockGenerator.context.parameters.items as DataSetMock;
+    //  var displayNameMetadata =
+    //   mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
+    //    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
+    //  mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
+
+    const logicalName = '!!!items';
+    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.DisplayName,
+            Attributes: [
+                'myId',
+                ItemColumns.DisplayName,
+                ItemColumns.Key,
+                ItemColumns.IconName,
+                ItemColumns.IconColor,
+            ].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!!items',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
     mockGenerator.metadata.initItems({
-        '@odata.context': '#!!items',
+        '@odata.context': '#!!!items',
         value: args.items || [],
     });
 
-    items.openDatasetItem.callsFake((item) => {
+    mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
         updateArgs({ CommandSelected: item.name });
@@ -97,7 +122,7 @@ export const Primary = Template.bind({});
 Primary.args = {
     items: [
         {
-            id: '1',
+            myId: '1',
             [ItemColumns.DisplayName]: 'OpenPane',
             [ItemColumns.Key]: 'OpenPane',
 
@@ -105,7 +130,7 @@ Primary.args = {
             [ItemColumns.IconColor]: 'blue',
         },
         {
-            id: '2',
+            myId: '2',
             [ItemColumns.DisplayName]: 'OpenInNewWindow',
             [ItemColumns.Key]: 'OpenInNewWindow',
 
@@ -113,7 +138,7 @@ Primary.args = {
             [ItemColumns.IconColor]: 'blue',
         },
         {
-            id: '3',
+            myId: '3',
             [ItemColumns.Key]: 'commandSave',
             [ItemColumns.DisplayName]: 'Save',
             [ItemColumns.IconName]: 'Save',
@@ -121,14 +146,14 @@ Primary.args = {
         },
 
         {
-            id: '5',
+            myId: '5',
             [ItemColumns.Key]: 'commandSettings',
             [ItemColumns.DisplayName]: 'Settings',
             [ItemColumns.IconName]: 'Settings',
             [ItemColumns.IconColor]: 'black',
         },
         {
-            id: '6',
+            myId: '6',
             [ItemColumns.Key]: 'commandSaveAndClose',
             [ItemColumns.DisplayName]: 'SaveAndClose',
             [ItemColumns.IconName]: 'Save',
@@ -136,14 +161,14 @@ Primary.args = {
         },
         // Sub Items Second Level
         {
-            id: '7',
+            myId: '7',
             [ItemColumns.Key]: 'commandUpload',
             [ItemColumns.DisplayName]: 'Upload',
             [ItemColumns.IconName]: 'Upload',
             [ItemColumns.IconColor]: 'blue',
         },
         {
-            id: '8',
+            myId: '8',
             [ItemColumns.Key]: 'commandDownload',
             [ItemColumns.DisplayName]: 'Download',
             [ItemColumns.IconName]: 'Download',
