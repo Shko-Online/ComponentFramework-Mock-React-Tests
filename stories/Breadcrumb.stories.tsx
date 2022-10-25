@@ -70,14 +70,36 @@ const Template = (args) => {
         updateArgs({ LastSelected: item.name });
     });
 
-    const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-    accessibility.setValue(args.accessibility);
-    const MaxdisplayedItems = mockGenerator.context.parameters.MaxDisplayedItems as WholeNumberPropertyMock;
-    MaxdisplayedItems.setValue(args.MaxdisplayedItems);
-    const overflowindex = mockGenerator.context.parameters.OverflowIndex as WholeNumberPropertyMock;
-    overflowindex.setValue(args.overflowIndex);
-    const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    theme.setValue(args.theme);
+    // const accessibility = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
+    // accessibility.setValue(args.accessibility);
+
+    mockGenerator.metadata.initCanvasItems([
+        {
+            AccessibilityLabel: args.accessibility,   
+        },
+      ]);
+  
+    // const MaxdisplayedItems = mockGenerator.context.parameters.MaxDisplayedItems as WholeNumberPropertyMock;
+    // MaxdisplayedItems.setValue(args.MaxdisplayedItems);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            MaxDisplayedItems: args.MaxdisplayedItems,   
+        },
+      ]);
+    // const overflowindex = mockGenerator.context.parameters.OverflowIndex as WholeNumberPropertyMock;
+    // overflowindex.setValue(args.overflowIndex);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            OverflowIndex: args.overflowIndex,   
+        },
+      ]);
+    // const theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+    // theme.setValue(args.theme);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            Theme: args.theme,   
+        },
+      ]);
     mockGenerator.ExecuteInit();
     const Component = mockGenerator.ExecuteUpdateView();
     return Component;
