@@ -70,14 +70,28 @@ const Template = (args) => {
         },
     ]);
     
-    var displayNameMetadata =
-    mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.Type) ||
-    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.Type } as ShkoOnline.StringAttributeMetadata);
-mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
-mockGenerator.metadata.initItems({
-    '@odata.context': '#!!items',
-    value: args.items || [],
-});
+    const logicalName = '!!!items';
+    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: logicalName,
+            LogicalName: logicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.Type,
+            Attributes: ['myId', ItemColumns.Type, ItemColumns.RowKey, ItemColumns.Height, ItemColumns.Width].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: '!!items',
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
+    mockGenerator.metadata.initItems({
+        '@odata.context': '#!!!items',
+        value: args.items || [],
+    });
    
     mockGenerator.ExecuteInit();
     return mockGenerator.ExecuteUpdateView();
