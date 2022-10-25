@@ -137,14 +137,34 @@ const Template = (args: {
             items: DataSetMock,
         });
 
-    const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
-    AccessibilityLabel.setValue(args.AccessibilityLabel);
-    const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
-    Theme.setValue(args.theme);
-    const CollapseByDefault = mockGenerator.context.parameters.CollapseByDefault as TwoOptionsPropertyMock;
-    CollapseByDefault.setValue(args.Expanded);
-    const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
-    InputEvent.setValue('SetFocus' + Math.random().toString());
+    // const AccessibilityLabel = mockGenerator.context.parameters.AccessibilityLabel as StringPropertyMock;
+    // AccessibilityLabel.setValue(args.AccessibilityLabel);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            AccessibilityLabel: args.AccessibilityLabel,
+        },
+      ]);
+    // const Theme = mockGenerator.context.parameters.Theme as StringPropertyMock;
+    // Theme.setValue(args.theme);
+    mockGenerator.metadata.initCanvasItems([
+        {
+          Theme: args.theme,
+        },
+      ]);
+    // const CollapseByDefault = mockGenerator.context.parameters.CollapseByDefault as TwoOptionsPropertyMock;
+    // CollapseByDefault.setValue(args.Expanded);
+    mockGenerator.metadata.initCanvasItems([
+        {
+            CollapseByDefault: args.Expanded,
+        },
+      ]);
+    // const InputEvent = mockGenerator.context.parameters.InputEvent as StringPropertyMock;
+    // InputEvent.setValue('SetFocus' + Math.random().toString());
+    mockGenerator.metadata.initCanvasItems([
+        {
+            InputEvent: 'SetFocus' + Math.random().toString(),
+        },
+      ]);
     const itemsDataset = mockGenerator.context.parameters.items as DataSetMock;
     itemsDataset.openDatasetItem.callsFake((item) => {
         console.log(item.id);
@@ -209,6 +229,7 @@ EnableNotes.args = {
     EnableNotes: true,
     CustomIconColor: true,
     ShowActivityLink: true,
+    InputEvent: 'SetFocus' + Math.random().toString(),
 };
 
 EnableNotes.parameters = {
