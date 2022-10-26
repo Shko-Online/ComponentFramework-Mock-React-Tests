@@ -15,8 +15,8 @@
 
 const path = require("path");
 
-/**  @type {import('ts-jest').JestConfigWithTsJest}  */
-module.export ={
+/**  @type {import('ts-jest').InitialOptionsTsJest}  */
+module.exports = {
 	moduleNameMapper:{
 		'@shko-online/componentframework-mock/(.*)': '<rootDir>/ComponentFramework-Mock/src/$1',
 		'@powercat/breadcrumb/(.*)': '<rootDir>/powercat-code-components/Breadcrumb/$1',
@@ -51,12 +51,12 @@ module.export ={
         babelConfig: true,
       }],	
       "\\.resx" : "<rootDir>/raw-Loader.js"
-    },
-    testMatch:[ "<rootDir>/__tests__/**/*.[jt]s?(x)" ],
+    },	
     coveragePathIgnorePatterns : [
       "/node_modules/",
       "/ComponentFramework-Mock/"
     ],
+	testMatch: [ "<rootDir>/__tests__/**/*.[jt]s?(x)", "<rootDir>/?(*.)+(spec|test).[jt]s?(x)" ],
 	setupFiles: [path.resolve(path.join(__dirname, 'config', 'tests.js'))],
 	snapshotSerializers: ['@fluentui/jest-serializer-merge-styles'],
 	transformIgnorePatterns: [

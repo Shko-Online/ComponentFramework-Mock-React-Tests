@@ -37,7 +37,7 @@ export default {
     // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
     argTypes: {
         onClick: { action: 'clicked' },
-        LastSelected: { control: 'select', options: ['text1', 'text2', 'text3', 'text4'] },
+        LastSelected: { control: 'select', options: ['Text1', 'Text2', 'Text3', 'Text4'] },
     },
 } as Meta;
 const Template = (args) => {
@@ -52,29 +52,26 @@ const Template = (args) => {
             Theme: StringPropertyMock,
         });
 
-    const logicalName = '!!!items';
-    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    const itemsLogicalName = '!!!items';
+  
     mockGenerator.metadata.initMetadata([
         {
-            EntitySetName: logicalName,
-            LogicalName: logicalName,
+            EntitySetName: itemsLogicalName,
+            LogicalName: itemsLogicalName,
             PrimaryIdAttribute: 'myId',
             PrimaryNameAttribute: ItemColumns.DisplayName,
             Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Clickable, ItemColumns.Key].map(
                 (logicalName) =>
-                    ({
-                        EntityLogicalName: '!!items',
-                        LogicalName: logicalName,
-                    } as ShkoOnline.StringAttributeMetadata),
+                ({
+                    EntityLogicalName: itemsLogicalName,
+                    LogicalName: logicalName,
+                } as ShkoOnline.StringAttributeMetadata),
             ),
         },
     ]);
 
-    mockGenerator.metadata.initItems({
-        '@odata.context': '#!!!items',
-        value: args.items || [],
-    });
-
+    mockGenerator.context._parameters.items._Bind(itemsLogicalName, 'items');
+    mockGenerator.context._parameters.items._InitItems(args.items || []);
     mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
