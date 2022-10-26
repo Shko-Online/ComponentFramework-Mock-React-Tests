@@ -75,45 +75,55 @@ const Template = (args) => {
     });
 
 
-    const logicalName = '!!!items';
-    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
-    mockGenerator.metadata.initMetadata([
-        {
-            EntitySetName: logicalName,
-            LogicalName: logicalName,
-            PrimaryIdAttribute: 'myId',
-            PrimaryNameAttribute: ItemColumns.DisplayName,
-            Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Key,ItemColumns.IconName,ItemColumns.IconColor, ItemColumns.Enabled, ItemColumns.IconOnly].map(
-                (logicalName) =>
-                    ({
-                        EntityLogicalName: '!!items',
-                        LogicalName: logicalName,
-                    } as ShkoOnline.StringAttributeMetadata),
-            ),
-        },
-    ]);
+  const logicalName = '!!!items';
+  mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+  mockGenerator.metadata.initMetadata([
+    {
+      EntitySetName: logicalName,
+      LogicalName: logicalName,
+      PrimaryIdAttribute: 'myId',
+      PrimaryNameAttribute: ItemColumns.DisplayName,
+      Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Key, ItemColumns.IconName, ItemColumns.IconColor, ItemColumns.Enabled, ItemColumns.IconOnly].map(
+        (logicalName) =>
+        ({
+          EntityLogicalName: '!!items',
+          LogicalName: logicalName,
+        } as ShkoOnline.StringAttributeMetadata),
+      ),
+    },
+  ]);
 
-    mockGenerator.metadata.initItems({
-        '@odata.context': '#!!!items',
-        value: args.items || [],
-    });
+  mockGenerator.metadata.initItems({
+    '@odata.context': '#!!!items',
+    value: args.items || [],
+  });
   mockGenerator.context._parameters.items.openDatasetItem.callsFake((ids) => {
     console.log(ids.id.guid);
     action('OpenDatasetItem')(ids);
     updateArgs({ PivotSelected: ids.name });
   });
 
-  mockGenerator.metadata.initCanvasItems([
-    {
-      RenderType: args.renderType,
-      RenderSize: args.renderSize,
-    },
-  ]);
+  mockGenerator.context._SetCanvasItems({
+    AccessibilityLabel: '',
+    InputEvent: null,
+    RenderSize: args.renderSize,
+    RenderType: args.renderType,
+    SelectedKey: args.PivotSelected,
+    Theme: ''
+  });
+
+  // mockGenerator.metadata.initCanvasItems([
+  //   {
+  //     RenderType: args.renderType,
+  //     RenderSize: args.renderSize,
+  //     Selected
+  //   },
+  // ]);
   mockGenerator.context.mode.allocatedHeight = 200;
   mockGenerator.context.mode.allocatedWidth = 1000;
   mockGenerator.ExecuteInit();
   return mockGenerator.ExecuteUpdateView();
-  
+
 };
 
 export const Primary = Template.bind({});
