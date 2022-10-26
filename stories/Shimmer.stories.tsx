@@ -25,7 +25,6 @@ import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/Co
 import { EnumPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock';
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { ItemColumns } from "@powercat/shimmer/Shimmer/ManifestConstants";
-import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { within, waitFor, userEvent } from '@storybook/testing-library';
 
 const Delay = () =>
@@ -36,17 +35,14 @@ const Delay = () =>
 export default {
     title: 'PCF Components/Shimmer',
     parameters: {
-        // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
         layout: 'fullscreen',
     },
-    // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
     argTypes: {
         SpaceBetweenshimmer: {
             control: 'select',
             options: ["0", "10px", "20px", "30px", "40px", "50px"]
         }
     },
-
 } as Meta;
 
 type SpaceBetweenshimmer = "0" | "10px" | "20px" | "30px" | "40px" | "50px";
@@ -60,7 +56,27 @@ const Template = (args) => {
             items: DataSetMock,
         });
 
-    
+    const itemsLogicalName = '!!!items';
+
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: itemsLogicalName,
+            LogicalName: itemsLogicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.Type,
+            Attributes: ['myId', ItemColumns.Type, ItemColumns.RowKey, ItemColumns.Height, ItemColumns.Width].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: itemsLogicalName,
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
+    mockGenerator.context._parameters.items._Bind(itemsLogicalName, 'items');
+    mockGenerator.context._parameters.items._InitItems(args.items || []);
+
     mockGenerator.metadata.initCanvasItems([
         {
             AccessibilityLabel: args.AccessibilityLabel,
@@ -69,30 +85,7 @@ const Template = (args) => {
             SpacebetweenShimmer: args.SpacebetweenShimmer,
         },
     ]);
-    
-    const logicalName = '!!!items';
-    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
-    mockGenerator.metadata.initMetadata([
-        {
-            EntitySetName: logicalName,
-            LogicalName: logicalName,
-            PrimaryIdAttribute: 'myId',
-            PrimaryNameAttribute: ItemColumns.Type,
-            Attributes: ['myId', ItemColumns.Type, ItemColumns.RowKey, ItemColumns.Height, ItemColumns.Width].map(
-                (logicalName) =>
-                    ({
-                        EntityLogicalName: '!!items',
-                        LogicalName: logicalName,
-                    } as ShkoOnline.StringAttributeMetadata),
-            ),
-        },
-    ]);
 
-    mockGenerator.metadata.initItems({
-        '@odata.context': '#!!!items',
-        value: args.items || [],
-    });
-   
     mockGenerator.ExecuteInit();
     return mockGenerator.ExecuteUpdateView();
    

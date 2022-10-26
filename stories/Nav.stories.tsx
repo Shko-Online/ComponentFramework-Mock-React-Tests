@@ -37,10 +37,8 @@ const Delay = () =>
 export default {
     title: 'PCF Components/Nav',
     parameters: {
-        // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
         layout: 'fullscreen',
     },
-    // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
     argTypes: {
         onClick: { action: 'clicked' },
         LastSelected: {
@@ -134,6 +132,42 @@ const Template = (args: {
             items: DataSetMock,
         });
 
+    const itemLogicalName = '!!!items';
+
+    mockGenerator.metadata.initMetadata([
+        {
+            EntitySetName: itemLogicalName,
+            LogicalName: itemLogicalName,
+            PrimaryIdAttribute: 'myId',
+            PrimaryNameAttribute: ItemColumns.DisplayName,
+            Attributes: [
+                'myId',
+                ItemColumns.DisplayName,
+                ItemColumns.Key,
+                ItemColumns.IconName,
+                ItemColumns.IconColor,
+                ItemColumns.Enabled,
+                ItemColumns.ParentKey,
+                ItemColumns.Expanded,
+                ItemColumns.TextColor,
+            ].map(
+                (logicalName) =>
+                    ({
+                        EntityLogicalName: itemLogicalName,
+                        LogicalName: logicalName,
+                    } as ShkoOnline.StringAttributeMetadata),
+            ),
+        },
+    ]);
+
+    mockGenerator.context._parameters.items._Bind(itemLogicalName, 'items');
+    mockGenerator.context._parameters.items._InitItems(args.items);
+    mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
+        console.log(item.id);
+        action('OpenDatasetItem')(item);
+        updateArgs({ LastSelected: item.name });
+    });
+
     mockGenerator.metadata.initCanvasItems([
         {
             AccessibilityLabel: args.AccessibilityLabel,
@@ -143,33 +177,6 @@ const Template = (args: {
         },
     ]);
 
-    const logicalName = '!!!items';
-    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
-    mockGenerator.metadata.initMetadata([
-        {
-            EntitySetName: logicalName,
-            LogicalName: logicalName,
-            PrimaryIdAttribute: 'myId',
-            PrimaryNameAttribute: ItemColumns.DisplayName,
-            Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Key,ItemColumns.IconName,ItemColumns.IconColor,ItemColumns.Enabled,ItemColumns.ParentKey,ItemColumns.Expanded,ItemColumns.TextColor].map(
-                (logicalName) =>
-                    ({
-                        EntityLogicalName: '!!items',
-                        LogicalName: logicalName,
-                    } as ShkoOnline.StringAttributeMetadata),
-            ),
-        },
-    ]);
-
-    mockGenerator.metadata.initItems({
-        '@odata.context': '#!!!items',
-        value: args.items || [],
-    });
-    mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
-        console.log(item.id);
-        action('OpenDatasetItem')(item);
-        updateArgs({ LastSelected: item.name });
-    });
     if (args.EnableNotes !== undefined) {
         argsItems
             .filter((item) => item.id === '8')
@@ -178,6 +185,7 @@ const Template = (args: {
                 item.ItemEnabled = !!args.EnableNotes;
             });
     }
+
     if (args.CustomIconColor !== undefined) {
         argsItems
             .filter((item) => item.id === '6' && item.ItemIconColor)
@@ -185,10 +193,10 @@ const Template = (args: {
                 args.CustomIconColor === true ? (item.ItemIconColor = 'red') : (item.ItemIconColor = 'blue');
             });
     }
+    
     mockGenerator.ExecuteInit();
-    const component = mockGenerator.ExecuteUpdateView();
     mockGenerator.notifyOutputChanged();
-    return component;
+    return mockGenerator.ExecuteUpdateView();
 };
 export const Primary = Template.bind({});
 Primary.args = {

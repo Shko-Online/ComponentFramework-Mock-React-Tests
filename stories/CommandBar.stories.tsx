@@ -23,14 +23,10 @@ import { IInputs, IOutputs } from '@powercat/command-bar/CommandBar/generated/Ma
 import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
 import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import resourse from '@powercat/command-bar/CommandBar/strings/CommandBar.1033.resx';
-
-import { EntityRecord } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock';
 import { action } from '@storybook/addon-actions';
 import { ItemColumns } from '@powercat/command-bar/CommandBar/ManifestConstants';
 import { useArgs } from '@storybook/client-api';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
-
-import canvasColumns from './canvasColumns';
 
 const Delay = () =>
     new Promise<void>((resolve) => {
@@ -59,18 +55,13 @@ const Template = (args) => {
             InputEvent: StringPropertyMock,
             items: DataSetMock,
         });
-    //  const items = mockGenerator.context.parameters.items as DataSetMock;
-    //  var displayNameMetadata =
-    //   mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
-    //    ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
-    //  mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
 
-    const logicalName = '!!!items';
-    mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+    const itemLogicalName = '!!!items';
+    
     mockGenerator.metadata.initMetadata([
         {
-            EntitySetName: logicalName,
-            LogicalName: logicalName,
+            EntitySetName: itemLogicalName,
+            LogicalName: itemLogicalName,
             PrimaryIdAttribute: 'myId',
             PrimaryNameAttribute: ItemColumns.DisplayName,
             Attributes: [
@@ -82,18 +73,15 @@ const Template = (args) => {
             ].map(
                 (logicalName) =>
                     ({
-                        EntityLogicalName: '!!!items',
+                        EntityLogicalName: itemLogicalName,
                         LogicalName: logicalName,
                     } as ShkoOnline.StringAttributeMetadata),
             ),
         },
     ]);
-
-    mockGenerator.metadata.initItems({
-        '@odata.context': '#!!!items',
-        value: args.items || [],
-    });
-
+    
+    mockGenerator.context._parameters.items._Bind(itemLogicalName, 'items');
+    mockGenerator.context._parameters.items._InitItems(args.items || [])
     mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
@@ -109,14 +97,14 @@ const Template = (args) => {
     ]);
 
     mockGenerator.context.mode.allocatedHeight = 200;
-    mockGenerator.context.mode.allocatedWidth = 200;
+    mockGenerator.context.mode.allocatedWidth = 600;
     mockGenerator.context.mode.isVisible = true;
     mockGenerator.context.mode.isControlDisabled = false;
 
     mockGenerator.SetControlResource(resourse);
     mockGenerator.ExecuteInit();
-    const Component = mockGenerator.ExecuteUpdateView();
-    return Component;
+    return mockGenerator.ExecuteUpdateView();
+   
 };
 export const Primary = Template.bind({});
 Primary.args = {

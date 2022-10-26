@@ -33,10 +33,8 @@ import { useArgs } from '@storybook/client-api';
 export default {
   title: "PCF Components/Calendar",
   parameters: {
-    // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
     layout: "fullscreen",
   },
-  // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
   argTypes: { FirstDayOfWeek: {
     control: 'select',
     options: ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday"]
@@ -92,15 +90,15 @@ const Template = (args) => {
     },
   ]);
 
-mockGenerator.notifyOutputChanged.callsFake(()=>{
-  const {SelectedDateValue} = mockGenerator.control.getOutputs() || {};
-  console.log(SelectedDateValue);
-  updateArgs({SelectedDateValue}); 
-});
+  mockGenerator.notifyOutputChanged.callsFake(()=>{
+    const {SelectedDateValue} = mockGenerator.control.getOutputs() || {};
+    console.log(SelectedDateValue);
+    updateArgs({SelectedDateValue}); 
+  });
 
   mockGenerator.ExecuteInit();
-  const component = mockGenerator.ExecuteUpdateView();
-  return component;
+  return mockGenerator.ExecuteUpdateView();
+ 
 };
 export const Primary = Template.bind({});
 Primary.args = {

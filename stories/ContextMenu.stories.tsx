@@ -29,13 +29,10 @@ import { TwoOptionsPropertyMock } from "@shko-online/componentframework-mock/Com
 import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
 import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
-import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { ItemColumns } from "@powercat/context-menu/ContextMenu/ManifestConstants";
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
 import { within, waitFor, userEvent } from '@storybook/testing-library';
-
-
 
 const Delay = ()=>
   new Promise<void>((resolve)=>{
@@ -45,10 +42,8 @@ const Delay = ()=>
 export default {
   title: "PCF Components/ContextMenu",
   parameters: {
-    // More on Story layout: https://storybook.js.org/docs/html/configure/story-layout
     layout: "fullscreen",
   },
-  // More on argTypes: https://storybook.js.org/docs/html/api/argtypes
   argTypes: {
     onClick: { action: 'clicked' },
     ContextSelected: { control: 'select', options:['Item 2',
@@ -84,64 +79,47 @@ const Template = (args) => {
       items: DataSetMock,
     });
 
-    
+  const itemLogicalName = '!!!items';
 
-    // const Chevron = mockGenerator.context.parameters.Chevron as TwoOptionsPropertyMock;
-    // Chevron.setValue(true);
-    mockGenerator.metadata.initCanvasItems([
-      {
-        Chevron: true,    
-        BorderRadius: 10,
-        TextAlignment: "0",
-        InputEvent: 'SetFocus' + Math.random().toString(), 
-      },
-    ]);
-    // const IconColor = mockGenerator.context.parameters.IconColor as StringPropertyMock;
-    // IconColor.setValue(args.IconColor);
-   
-//     const items = mockGenerator.context.parameters.items as DataSetMock;
-//     var displayNameMetadata =
-//     mockGenerator.metadata.getAttributeMetadata('!!items', ItemColumns.DisplayName) ||
-//     ({ EntityLogicalName: '!!items', LogicalName: ItemColumns.DisplayName } as ShkoOnline.StringAttributeMetadata);
-// mockGenerator.metadata.upsertAttributeMetadata('!!items', displayNameMetadata);
-
-const logicalName = '!!!items';
-mockGenerator.context._parameters.items._Bind(logicalName, 'items');
-    mockGenerator.metadata.initMetadata([
-        {
-            EntitySetName: logicalName,
+  mockGenerator.metadata.initMetadata([
+    {
+      EntitySetName: itemLogicalName,
+      LogicalName: itemLogicalName,
+      PrimaryIdAttribute: 'myId',
+      PrimaryNameAttribute: ItemColumns.DisplayName,
+      Attributes: [
+        'myId',
+        ItemColumns.DisplayName,
+        ItemColumns.IconName,
+        ItemColumns.IconColor,
+        ItemColumns.Enabled,
+        ItemColumns.IconOnly
+        ].map(
+          (logicalName) =>
+          ({
+            EntityLogicalName: itemLogicalName,
             LogicalName: logicalName,
-            PrimaryIdAttribute: 'myId',
-            PrimaryNameAttribute: ItemColumns.DisplayName,
-            Attributes: [
-                'myId',
-                ItemColumns.DisplayName,
-                ItemColumns.IconName,
-                ItemColumns.IconColor,
-                ItemColumns.Enabled,
-                ItemColumns.IconOnly
-            ].map(
-                (logicalName) =>
-                    ({
-                        EntityLogicalName: '!!!items',
-                        LogicalName: logicalName,
-                    } as ShkoOnline.StringAttributeMetadata),
-            ),
-        },
-    ]);
+            } as ShkoOnline.StringAttributeMetadata),
+        ),
+    },
+  ]);
 
-
-mockGenerator.metadata.initItems({
-    '@odata.context': '#!!!items',
-    value: args.items || [],
-});
-
-  //items.columns = [{"displayName":"ItemDisplayName","name":null,"dataType":"SingleLine.Text","alias":"ItemDisplayName","order":-1,"visualSizeFactor":1},{"displayName":"ItemKey","name":null,"dataType":"SingleLine.Text","alias":"ItemKey","order":-1,"visualSizeFactor":1},{"displayName":"ItemEnabled","name":null,"dataType":"SingleLine.Text","alias":"ItemEnabled","order":-1,"visualSizeFactor":1},{"displayName":"ItemVisible","name":null,"dataType":"SingleLine.Text","alias":"ItemVisible","order":-1,"visualSizeFactor":1},{"displayName":"ItemChecked","name":null,"dataType":"SingleLine.Text","alias":"ItemChecked","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconName","name":null,"dataType":"SingleLine.Text","alias":"ItemIconName","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconColor","name":null,"dataType":"SingleLine.Text","alias":"ItemIconColor","order":-1,"visualSizeFactor":1},{"displayName":"ItemIconOnly","name":null,"dataType":"SingleLine.Text","alias":"ItemIconOnly","order":-1,"visualSizeFactor":1},{"displayName":"ItemHeader","name":null,"dataType":"SingleLine.Text","alias":"ItemHeader","order":-1,"visualSizeFactor":1},{"displayName":"ItemTopDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemTopDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemDivider","name":null,"dataType":"SingleLine.Text","alias":"ItemDivider","order":-1,"visualSizeFactor":1},{"displayName":"ItemParentKey","name":null,"dataType":"SingleLine.Text","alias":"ItemParentKey","order":-1,"visualSizeFactor":1}];
+  mockGenerator.context._parameters.items._Bind(itemLogicalName, 'items');
+  mockGenerator.context._parameters.items._InitItems(args.items || []);
   mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
     console.log(item.id);
     action('OpenDatasetItem')(item);
     updateArgs({ContextSelected: item.name});
   });
+  
+  mockGenerator.metadata.initCanvasItems([
+    {
+      Chevron: true,    
+      BorderRadius: 10,
+      TextAlignment: "0",
+      InputEvent: 'SetFocus' + Math.random().toString(), 
+    },
+  ]);
 
   mockGenerator.notifyOutputChanged()
   mockGenerator.ExecuteInit();
