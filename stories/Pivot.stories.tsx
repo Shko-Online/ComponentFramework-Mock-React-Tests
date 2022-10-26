@@ -31,7 +31,8 @@ import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFram
 import { ItemColumns } from "@powercat/command-bar/CommandBar/ManifestConstants";
 import { useArgs } from '@storybook/client-api'
 import { within, userEvent, waitFor } from '@storybook/testing-library';
-
+import { MockToRaw, PropertyToMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/PropertyMap";
+import AttributeMetadataGenerator from '@shko-online/componentframework-mock/utils/AttributeMetadataGenerator';
 
 
 const Delay = () =>
@@ -76,31 +77,23 @@ const Template = (args) => {
 
 
   const logicalName = '!!!items';
-  mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+  const generator = new AttributeMetadataGenerator(logicalName);
+
   mockGenerator.metadata.initMetadata([
     {
       EntitySetName: logicalName,
       LogicalName: logicalName,
       PrimaryIdAttribute: 'myId',
       PrimaryNameAttribute: ItemColumns.DisplayName,
-      Attributes: ['myId', ItemColumns.DisplayName, ItemColumns.Key, ItemColumns.IconName, ItemColumns.IconColor, ItemColumns.Enabled, ItemColumns.IconOnly].map(
-        (logicalName) =>
-        ({
-          EntityLogicalName: '!!items',
-          LogicalName: logicalName,
-        } as ShkoOnline.StringAttributeMetadata),
-      ),
+      Attributes: generator.AddString(['myId', ItemColumns.DisplayName, ItemColumns.Key, ItemColumns.IconName, ItemColumns.IconColor]).AddBoolean([ ItemColumns.Enabled, ItemColumns.IconOnly]).Attributes,
     },
   ]);
-
-  mockGenerator.metadata.initItems({
-    '@odata.context': '#!!!items',
-    value: args.items || [],
-  });
+  mockGenerator.context._parameters.items._Bind(logicalName, 'items');
+  mockGenerator.context._parameters.items._InitItems(args.items || [],);
   mockGenerator.context._parameters.items.openDatasetItem.callsFake((ids) => {
     console.log(ids.id.guid);
     action('OpenDatasetItem')(ids);
-    updateArgs({ PivotSelected: ids.name });
+   updateArgs({ PivotSelected: ids.name });
   });
 
   mockGenerator.context._SetCanvasItems({
@@ -109,7 +102,8 @@ const Template = (args) => {
     RenderSize: args.renderSize,
     RenderType: args.renderType,
     SelectedKey: args.PivotSelected,
-    Theme: ''
+    Theme: null
+  
   });
 
   // mockGenerator.metadata.initCanvasItems([
@@ -221,5 +215,4 @@ Primary.play = async ({ canvasElement, args }) => {
   await waitFor(Delay, { timeout: 2000 });
   await userEvent.click(canvas.getByText("PageSolid"));
   await waitFor(Delay, { timeout: 2000 });
-  await userEvent.click(canvas.getByText("Save"));
 }
