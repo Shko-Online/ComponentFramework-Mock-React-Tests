@@ -88,16 +88,16 @@ const Template = (args) => {
         updateArgs({ CommandSelected: item.name });
     });
 
-    mockGenerator.metadata.initCanvasItems([
+    mockGenerator.context._SetCanvasItems(
         {
             Theme: args.theme,
             AccessibilityLabel: args.AccessibilityLabel,
-            InputEvent: args.inputEvent,
+            InputEvent: args.inputEvent        
         },
-    ]);
+    );
 
     mockGenerator.context.mode.allocatedHeight = 200;
-    mockGenerator.context.mode.allocatedWidth = 600;
+    mockGenerator.context.mode.allocatedWidth = 200;
     mockGenerator.context.mode.isVisible = true;
     mockGenerator.context.mode.isControlDisabled = false;
 
@@ -111,17 +111,15 @@ Primary.args = {
     items: [
         {
             myId: '1',
-            [ItemColumns.DisplayName]: 'OpenPane',
+            [ItemColumns.DisplayName]: 'Open Pane',
             [ItemColumns.Key]: 'OpenPane',
-
             [ItemColumns.IconName]: 'OpenPane',
             [ItemColumns.IconColor]: 'blue',
         },
         {
             myId: '2',
-            [ItemColumns.DisplayName]: 'OpenInNewWindow',
+            [ItemColumns.DisplayName]: 'Open In New Window',
             [ItemColumns.Key]: 'OpenInNewWindow',
-
             [ItemColumns.IconName]: 'OpenInNewWindow',
             [ItemColumns.IconColor]: 'blue',
         },
@@ -132,7 +130,6 @@ Primary.args = {
             [ItemColumns.IconName]: 'Save',
             [ItemColumns.IconColor]: 'green',
         },
-
         {
             myId: '5',
             [ItemColumns.Key]: 'commandSettings',
@@ -143,7 +140,7 @@ Primary.args = {
         {
             myId: '6',
             [ItemColumns.Key]: 'commandSaveAndClose',
-            [ItemColumns.DisplayName]: 'SaveAndClose',
+            [ItemColumns.DisplayName]: 'Save And Close',
             [ItemColumns.IconName]: 'Save',
             [ItemColumns.IconColor]: 'green',
         },
