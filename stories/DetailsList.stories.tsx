@@ -34,7 +34,8 @@ import canvasColumns from './canvasColumns';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { ColumnsColumns, RecordsColumns } from '@powercat/details-list/DetailsList/ManifestConstants';
 import AttributeMetadataGenerator from '@shko-online/componentframework-mock/utils/AttributeMetadataGenerator';
-
+import { template } from '@babel/core';
+// import '@powercat/details-list/DetailsList/css/DetailList.css'
 
 const Delay = () =>
   new Promise<void>((resolve) => {
@@ -75,6 +76,7 @@ const Template = (args) => {
     }
 
   );
+
 
   const columnsLogicalName = '!!!columns';
   mockGenerator.metadata.initMetadata([
@@ -348,7 +350,19 @@ const Template = (args) => {
           "StatusIcon",
           "SubText1",
           "SubText2",
-          "SubText3"]).Attributes
+          "SubText3",
+          "City",
+          "city",
+        "country",
+        "description",
+        "expand",
+        "externalimage",
+        "iconimage",
+        "id",
+        "name",
+        "svg",
+        "TagColor",
+        "TagBorderColor",]).Attributes
     }
   ])
 
@@ -667,6 +681,530 @@ Primary.args = {
 
 };
 
+export const Expand = Template.bind({});
+Expand.args = {
+columns: [
+  {
+      "myId": "3706",
+      "ColDisplayName": "",
+      "ColName": "Icon",
+      "ColWidth": 40,
+      "ColCellType": "Image",
+      "ColHorizontalAlign": "Center",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": null,
+      "ColSortable": false,
+      "ColSortBy": null,
+      "ColIsBold": null,
+      "ColTagColorColumn": "#00ff00",
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": 20,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "3707",
+      "ColDisplayName": "Name",
+      "ColName": "Name",
+      "ColWidth": 1000,
+      "ColCellType": null,
+      "ColHorizontalAlign": "Center",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": true,
+      "ColSortable": true,
+      "ColSortBy": "Index",
+      "ColIsBold": true,
+      "ColTagColorColumn": "00ff00",
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "3708",
+      "ColDisplayName": "Status",
+      "ColName": "StatusIcon",
+      "ColWidth": 50,
+      "ColCellType": "Image",
+      "ColHorizontalAlign": "Right",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": null,
+      "ColSortable": false,
+      "ColSortBy": null,
+      "ColIsBold": null,
+      "ColTagColorColumn": "#00ff00",
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": 20,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  }
+],
+records: [
+  {
+      "myId": "2989",
+      "RecordKey": null,
+      "RecordCanSelect": null,
+      "RecordSelected": null,
+      "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean tincidunt, orci vel molestie posuere, ligula justo commodo erat, ut finibus ipsum r",
+      "Icon": "icon:Table",
+      "Image": "https://via.placeholder.com/100x70",
+      "Index": 1,
+      "Name": "Row 1",
+      "Number": 15416,
+      "Status": "Open",
+      "StatusCol": "green",
+      "StatusColor": "#000080",
+      "StatusIcon": "icon:SkypeCircleCheck",
+      "SubText1": "Lorem ipsum dolor sit amet, conse",
+      "SubText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean tincidunt, orci vel molestie po",
+      "SubText3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean tincidunt, orci vel molestie posuere, ligu"
+  },
+  {
+      "myId": "2990",
+      "RecordKey": null,
+      "RecordCanSelect": null,
+      "RecordSelected": null,
+      "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean tincidunt, orci vel molestie posuere, ligula justo commodo erat, ut finibus ipsum risus scelerisque tellus. ",
+      "Icon": "icon:SidePanel",
+      "Image": "https://via.placeholder.com/100x70",
+      "Index": 2,
+      "Name": "Row 2",
+      "Number": 2836,
+      "Status": "Open",
+      "StatusCol": "green",
+      "StatusColor": "#000080",
+      "StatusIcon": "icon:SkypeCircleCheck",
+      "SubText1": "Lorem ipsum dolor sit amet, consectetur adipi",
+      "SubText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ips",
+      "SubText3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean tincidunt, orci vel molestie posuere,"
+  },
+  {
+      "myId": "2991",
+      "RecordKey": null,
+      "RecordCanSelect": null,
+      "RecordSelected": null,
+      "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean tincidunt, orci vel molestie posuere, ligula justo commodo erat, ut finibus ipsum risus scelerisque tellus. Donec vel pellentesque turpis. Nullam semper purus ac arcu lacinia, quis viverra eros fermentum. Proin tincidunt hendrerit ante, eu hendrerit ex vestibulum sit amet. Mauris dui odio, congue id iaculis sit amet, lacinia id felis. Fusce non vulputate ipsum, at imperdiet massa. Fusce vitae eleifend mauris, sed semper eros. Aenean varius ex accumsan velit porttitor pharetra. Sed eget sagittis sapien, ut porta augue. Aenean commodo lacus eu tortor tempus, eget luctus justo rhoncus. Aenean malesuada, elit molestie scelerisque convallis, massa tortor luctus mauris, non auctor nunc tortor ut erat. Vivamus non vehicula neque, quis eleifend felis. Pellentesque arcu ipsum, commodo eu libero et, placerat pretium orci. Nulla quis ultricies",
+      "Icon": "icon:ChatBot",
+      "Image": "https://via.placeholder.com/100x70",
+      "Index": 3,
+      "Name": "Row 3",
+      "Number": 22208,
+      "Status": "Open",
+      "StatusCol": "#000080",
+      "StatusColor": "#000080",
+      "StatusIcon": "icon:SkypeCircleCheck",
+      "SubText1": "Lorem ipsum dolor sit amet, consectetur adipiscing ",
+      "SubText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean tincidunt, orci vel molestie p",
+      "SubText3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac sapien eu ipsum iaculis iaculis. Aenean "
+  }
+]
+}
+
+export const CellTypes = Template.bind({});
+CellTypes.args = {
+  records: [
+    {
+        "myId": "7257",
+        "RecordKey": null,
+        "RecordCanSelect": null,
+        "RecordSelected": null,
+        "City": "Redmond",
+        "Country": "U.S.",
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Expand": false,
+        "ExternalImage": "https://via.placeholder.com/100x70",
+        "IconImage": "icon:SkypeCircleCheck",
+        "Id": "1",
+        "Name": "Contoso",
+        "Svg": "data:image/svg+xml;utf8, %3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%20style%3D%27margin%3A%20auto%3B%20display%3A%20block%3B%20shape-rendering%3A%20auto%3B%27%20width%3D%27200px%27%20height%3D%27200px%27%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27xMidYMid%27%3E%0D%0A%3Ccircle%20cx%3D%2750%27%20cy%3D%2750%27%20fill%3D%27none%27%20stroke%3D%27%230078d4%27%20stroke-width%3D%274%27%20r%3D%2731%27%20stroke-dasharray%3D%27146.08405839192537%2050.69468613064179%27%3E%0D%0A%20%20%3CanimateTransform%20attributeName%3D%27transform%27%20type%3D%27rotate%27%20repeatCount%3D%27indefinite%27%20dur%3D%271.2048192771084336s%27%20values%3D%270%2050%2050%3B360%2050%2050%27%20keyTimes%3D%270%3B1%27%3E%3C%2FanimateTransform%3E%0D%0A%3C%2Fcircle%3E%0D%0A%3C%2Fsvg%3E",
+        "TagColor": "rgb(0, 183, 195)",
+        "TagBorderColor": "rgb(0,137,147)",
+        "Tags": [
+            {
+                "Value": "#PowerApps"
+            },
+            {
+                "Value": "#PowerPlatform"
+            }
+        ]
+    },
+    {
+        "myId": "7258",
+        "RecordKey": null,
+        "RecordCanSelect": null,
+        "RecordSelected": null,
+        "City": "Dallas",
+        "Country": "U.S.",
+        "Description": "Donec vel pellentesque turpis.",
+        "Expand": false,
+        "ExternalImage": "https://via.placeholder.com/100x70",
+        "IconImage": "icon:SkypeCircleCheck",
+        "Id": "2",
+        "Name": "Litware, Inc",
+        "Svg": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%20version%3D%271.1%27%20viewBox%3D%27-10%200%202068%202048%27%3E%0D%0A%20%20%3Cg%20transform%3D%27matrix%281%200%200%20-1%200%202048%29%2Crotate%280%2C1034%2C1024%29%27%3E%0D%0A%20%20%20%3Cpath%20fill%3D%27%2376db91%27%0D%0Ad%3D%27M1024%202048q141%200%20272%20-36.5t244.5%20-103.5t207%20-160.5t160.5%20-207t103.5%20-244.5t36.5%20-272t-36.5%20-272t-103.5%20-244.5t-160.5%20-207t-207%20-160.5t-244.5%20-103.5t-272%20-36.5t-272%2036.5t-244.5%20103.5t-207%20160.5t-160.5%20207t-103.5%20244.5t-36.5%20272t36.5%20272t103.5%20244.5t160.5%20207t207%20160.5t244.5%20103.5t272%2036.5zM907%20701q22%200%2042%208.5t35%2023.5l429%20429q15%2015%2023%2035t8%2041q0%2022%20-8.5%2042t-23%2034.5t-34.5%2023t-42%208.5q-21%200%20-41.5%20-8t-35.5%20-23l-352%20-352l-118%20118q-32%2032%20-77%2032q-22%200%20-42%20-8.5t-35%20-23.5t-23.5%20-34.5t-8.5%20-41.5q0%20-21%208.5%20-41.5t23.5%20-35.5l195%20-195q15%20-15%2035.5%20-23.5t41.5%20-8.5z%27%20%2F%3E%0D%0A%20%20%3C%2Fg%3E%0D%0A%3C%2Fsvg%3E",
+        "TagColor": "rgb(255, 140, 0)",
+        "TagBorderColor": "rgb(194,107,0)",
+        "Tags": [
+            {
+                "Value": "#MsDyn365"
+            },
+            {
+                "Value": "#PowerApps"
+            }
+        ]
+    }
+],
+ columns: [
+  {
+      "myId": "9043",
+      "ColDisplayName": "Account Name",
+      "ColName": "Name",
+      "ColWidth": 100,
+      "ColCellType": "link",
+      "ColHorizontalAlign": null,
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": null,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": true,
+      "ColTagColorColumn": null,
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "9044",
+      "ColDisplayName": "City:",
+      "ColName": "Description",
+      "ColWidth": null,
+      "ColCellType": "expand",
+      "ColHorizontalAlign": null,
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": null,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": true,
+      "ColTagColorColumn": null,
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": true,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": 1,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "9045",
+      "ColDisplayName": "External",
+      "ColName": "Status",
+      "ColWidth": 160,
+      "ColCellType": "image",
+      "ColHorizontalAlign": "Center",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": true,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": null,
+      "ColTagColorColumn": null,
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": 60,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "9046",
+      "ColDisplayName": "Icon",
+      "ColName": "IconImage",
+      "ColWidth": 140,
+      "ColCellType": "clickableimage",
+      "ColHorizontalAlign": "Center",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": true,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": null,
+      "ColTagColorColumn": "TagColor",
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "9047",
+      "ColDisplayName": "Svg",
+      "ColName": "Svg",
+      "ColWidth": 160,
+      "ColCellType": "clickableimage",
+      "ColHorizontalAlign": "Center",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": true,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": null,
+      "ColTagColorColumn": null,
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "9048",
+      "ColDisplayName": "Tag",
+      "ColName": "Country",
+      "ColWidth": 170,
+      "ColCellType": "tag",
+      "ColHorizontalAlign": "Center",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": true,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": null,
+      "ColTagColorColumn": "TagColor",
+      "ColTagBorderColorColumn": "TagBorderColor",
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "9049",
+      "ColDisplayName": "Indicator",
+      "ColName": "Country",
+      "ColWidth": 150,
+      "ColCellType": "indicatortag",
+      "ColHorizontalAlign": "Center",
+      "ColVerticalAlign": "Center",
+      "ColMultiLine": null,
+      "ColResizable": true,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": true,
+      "ColTagColorColumn": "TagColor",
+      "ColTagBorderColorColumn": "TagBorderColor",
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": null,
+      "ColInlineLabel": "Status:",
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  },
+  {
+      "myId": "9050",
+      "ColDisplayName": "Tag List",
+      "ColName": "TagList",
+      "ColWidth": 250,
+      "ColCellType": null,
+      "ColHorizontalAlign": null,
+      "ColVerticalAlign": null,
+      "ColMultiLine": null,
+      "ColResizable": null,
+      "ColSortable": null,
+      "ColSortBy": null,
+      "ColIsBold": null,
+      "ColTagColorColumn": null,
+      "ColTagBorderColorColumn": null,
+      "ColHeaderPaddingLeft": null,
+      "ColShowAsSubTextOf": null,
+      "ColPaddingLeft": null,
+      "ColPaddingTop": null,
+      "ColLabelAbove": null,
+      "ColMultiValueDelimiter": null,
+      "ColFirstMultiValueBold": true,
+      "ColInlineLabel": null,
+      "ColHideWhenBlank": null,
+      "ColSubTextRow": null,
+      "ColAriaTextColumn": null,
+      "ColCellActionDisabledColumn": null,
+      "ColImageWidth": null,
+      "ColImagePadding": null,
+      "ColRowHeader": null
+  }
+]
+}
+
+export const DropDown = Template.bind({});
+DropDown.args = {
+  records: 
+    [
+      {
+          "myId": "7461",
+          "RecordKey": null,
+          "RecordCanSelect": null,
+          "RecordSelected": null,
+          "country": "U.S.",
+          "city": "Redmond",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "expand": false,
+          "externalimage": "https://via.placeholder.com/100x70",
+          "iconimage": "icon:SkypeCircleCheck",
+          "id": "1",
+          "name": "Contoso",
+          "svg": "data:image/svg+xml;utf8, %3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%20style%3D%27margin%3A%20auto%3B%20display%3A%20block%3B%20shape-rendering%3A%20auto%3B%27%20width%3D%27200px%27%20height%3D%27200px%27%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27xMidYMid%27%3E%0D%0A%3Ccircle%20cx%3D%2750%27%20cy%3D%2750%27%20fill%3D%27none%27%20stroke%3D%27%230078d4%27%20stroke-width%3D%274%27%20r%3D%2731%27%20stroke-dasharray%3D%27146.08405839192537%2050.69468613064179%27%3E%0D%0A%20%20%3CanimateTransform%20attributeName%3D%27transform%27%20type%3D%27rotate%27%20repeatCount%3D%27indefinite%27%20dur%3D%271.2048192771084336s%27%20values%3D%270%2050%2050%3B360%2050%2050%27%20keyTimes%3D%270%3B1%27%3E%3C%2FanimateTransform%3E%0D%0A%3C%2Fcircle%3E%0D%0A%3C%2Fsvg%3E",
+          "TagBorderColor": "rgb(0,137,147)",
+          "TagColor": "rgb(0, 183, 195)",
+          "Tags": [
+              {
+                  "Value": "#PowerApps"
+              },
+              {
+                  "Value": "#PowerPlatform"
+              }
+          ]
+      },
+      {
+          "myId": "7462",
+          "RecordKey": null,
+          "RecordCanSelect": null,
+          "RecordSelected": null,
+          "country": "U.S.",
+          "city": "Dallas",
+          "description": "Donec vel pellentesque turpis.",
+          "expand": false,
+          "externalimage": "https://via.placeholder.com/100x70",
+          "iconimage": "icon:SkypeCircleCheck",
+          "id": "2",
+          "name": "Litware, Inc",
+          "svg": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%20version%3D%271.1%27%20viewBox%3D%27-10%200%202068%202048%27%3E%0D%0A%20%20%3Cg%20transform%3D%27matrix%281%200%200%20-1%200%202048%29%2Crotate%280%2C1034%2C1024%29%27%3E%0D%0A%20%20%20%3Cpath%20fill%3D%27%2376db91%27%0D%0Ad%3D%27M1024%202048q141%200%20272%20-36.5t244.5%20-103.5t207%20-160.5t160.5%20-207t103.5%20-244.5t36.5%20-272t-36.5%20-272t-103.5%20-244.5t-160.5%20-207t-207%20-160.5t-244.5%20-103.5t-272%20-36.5t-272%2036.5t-244.5%20103.5t-207%20160.5t-160.5%20207t-103.5%20244.5t-36.5%20272t36.5%20272t103.5%20244.5t160.5%20207t207%20160.5t244.5%20103.5t272%2036.5zM907%20701q22%200%2042%208.5t35%2023.5l429%20429q15%2015%2023%2035t8%2041q0%2022%20-8.5%2042t-23%2034.5t-34.5%2023t-42%208.5q-21%200%20-41.5%20-8t-35.5%20-23l-352%20-352l-118%20118q-32%2032%20-77%2032q-22%200%20-42%20-8.5t-35%20-23.5t-23.5%20-34.5t-8.5%20-41.5q0%20-21%208.5%20-41.5t23.5%20-35.5l195%20-195q15%20-15%2035.5%20-23.5t41.5%20-8.5z%27%20%2F%3E%0D%0A%20%20%3C%2Fg%3E%0D%0A%3C%2Fsvg%3E",
+          "TagBorderColor": "rgb(194,107,0)",
+          "TagColor": "rgb(255, 140, 0)",
+          "tags": [
+              {
+                  "Value": "#MsDyn365"
+              },
+              {
+                  "Value": "#PowerApps"
+              }
+          ]
+      }
+  ],
+  columns: [
+    
+],
+
+}
 // Primary.play = async ({ canvasElement, args }) => {
 //   const canvas = within(canvasElement);
 //   await waitFor(Delay, { timeout: 2000 });
