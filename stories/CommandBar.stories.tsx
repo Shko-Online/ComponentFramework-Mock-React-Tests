@@ -17,11 +17,9 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 initializeIcons(/* optional base url */);
 import { Meta } from '@storybook/react';
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import { ComponentFrameworkMockGeneratorReact,StringPropertyMock ,DataSetMock} from '@shko-online/componentframework-mock';
 import { CommandBar } from '@powercat/command-bar/CommandBar';
 import { IInputs, IOutputs } from '@powercat/command-bar/CommandBar/generated/ManifestTypes';
-import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
-import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import resourse from '@powercat/command-bar/CommandBar/strings/CommandBar.1033.resx';
 import { action } from '@storybook/addon-actions';
 import { ItemColumns } from '@powercat/command-bar/CommandBar/ManifestConstants';

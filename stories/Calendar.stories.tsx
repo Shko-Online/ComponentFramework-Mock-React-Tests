@@ -18,16 +18,12 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
+import { ComponentFrameworkMockGeneratorReact, DateTimePropertyMock, EnumPropertyMock, StringPropertyMock, TwoOptionsPropertyMock } from "@shko-online/componentframework-mock";
 import {
   IInputs,
   IOutputs,
 } from "@powercat/calendar/Calendar/generated/ManifestTypes";
 import { Calendar } from "@powercat/calendar/Calendar"
-import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
-import { TwoOptionsPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock";
-import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
-import { DateTimePropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DateTimeProperty.mock";
 import { useArgs } from '@storybook/client-api';
 
 export default {
@@ -35,19 +31,21 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-  argTypes: { FirstDayOfWeek: {
-    control: 'select',
-    options: ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday"]
-},
-SelectedDateValue:{
-  control: 'date'
-}},
+  argTypes: {
+    FirstDayOfWeek: {
+      control: 'select',
+      options: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    },
+    SelectedDateValue: {
+      control: 'date'
+    }
+  },
 } as Meta;
 
 type DaysOfWeek = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
 
 const Template = (args) => {
-  const [{SelectedDateValue:selectedDateValue},updateArgs] = useArgs();
+  const [{ SelectedDateValue: selectedDateValue }, updateArgs] = useArgs();
 
 
   const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
@@ -72,33 +70,33 @@ const Template = (args) => {
 
   mockGenerator.metadata.initCanvasItems([
     {
-      Theme: args.theme, 
-      AccessibilityLabel: args.AccessibilityLabel, 
-      BackgroundColor: args.BackgroundColor, 
+      Theme: args.theme,
+      AccessibilityLabel: args.AccessibilityLabel,
+      BackgroundColor: args.BackgroundColor,
       Language: args.Language,
-      MaxDate: args.MaxDate,    
-      MinDate: args.MinDate, 
+      MaxDate: args.MaxDate,
+      MinDate: args.MinDate,
       SelectedDateValue: selectedDateValue,
       MonthPickerVisible: args.MonthPickerVisible,
-      FirstDayOfWeek:args.FirstDayOfWeek,
-      HighlightSelectedMonth:true,
-      HighlightCurrentMonth:true,
+      FirstDayOfWeek: args.FirstDayOfWeek,
+      HighlightSelectedMonth: true,
+      HighlightCurrentMonth: true,
       DayPickerVisible: true,
-      ShowGoToToday:true,
+      ShowGoToToday: true,
       ShowWeekNumbers: true,
-      ShowSixWeeksByDefault:true,
+      ShowSixWeeksByDefault: true,
     },
   ]);
 
-  mockGenerator.notifyOutputChanged.callsFake(()=>{
-    const {SelectedDateValue} = mockGenerator.control.getOutputs() || {};
+  mockGenerator.notifyOutputChanged.callsFake(() => {
+    const { SelectedDateValue } = mockGenerator.control.getOutputs() || {};
     console.log(SelectedDateValue);
-    updateArgs({SelectedDateValue}); 
+    updateArgs({ SelectedDateValue });
   });
 
   mockGenerator.ExecuteInit();
   return mockGenerator.ExecuteUpdateView();
- 
+
 };
 export const Primary = Template.bind({});
 Primary.args = {

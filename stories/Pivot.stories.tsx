@@ -27,12 +27,12 @@ import { StringPropertyMock } from "@shko-online/componentframework-mock/Compone
 import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
 import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 import { action } from "@storybook/addon-actions";
-import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
+import { EntityRecordMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { ItemColumns } from "@powercat/command-bar/CommandBar/ManifestConstants";
 import { useArgs } from '@storybook/client-api'
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { MockToRaw, PropertyToMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/PropertyMap";
-import AttributeMetadataGenerator from '@shko-online/componentframework-mock/utils/AttributeMetadataGenerator';
+import {AttributeMetadataGenerator} from '@shko-online/componentframework-mock/utils/AttributeMetadataGenerator';
 
 
 const Delay = () =>

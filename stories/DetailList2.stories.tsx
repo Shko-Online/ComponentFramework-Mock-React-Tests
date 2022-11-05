@@ -18,22 +18,17 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import { AttributeMetadataGenerator,ComponentFrameworkMockGeneratorReact,WholeNumberPropertyMock,TwoOptionsPropertyMock,StringPropertyMock,DataSetMock,EnumPropertyMock,EntityRecordMock } from '@shko-online/componentframework-mock';
 import { FluentDetailsList } from '@powercat/details-list/DetailsList';
 import {
   IInputs,
   IOutputs,
 } from "@powercat/details-list/DetailsList/generated/ManifestTypes";
-import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
-import { TwoOptionsPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock";
-import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
-import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
-import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
-import { EntityRecord } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
+
 import canvasColumns from './canvasColumns';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { ColumnsColumns, RecordsColumns } from '@powercat/details-list/DetailsList/ManifestConstants';
-import AttributeMetadataGenerator from '@shko-online/componentframework-mock/utils/AttributeMetadataGenerator';
+
 import { template } from '@babel/core';
 import '../powercat-code-components/DetailsList/DetailsList/css/DetailsList.css'
 

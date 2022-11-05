@@ -18,12 +18,9 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from '@storybook/react';
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import { ComponentFrameworkMockGeneratorReact, StringPropertyMock, WholeNumberPropertyMock, DataSetMock } from '@shko.online/componentframework-mock';
 import { IInputs, IOutputs } from '@powercat/breadcrumb/Breadcrumb/generated/ManifestTypes';
 import { Breadcrumb } from '@powercat/breadcrumb/Breadcrumb';
-import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
-import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock';
-import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { action } from '@storybook/addon-actions';
 import { ItemColumns } from '@powercat/breadcrumb/Breadcrumb/ManifestConstants';
 import { useArgs } from '@storybook/client-api';
@@ -53,7 +50,7 @@ const Template = (args) => {
         });
 
     const itemsLogicalName = '!!!items';
-  
+
     mockGenerator.metadata.initMetadata([
         {
             EntitySetName: itemsLogicalName,
@@ -77,6 +74,8 @@ const Template = (args) => {
         action('OpenDatasetItem')(item);
         updateArgs({ LastSelected: item.name });
     });
+
+    const test = mockGenerator.metadata.getAttributeMetadata('');
 
     mockGenerator.metadata.initCanvasItems([
         {

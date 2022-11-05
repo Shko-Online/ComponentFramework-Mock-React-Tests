@@ -18,25 +18,20 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
+import { ComponentFrameworkMockGeneratorReact, StringPropertyMock, TwoOptionsPropertyMock, EnumPropertyMock, WholeNumberPropertyMock, DataSetMock } from "@shko-online/componentframework-mock";
 import {
   IInputs,
   IOutputs,
 } from "@powercat/context-menu/ContextMenu/generated/ManifestTypes";
 import { ContextMenu } from "@powercat/context-menu/ContextMenu"
-import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
-import { TwoOptionsPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock";
-import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
-import { WholeNumberPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock";
-import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 import { ItemColumns } from "@powercat/context-menu/ContextMenu/ManifestConstants";
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
 import { within, waitFor, userEvent } from '@storybook/testing-library';
 
-const Delay = ()=>
-  new Promise<void>((resolve)=>{
-    setTimeout(()=>resolve(), 1000);
+const Delay = () =>
+  new Promise<void>((resolve) => {
+    setTimeout(() => resolve(), 1000);
   })
 
 export default {
@@ -46,18 +41,20 @@ export default {
   },
   argTypes: {
     onClick: { action: 'clicked' },
-    ContextSelected: { control: 'select', options:['Item 2',
-    'Open',
-    'New',
-    "Settings",
-    'Save',]}
+    ContextSelected: {
+      control: 'select', options: ['Item 2',
+        'Open',
+        'New',
+        "Settings",
+        'Save',]
+    }
 
   },
 } as Meta;
 
 type AlignmentTypes = "0" /*'center'*/ | "1" /*'left' */ | "2" /*'right'*/;
 const Template = (args) => {
-  const [,updateArgs] = useArgs();
+  const [, updateArgs] = useArgs();
   const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
     new ComponentFrameworkMockGeneratorReact(ContextMenu, {
       Chevron: TwoOptionsPropertyMock,
@@ -94,13 +91,13 @@ const Template = (args) => {
         ItemColumns.IconColor,
         ItemColumns.Enabled,
         ItemColumns.IconOnly
-        ].map(
-          (logicalName) =>
-          ({
-            EntityLogicalName: itemLogicalName,
-            LogicalName: logicalName,
-            } as ShkoOnline.StringAttributeMetadata),
-        ),
+      ].map(
+        (logicalName) =>
+        ({
+          EntityLogicalName: itemLogicalName,
+          LogicalName: logicalName,
+        } as ShkoOnline.StringAttributeMetadata),
+      ),
     },
   ]);
 
@@ -109,71 +106,71 @@ const Template = (args) => {
   mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
     console.log(item.id);
     action('OpenDatasetItem')(item);
-    updateArgs({ContextSelected: item.name});
+    updateArgs({ ContextSelected: item.name });
   });
-  
+
   mockGenerator.metadata.initCanvasItems([
     {
-      Chevron: true,    
+      Chevron: true,
       BorderRadius: 10,
       TextAlignment: "0",
-      InputEvent: 'SetFocus' + Math.random().toString(), 
+      InputEvent: 'SetFocus' + Math.random().toString(),
     },
   ]);
 
   mockGenerator.notifyOutputChanged()
   mockGenerator.ExecuteInit();
   const component = mockGenerator.ExecuteUpdateView();
-  return <div style={{width: "200px", height: "100px"}}>{component}</div>;
+  return <div style={{ width: "200px", height: "100px" }}>{component}</div>;
 };
 
 
 
 export const Primary = Template.bind({});
 Primary.args = {
-  
+
   items: [{
     myId: '1',
-      [ItemColumns.DisplayName]: 'Item 2',
-      [ItemColumns.IconName]: "World",
-      [ItemColumns.IconColor]: 'green',
-    },{
+    [ItemColumns.DisplayName]: 'Item 2',
+    [ItemColumns.IconName]: "World",
+    [ItemColumns.IconColor]: 'green',
+  }, {
     id: '2',
-   
+
     [ItemColumns.DisplayName]: 'Open',
     [ItemColumns.IconName]: "OpenInNewWindow",
     [ItemColumns.IconColor]: "blue",
-},{
-  myId: '3',
-  
+  }, {
+    myId: '3',
+
     [ItemColumns.DisplayName]: 'New',
     [ItemColumns.IconName]: "NewFolder",
     [ItemColumns.IconColor]: 'red',
-},
+  },
 
   {
-  myId: '4',
+    myId: '4',
     [ItemColumns.DisplayName]: "Settings",
     [ItemColumns.IconName]: "Settings",
     [ItemColumns.IconColor]: "peach",
     [ItemColumns.Enabled]: true,
     [ItemColumns.IconOnly]: true,
   },
-   {
+  {
     myId: '5',
-      [ItemColumns.DisplayName]: 'Save',
-      [ItemColumns.IconName]: 'Save',
-      [ItemColumns.IconColor]: 'black',
-      [ItemColumns.Enabled]: true,
+    [ItemColumns.DisplayName]: 'Save',
+    [ItemColumns.IconName]: 'Save',
+    [ItemColumns.IconColor]: 'black',
+    [ItemColumns.Enabled]: true,
     [ItemColumns.IconOnly]: true,
   },
   ]
 
 };
-Primary.play = async({canvasElement, args}) => {
-  const canvas  = within(canvasElement);
-  await waitFor(Delay, {timeout: 2000});
-await userEvent.click( canvas.getByText("Item 2"));
-await waitFor(Delay, {timeout: 2000});
-console.log(args.checked); 
+Primary.play = async ({ canvasElement, args }) => {
+  const canvas = within(canvasElement);
+  await waitFor(Delay, { timeout: 2000 });
+  await userEvent.click(canvas.getByText("Item 2"));
+  await waitFor(Delay, { timeout: 2000 });
+  console.log(args.checked);
 }

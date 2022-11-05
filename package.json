@@ -51,6 +51,7 @@
     "@fluentui/react": "8.29.0",
     "@fluentui/utilities": "8.9.0",
     "@react-hook/resize-observer": "1.2.5",
+    "@shko.online/componentframework-mock": "file:ComponentFramework-Mock",
     "enzyme": "3.11.0",
     "module-alias": "^2.2.2",
     "react": "16.8.6",

@@ -18,7 +18,6 @@ const path = require("path");
 /**  @type {import('ts-jest').InitialOptionsTsJest}  */
 module.exports = {
 	moduleNameMapper:{
-		'@shko-online/componentframework-mock/(.*)': '<rootDir>/ComponentFramework-Mock/src/$1',
 		'@powercat/breadcrumb/(.*)': '<rootDir>/powercat-code-components/Breadcrumb/$1',
 		'@powercat/auto-width-label/(.*)': '<rootDir>/powercat-code-components/AutoWidthLabel/$1',
 		'@powercat/calendar/(.*)': '<rootDir>/powercat-code-components/Calendar/$1',

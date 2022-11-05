@@ -32,10 +32,7 @@
         "outDir": "dist",
         "declaration": true,
         "sourceMap": true,
-        "paths": {
-            "@shko-online/componentframework-mock*": [
-                "./ComponentFramework-Mock/src*"
-            ],
+        "paths": {         
             "@powercat/breadcrumb*": [
                 "./powercat-code-components/Breadcrumb*"
             ],
@@ -77,7 +74,6 @@
         },
         "typeRoots": [
             "./node_modules/@types",
-            // "./ComponentFramework-Mock/src"
              "./src"
         ]
     },
