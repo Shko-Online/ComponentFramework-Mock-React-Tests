@@ -18,14 +18,16 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from '@storybook/react';
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import {
+    ComponentFrameworkMockGeneratorReact,
+    DecimalNumberPropertyMock,
+    TwoOptionsPropertyMock,
+    StringPropertyMock,
+    WholeNumberPropertyMock,
+    DataSetMock,
+} from '@shko.online/componentframework-mock';
 import { Picker } from '@powercat/picker/Picker';
 import { IInputs, IOutputs } from '@powercat/picker/Picker/generated/ManifestTypes';
-import { DecimalNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DecimalNumberProperty.mock';
-import { TwoOptionsPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock';
-import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
-import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock';
-import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { SuggestionsColumns, TagsColumns } from '@powercat/picker/Picker/ManifestConstants';
 import { ContextEx } from '@powercat/picker/Picker/ContextExtended';
 
@@ -95,7 +97,7 @@ const Template = (args) => {
     mockGenerator.metadata.initMetadata([
         {
             EntitySetName: suggestionsLogicalName,
-            LogicalName:suggestionsLogicalName,
+            LogicalName: suggestionsLogicalName,
             PrimaryIdAttribute: 'myId',
             PrimaryNameAttribute: SuggestionsColumns.SuggestionsDisplayName,
             Attributes: [

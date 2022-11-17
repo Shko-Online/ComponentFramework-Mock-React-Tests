@@ -18,7 +18,7 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact, DateTimePropertyMock, EnumPropertyMock, StringPropertyMock, TwoOptionsPropertyMock } from "@shko-online/componentframework-mock";
+import { ComponentFrameworkMockGeneratorReact, DateTimePropertyMock, EnumPropertyMock, StringPropertyMock, TwoOptionsPropertyMock } from "@shko.online/componentframework-mock";
 import {
   IInputs,
   IOutputs,
@@ -46,7 +46,6 @@ type DaysOfWeek = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "
 
 const Template = (args) => {
   const [{ SelectedDateValue: selectedDateValue }, updateArgs] = useArgs();
-
 
   const mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs> =
     new ComponentFrameworkMockGeneratorReact(Calendar, {
@@ -108,4 +107,5 @@ Primary.args = {
   MaxDate: new Date(2099, 0, 1),
   MinDate: new Date(2001, 0, 1),
   MonthPickerVisible: true,
+  SelectedDateValue: new Date()
 }

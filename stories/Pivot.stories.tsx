@@ -17,22 +17,16 @@ import { initializeIcons } from "@fluentui/react/lib/Icons";
 
 initializeIcons(/* optional base url */);
 import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
+import { ComponentFrameworkMockGeneratorReact,StringPropertyMock, EnumPropertyMock,DataSetMock,EntityRecordMock,MockToRaw, PropertyToMock,AttributeMetadataGenerator} from "@shko.online/componentframework-mock";
 import {
   IInputs,
   IOutputs,
 } from "@powercat/pivot/Pivot/generated/ManifestTypes";
 import { Pivot } from "@powercat/pivot/Pivot"
-import { StringPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock";
-import { EnumPropertyMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock";
-import { DataSetMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock";
 import { action } from "@storybook/addon-actions";
-import { EntityRecordMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSetApi/EntityRecord.mock";
 import { ItemColumns } from "@powercat/command-bar/CommandBar/ManifestConstants";
 import { useArgs } from '@storybook/client-api'
 import { within, userEvent, waitFor } from '@storybook/testing-library';
-import { MockToRaw, PropertyToMock } from "@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/PropertyMap";
-import {AttributeMetadataGenerator} from '@shko-online/componentframework-mock/utils/AttributeMetadataGenerator';
 
 
 const Delay = () =>
@@ -60,7 +54,7 @@ export default {
 } as Meta;
 
 type RenderType = "0" | "1";
-type RenderSize = "0" | "1" | "2";
+type RenderSize = "0" | /*"1" |*/ "2";
 
 const Template = (args) => {
   const [, updateArgs] = useArgs();

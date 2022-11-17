@@ -14,16 +14,12 @@
 */
 
 import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact } from "@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React";
+import { ComponentFrameworkMockGeneratorReact,StringPropertyMock,WholeNumberPropertyMock,EnumPropertyMock,DataSetMock } from "@shko.online/componentframework-mock";
 import {
     IInputs,
     IOutputs,
 } from "@powercat/shimmer/Shimmer/generated/ManifestTypes";
 import { Shimmer } from "@powercat/shimmer/Shimmer"
-import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
-import { WholeNumberPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/WholeNumberProperty.mock';
-import { EnumPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/EnumProperty.mock';
-import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { ItemColumns } from "@powercat/shimmer/Shimmer/ManifestConstants";
 import { within, waitFor, userEvent } from '@storybook/testing-library';
 

@@ -18,7 +18,7 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from "@storybook/react";
-import { AttributeMetadataGenerator,ComponentFrameworkMockGeneratorReact,WholeNumberPropertyMock,TwoOptionsPropertyMock,StringPropertyMock,DataSetMock,EnumPropertyMock,EntityRecordMock } from '@shko-online/componentframework-mock';
+import { AttributeMetadataGenerator,ComponentFrameworkMockGeneratorReact,WholeNumberPropertyMock,TwoOptionsPropertyMock,StringPropertyMock,DataSetMock,EnumPropertyMock,EntityRecordMock } from '@shko.online/componentframework-mock';
 import { FluentDetailsList } from '@powercat/details-list/DetailsList';
 import {
   IInputs,

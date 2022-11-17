@@ -18,12 +18,9 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(undefined /* optional base url */, { disableWarnings: true });
 
 import { Meta } from '@storybook/react';
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import { ComponentFrameworkMockGeneratorReact, StringPropertyMock, TwoOptionsPropertyMock, DataSetMock } from '@shko.online/componentframework-mock';
 import { IInputs, IOutputs } from '@powercat/nav/Nav/generated/ManifestTypes';
 import { Nav } from '@powercat/nav/Nav';
-import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
-import { TwoOptionsPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/TwoOptionsProperty.mock';
-import { DataSetMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/DataSet.mock';
 import { ItemColumns } from '@powercat/nav/Nav/ManifestConstants';
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';

@@ -18,7 +18,7 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from "@storybook/react";
-import { ComponentFrameworkMockGeneratorReact, StringPropertyMock, TwoOptionsPropertyMock, EnumPropertyMock, WholeNumberPropertyMock, DataSetMock } from "@shko-online/componentframework-mock";
+import { ComponentFrameworkMockGeneratorReact, StringPropertyMock, TwoOptionsPropertyMock, EnumPropertyMock, WholeNumberPropertyMock, DataSetMock } from "@shko.online/componentframework-mock";
 import {
   IInputs,
   IOutputs,
@@ -135,7 +135,7 @@ Primary.args = {
     [ItemColumns.IconName]: "World",
     [ItemColumns.IconColor]: 'green',
   }, {
-    id: '2',
+    myId: '2',
 
     [ItemColumns.DisplayName]: 'Open',
     [ItemColumns.IconName]: "OpenInNewWindow",

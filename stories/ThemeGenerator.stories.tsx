@@ -18,10 +18,9 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 initializeIcons(/* optional base url */);
 
 import { Meta } from '@storybook/react';
-import { ComponentFrameworkMockGeneratorReact } from '@shko-online/componentframework-mock/ComponentFramework-Mock-Generator/ComponentFramework-Mock-Generator-React';
+import { ComponentFrameworkMockGeneratorReact, StringPropertyMock } from '@shko.online/componentframework-mock';
 import { IInputs, IOutputs } from '@powercat/theme-generator/ThemeGenerator/generated/ManifestTypes';
 import { ThemeDesigner } from '@powercat/theme-generator/ThemeGenerator';
-import { StringPropertyMock } from '@shko-online/componentframework-mock/ComponentFramework-Mock/PropertyTypes/StringProperty.mock';
 
 export default {
     title: 'PCF Components/ThemeDesigner',

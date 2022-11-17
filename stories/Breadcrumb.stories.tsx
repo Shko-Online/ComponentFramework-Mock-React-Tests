@@ -75,8 +75,6 @@ const Template = (args) => {
         updateArgs({ LastSelected: item.name });
     });
 
-    const test = mockGenerator.metadata.getAttributeMetadata('');
-
     mockGenerator.metadata.initCanvasItems([
         {
             AccessibilityLabel: args.accessibility,

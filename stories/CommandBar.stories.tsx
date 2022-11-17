@@ -17,7 +17,11 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 initializeIcons(/* optional base url */);
 import { Meta } from '@storybook/react';
-import { ComponentFrameworkMockGeneratorReact,StringPropertyMock ,DataSetMock} from '@shko-online/componentframework-mock';
+import {
+    ComponentFrameworkMockGeneratorReact,
+    StringPropertyMock,
+    DataSetMock,
+} from '@shko.online/componentframework-mock';
 import { CommandBar } from '@powercat/command-bar/CommandBar';
 import { IInputs, IOutputs } from '@powercat/command-bar/CommandBar/generated/ManifestTypes';
 import resourse from '@powercat/command-bar/CommandBar/strings/CommandBar.1033.resx';
@@ -55,7 +59,7 @@ const Template = (args) => {
         });
 
     const itemLogicalName = '!!!items';
-    
+
     mockGenerator.metadata.initMetadata([
         {
             EntitySetName: itemLogicalName,
@@ -77,22 +81,20 @@ const Template = (args) => {
             ),
         },
     ]);
-    
+
     mockGenerator.context._parameters.items._Bind(itemLogicalName, 'items');
-    mockGenerator.context._parameters.items._InitItems(args.items || [])
+    mockGenerator.context._parameters.items._InitItems(args.items || []);
     mockGenerator.context._parameters.items.openDatasetItem.callsFake((item) => {
         console.log(item.id);
         action('OpenDatasetItem')(item);
         updateArgs({ CommandSelected: item.name });
     });
 
-    mockGenerator.context._SetCanvasItems(
-        {
-            Theme: args.theme,
-            AccessibilityLabel: args.AccessibilityLabel,
-            InputEvent: args.inputEvent        
-        },
-    );
+    mockGenerator.context._SetCanvasItems({
+        Theme: args.theme,
+        AccessibilityLabel: args.AccessibilityLabel,
+        InputEvent: args.inputEvent,
+    });
 
     mockGenerator.context.mode.allocatedHeight = 200;
     mockGenerator.context.mode.allocatedWidth = 200;
@@ -102,7 +104,6 @@ const Template = (args) => {
     mockGenerator.SetControlResource(resourse);
     mockGenerator.ExecuteInit();
     return mockGenerator.ExecuteUpdateView();
-   
 };
 export const Primary = Template.bind({});
 Primary.args = {
