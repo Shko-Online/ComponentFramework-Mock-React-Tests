@@ -32,10 +32,7 @@
         "outDir": "dist",
         "declaration": true,
         "sourceMap": true,
-        "paths": {         
-            "@shko.online/componentframework-mock*": [
-                "./ComponentFramework-Mock*"
-            ],
+        "paths": {   
             "@powercat/breadcrumb*": [
                 "./powercat-code-components/Breadcrumb*"
             ],
@@ -76,8 +73,7 @@
 		    "@fluentui/date-time-utilities*": ["./node_modules/@fluentui/date-time-utilities*"]
         },
         "typeRoots": [
-            "./node_modules/@types",
-             "./src"
+            "./node_modules/@types"
         ]
     },
     "exclude": [
@@ -85,7 +81,6 @@
         "wwwroot",
     ],
     "include": [
-       "src",
        "__tests__",
        "stories",
        "global.d.ts"
